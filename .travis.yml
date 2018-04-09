@@ -3,12 +3,28 @@ cache: yarn
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
   - export PATH="$HOME/.yarn/bin:$PATH"
-script:
-- yarn build
-deploy:
-  provider: heroku
-  app: my-feedback-team-a-staging
-  on:
-    repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
-  api_key:
-    secure: RQ4+amQdF0dJq48wzRKaoCtJB25V6Lb0ReJ2oCRNw0fGLHa1M8cD3YfPC8BVCQfWXXpPVtvVwaUte4PSfCFzZoNCqvMjqdN9ok5otyVtY2QkJQrvkzD777lJ9VxAOKrssQSYMHN4I8fdkNIkZqZHGcdBmdm2vta5Q3U7QR12viNYTNF4zHNB0FxEyHXw6/JadFWLoZ6+0zJHF8Sw0pIXGRqjZX8EB8+y4R5zbTgtD5stvKb8qTpO8K96q6Ew8eqftzoVnxmY/hDcFGSqDjCkUnEVaVhXtRSyoJDLHqrFc6816S8y10/ZZhlo0xZ5AG88DWNARxqLhf769DsRfLjYo/aZdBdrTU1VrRTbCtKT6VEkFcqrf7WCvdf7Ac0+hUeF6iaLzPyxpUkY4fkwY4EjKQvFWUoBlikhUsywjsboAShoKYWwhZh+fGfs/oBWM5snrs0Eys2SY8TqxazdUKhcUNS5/xGhootuDhreRQdgZhxx64dctLtzcmF/7j2I+yUe+DwfxdAiJFJLs8NoqqQ6ln+hWdwp1+Pb5FndkScoJA2/QI+wWQl1jdEsZ54oWOud3mk2Xj5geJo5YwOLJKn+avDzBFXq6vTZmEnjbclpzvk3mbn8Mk39sMe1Qazu5dBF+tIDSnUZUfU/KKkUb00k4dUH8FIjtTk1VfmUwIrO+us=
+
+jobs:
+  include:
+    - stage: unit test
+      script: "echo 'Running unit tests (1)'"
+    - stage: build application
+      script: yarn build
+    - stage: deploy to staging
+      script: skip
+      deploy: &heroku
+        provider: heroku
+        app: my-feedback-team-a-staging
+        api_key:
+          secure: RQ4+amQdF0dJq48wzRKaoCtJB25V6Lb0ReJ2oCRNw0fGLHa1M8cD3YfPC8BVCQfWXXpPVtvVwaUte4PSfCFzZoNCqvMjqdN9ok5otyVtY2QkJQrvkzD777lJ9VxAOKrssQSYMHN4I8fdkNIkZqZHGcdBmdm2vta5Q3U7QR12viNYTNF4zHNB0FxEyHXw6/JadFWLoZ6+0zJHF8Sw0pIXGRqjZX8EB8+y4R5zbTgtD5stvKb8qTpO8K96q6Ew8eqftzoVnxmY/hDcFGSqDjCkUnEVaVhXtRSyoJDLHqrFc6816S8y10/ZZhlo0xZ5AG88DWNARxqLhf769DsRfLjYo/aZdBdrTU1VrRTbCtKT6VEkFcqrf7WCvdf7Ac0+hUeF6iaLzPyxpUkY4fkwY4EjKQvFWUoBlikhUsywjsboAShoKYWwhZh+fGfs/oBWM5snrs0Eys2SY8TqxazdUKhcUNS5/xGhootuDhreRQdgZhxx64dctLtzcmF/7j2I+yUe+DwfxdAiJFJLs8NoqqQ6ln+hWdwp1+Pb5FndkScoJA2/QI+wWQl1jdEsZ54oWOud3mk2Xj5geJo5YwOLJKn+avDzBFXq6vTZmEnjbclpzvk3mbn8Mk39sMe1Qazu5dBF+tIDSnUZUfU/KKkUb00k4dUH8FIjtTk1VfmUwIrO+us=
+        on:
+          repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
+    - stage: staging smoke test
+      script: 'curl http://my-feedback-team-a-staging.herokuapp.com'
+    - stage: deploy to production
+      script: skip
+      deploy:
+        <<: *heroku
+        app: my-feedback-team-a-production
+    - stage: production smoke test
+      script: 'curl my-feedback-team-a-production'
