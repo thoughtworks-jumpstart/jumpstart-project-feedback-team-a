@@ -25,7 +25,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/songguoqiang/react-express-mongodb-starter"
+    "url":
+      "https://github.com/thoughtworks-jumpstart/jumpstart-project-feedback-team-a"
   },
   "license": "MIT",
   "devDependencies": {
