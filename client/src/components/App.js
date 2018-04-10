@@ -10,6 +10,7 @@ import Signup from "./Account/Signup";
 import Profile from "./Account/Profile";
 import Forgot from "./Account/Forgot";
 import Reset from "./Account/Reset";
+import Feedback from "../components/Feedback";
 
 import { Provider, subscribe } from "react-contextual";
 
@@ -55,6 +56,7 @@ class App extends React.Component {
               <Header />
               <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/feedback" component={Feedback} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
                 <PrivateRoute path="/account" component={Profile} />
