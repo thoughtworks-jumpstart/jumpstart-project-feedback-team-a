@@ -101,6 +101,11 @@ class Header extends React.Component {
                   Home
                 </NavLink>
               </li>
+              <li>
+                <NavLink exact to="/feedback" activeStyle={active}>
+                  Give Feedback
+                </NavLink>
+              </li>
             </ul>
             {rightNav}
           </div>
