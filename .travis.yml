@@ -1,14 +1,16 @@
 language: node_js
 node_js:
-  - "9"
+- '9'
 cache:
   directories:
   - node_modules
 script:
-  - yarn test
-  - yarn build
+- yarn test
+- yarn build
 deploy:
   provider: heroku
   app: my-feedback-team-a-staging
   on:
-    repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a 
+    repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
+  api_key:
+    secure: VAyzsyIIScxs60cXBWWD8C1WNUZS/J74ghgOSDwH5EUewJJZsAvKBLaCq9dnRRzFalV0yyy9MNWNvtiE5nD60SoMllQNK5EbRmf8+kx4YBu9miPMNR+Br3vazL7ET8evCNts1nZyafPoTkDD5iGSCMk0ac1VseCpWTO/AmZikmwtH7UkXBwfTM9QDYbETZKaK84mf8MnGu881HfolEKF+ueZ0MFspRR6Np5P38zmrSbBxVdVnlfQ28aNRUr/HrCK5sbpip7QRMPwoysxIg3C16feJ68lIvv8yCH8R/943jeRKOUk8AY9s9jhkuTmXtvH2IA9Zv71aM318CCbTTPJis1FlUWEnb3+zI9ZB5dOu6GIFNnixpg4Zc42bx2yD7ePcOwz1a7KeHVRY/IYIQospvYozbyNswakcI/yaoNXWBokPLjkWjnjKbpR7iLNs/1qlYCXsG7SCIfQZlMcbHCupsNUYNhV0+BnRCTHXgZDCJjIvX9W/upO1sdUWOsr/voU+y6eI+mXOH1pwLNsASALHGsWMU7nmVXUKbKwkolY4OIcp2YJsqE8JYXtOW9lHwE3WZHzWlrYLWKxzdYEyBVHOVw1HdyRECoIZgruEcpE6Itf5SQObUQMNaezi6KQ4uLdKnmzD68Ixs//tMPsOF9Hd5rbuDlIkpa6usMt5cUUNuc=
