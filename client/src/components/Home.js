@@ -19,51 +19,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <Messages messages={this.props.messageContext.messages} />
         <div className="row">
-          <div className="col-sm-4">
+          <div className="col-md-6 col-md-offset-3">
             <div className="panel">
               <div className="panel-body">
-                <h3>Heading</h3>
-                <p>
-                  Donec id elit non mi porta gravida at eget metus. Fusce
-                  dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                  malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <a href="about:blank" role="button" className="btn btn-default">
-                  View details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="panel">
-              <div className="panel-body">
-                <h3>Heading</h3>
-                <p>
-                  Donec id elit non mi porta gravida at eget metus. Fusce
-                  dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                  malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
-                <a href="about:blank" role="button" className="btn btn-default">
-                  View details
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="panel">
-              <div className="panel-body">
-                <h3>Heading</h3>
-                <p>
-                  Donec id elit non mi porta gravida at eget metus. Fusce
-                  dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                  malesuada magna mollis euismod. Donec sed odio dui.
-                </p>
+                <h3>myFeedback</h3>
+                <p>Welcome to myFeedback. Click on Sign Up to start</p>
                 <a href="about:blank" role="button" className="btn btn-default">
                   View details
                 </a>
