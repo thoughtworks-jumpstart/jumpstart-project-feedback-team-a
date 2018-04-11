@@ -51,6 +51,7 @@ class App extends React.Component {
         <CookiesProvider>
           <BrowserRouter>
             <div>
+              <h1>This shouldn't show up in production</h1>
               <Header />
               <Switch>
                 <Route path="/" exact component={Home} />
