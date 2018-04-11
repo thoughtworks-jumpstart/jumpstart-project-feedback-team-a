@@ -12,10 +12,10 @@ cache:
     - server/node_modules
 jobs:
   include:
-    # - stage: unit tests
-    #   script: yarn test
-    # - stage: build
-    #   script: yarn build
+    - stage: unit tests
+      script: yarn test
+    - stage: build
+      script: yarn build
     - stage: deploy to staging
       script: skip
       deploy: &heroku
