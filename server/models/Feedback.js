@@ -5,10 +5,8 @@ const FeedbackSchema = new mongoose.Schema(
     receiverEmail: {
       type: String,
       lowercase: true,
-      unique: true,
       required: [true, "cannot be blank"],
-      match: [/\S+@\S+\.\S+/, "is invalid"],
-      index: true
+      match: [/\S+@\S+\.\S+/, "is invalid"]
     }
     // giverEmail: {
     //   type: String,

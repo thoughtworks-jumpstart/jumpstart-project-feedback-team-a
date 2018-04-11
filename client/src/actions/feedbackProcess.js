@@ -3,8 +3,8 @@ export function saveFeedback({ email }) {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      user: {
-        email: email
+      feedback: {
+        receiverEmail: email
       }
     })
   }).then(response => {

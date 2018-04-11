@@ -2,11 +2,14 @@ const Feedback = require("../models/Feedback");
 
 async function saveFeedback(req, res) {
   let feedback = new Feedback();
-  console.log(req.body);
-  feedback.receiverEmail = req.body.user.email;
+  feedback.receiverEmail = req.body.feedback.receiverEmail;
 
-  await feedback.save();
-  return res.json("Feedback saved!");
+  try {
+    await feedback.save();
+    return res.json("Feedback saved!");
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
