@@ -20,8 +20,6 @@ jobs:
         app: my-feedback-team-a-staging
         api_key:
           secure: VAyzsyIIScxs60cXBWWD8C1WNUZS/J74ghgOSDwH5EUewJJZsAvKBLaCq9dnRRzFalV0yyy9MNWNvtiE5nD60SoMllQNK5EbRmf8+kx4YBu9miPMNR+Br3vazL7ET8evCNts1nZyafPoTkDD5iGSCMk0ac1VseCpWTO/AmZikmwtH7UkXBwfTM9QDYbETZKaK84mf8MnGu881HfolEKF+ueZ0MFspRR6Np5P38zmrSbBxVdVnlfQ28aNRUr/HrCK5sbpip7QRMPwoysxIg3C16feJ68lIvv8yCH8R/943jeRKOUk8AY9s9jhkuTmXtvH2IA9Zv71aM318CCbTTPJis1FlUWEnb3+zI9ZB5dOu6GIFNnixpg4Zc42bx2yD7ePcOwz1a7KeHVRY/IYIQospvYozbyNswakcI/yaoNXWBokPLjkWjnjKbpR7iLNs/1qlYCXsG7SCIfQZlMcbHCupsNUYNhV0+BnRCTHXgZDCJjIvX9W/upO1sdUWOsr/voU+y6eI+mXOH1pwLNsASALHGsWMU7nmVXUKbKwkolY4OIcp2YJsqE8JYXtOW9lHwE3WZHzWlrYLWKxzdYEyBVHOVw1HdyRECoIZgruEcpE6Itf5SQObUQMNaezi6KQ4uLdKnmzD68Ixs//tMPsOF9Hd5rbuDlIkpa6usMt5cUUNuc=
-        on:
-          repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
     - stage: deploy to production
       script: skip
       provider: 
@@ -29,8 +27,8 @@ jobs:
         app: my-feedback-team-a-prod
         api_key:
           secure: VAyzsyIIScxs60cXBWWD8C1WNUZS/J74ghgOSDwH5EUewJJZsAvKBLaCq9dnRRzFalV0yyy9MNWNvtiE5nD60SoMllQNK5EbRmf8+kx4YBu9miPMNR+Br3vazL7ET8evCNts1nZyafPoTkDD5iGSCMk0ac1VseCpWTO/AmZikmwtH7UkXBwfTM9QDYbETZKaK84mf8MnGu881HfolEKF+ueZ0MFspRR6Np5P38zmrSbBxVdVnlfQ28aNRUr/HrCK5sbpip7QRMPwoysxIg3C16feJ68lIvv8yCH8R/943jeRKOUk8AY9s9jhkuTmXtvH2IA9Zv71aM318CCbTTPJis1FlUWEnb3+zI9ZB5dOu6GIFNnixpg4Zc42bx2yD7ePcOwz1a7KeHVRY/IYIQospvYozbyNswakcI/yaoNXWBokPLjkWjnjKbpR7iLNs/1qlYCXsG7SCIfQZlMcbHCupsNUYNhV0+BnRCTHXgZDCJjIvX9W/upO1sdUWOsr/voU+y6eI+mXOH1pwLNsASALHGsWMU7nmVXUKbKwkolY4OIcp2YJsqE8JYXtOW9lHwE3WZHzWlrYLWKxzdYEyBVHOVw1HdyRECoIZgruEcpE6Itf5SQObUQMNaezi6KQ4uLdKnmzD68Ixs//tMPsOF9Hd5rbuDlIkpa6usMt5cUUNuc=
-        on:
-          repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
+  on:
+    repo: thoughtworks-jumpstart/jumpstart-project-feedback-team-a
 notifications:
   slack:
     secure: O/CCieYBuW3EhBYnRxuwkDx8RjxAQ3dYsuhPwUHbJSMQ770YQAgpKlbNvW/LRPYGGp73vWsh9uM0wEkfr3CwBXe5mWd4h+FGvXAmi4WY9G9oEBtEMQNE0olII/RLxO5LQofZvO+gsPehT5Uh6dQ8NXqK2jvkvZEcj6TTkLAvnrF6pWy4Kw2uzsKaMACyYu7uoywnxClntx2L6iDbgqocVYy2Bo2iGkbmIR3lvXEIOtSD2wtrcGn4wFoYg6lZ4N8pYOkaY6H9a8t+kkUsRRSahMmE1zy3V70mrnQbdS904F9/ACMY4WspSGnE0/5VlaZCV8d7oXMyHlWtrVMxASVTXLNKk04RnZkZy3laqFOLYv1/wq5Fpg2WMRErw/t7xwCabiGG1PYC+l9VJvZOS/0Klda/yspDISWt1edVpfIJDcD5ln7litcEiGAR+mEfPl2YbWN98CeFBNGxaBVvxXCbamBeoXQW2TlJ871lnYELELhhETQmBHc0EpHpAqdWsg01Wvyvi9HtApJaL7T2U4AeK29DZFsIMqsep9VHq1wX7UTife48M4wdoSjGog2JZ4QehSqospu6BLFVvFxbn4uHnS7UcKT8qDiC8mxowne7ys6b1ODV+tbRd+QPOwFwXhcJrSJ4VouskvLN257Lwx6C+x8uwlP8Vtfl+dG6YBUrmc0=
