@@ -13,6 +13,7 @@ import "./components/Header.css";
 import "./components/Home.css";
 import "./components/Account/Login.css";
 import "./components/Account/Forgot.css";
+import "./components/Messages.css";
 
 ReactDOM.render(<App />, document.getElementById("app"));
 

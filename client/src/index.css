@@ -16,7 +16,7 @@
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 } */
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -31,7 +31,7 @@ a {
 
 a:hover {
   text-decoration: none;
-}
+} */
 
 /* .login-container {
   max-width: 555px;
@@ -210,10 +210,10 @@ a:hover {
 
 /* Forms */
 /* ------------------------- */
-
-textarea {
+/* couldn't see textarea being used by any component. so commenting it out for now. */
+/* textarea {
   resize: none;
-}
+} */
 
 /* .form-control {
   height: auto;
