@@ -12,10 +12,10 @@ cache:
     - server/node_modules
 jobs:
   include:
-    - stage: unit tests
-      script: yarn test
-    - stage: build
-      script: yarn build
+    # - stage: unit tests
+    #   script: yarn test
+    # - stage: build
+    #   script: yarn build
     - stage: deploy to staging
       script: skip
       deploy: &heroku
@@ -26,6 +26,7 @@ jobs:
     - stage: smoke test for staging
       script: ./deployment_smoke_test.sh https://my-feedback-team-a-staging.herokuapp.com/
     - stage: deploy to production
+      if: branch = deploy-to-prod
       script: skip
       deploy: 
         <<: *heroku
@@ -33,6 +34,7 @@ jobs:
         on:
           branch: deploy-to-prod
     - stage: smoke test for production
+      if: branch = deploy-to-prod
       script: ./deployment_smoke_test.sh https://my-feedback-team-a-prod.herokuapp.com/
 notifications:
   slack:
