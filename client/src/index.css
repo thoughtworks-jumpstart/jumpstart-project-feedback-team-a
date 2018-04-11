@@ -1,19 +1,20 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
+/* @import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800"); */
 
 /* Scaffolding
 /* ------------------------- */
-
-html {
+/* to move to common.css */
+/* html {
   position: relative;
   min-height: 100%;
-}
+} */
 
-body {
+/* to move to common.css */
+/* body {
   background-color: #f4f4f4;
   margin-bottom: 44px;
   line-height: 1.57142857;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+} */
 
 h1,
 h2,
@@ -121,14 +122,6 @@ a:hover {
   background: #e6e6e6 linear-gradient(to bottom, #f0f0f0, #e6e6e6);
 } */
 
-.btn-success {
-  border-color: #208a46;
-  background: #29b35b linear-gradient(to bottom, #2ec866, #29b35b);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    inset 0 -1px 4px rgba(32, 138, 70, 0.3);
-}
-
 .btn-success:active {
   background: #239a4e linear-gradient(to bottom, #28af59, #239a4e);
 }
@@ -234,8 +227,8 @@ textarea {
 .form-group > label {
   text-transform: uppercase;
   font-size: 13px;
-}
- */
+} */
+
 .hr-title {
   height: auto;
   margin-top: 20px;
