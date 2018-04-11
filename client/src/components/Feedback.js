@@ -1,5 +1,8 @@
 import React from "react";
 import { saveFeedback } from "../actions/feedbackProcess";
+import Messages from "../components/Messages";
+import { mapMessageContextToProps } from "./context_helper";
+import { ProviderContext, subscribe } from "react-contextual";
 
 class Feedback extends React.Component {
   constructor(props) {
@@ -9,7 +12,11 @@ class Feedback extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     saveFeedback({
-      email: this.state.email
+      email: this.state.email,
+      feedbackGood: this.state.feedbackGood,
+      feedbackImprove: this.state.feedbackImprove,
+      feedbackAction: this.state.feedbackAction,
+      messageContext: this.props.messageContext
     });
   }
 
@@ -19,6 +26,7 @@ class Feedback extends React.Component {
   render() {
     return (
       <div className="container">
+        <Messages messages={this.props.messageContext.messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h1 style={{ display: "inline" }}>Collect Feedback</h1>
           <button
@@ -44,15 +52,33 @@ class Feedback extends React.Component {
 
           <div style={{ marginTop: "20px" }} className="form-group">
             <label>What I did well?</label>
-            <textarea className="form-control" rows="5" id="feedbackItem1" />
+            <textarea
+              name="feedbackGood"
+              className="form-control"
+              rows="5"
+              id="feedbackItem1"
+              onChange={this.handleChange.bind(this)}
+            />
           </div>
           <div style={{ marginTop: "20px" }} className="form-group">
             <label>What could be better?</label>
-            <textarea className="form-control" rows="5" id="feedbackItem2" />
+            <textarea
+              name="feedbackImprove"
+              className="form-control"
+              rows="5"
+              id="feedbackItem2"
+              onChange={this.handleChange.bind(this)}
+            />
           </div>
           <div style={{ marginTop: "20px" }} className="form-group">
             <label>Suggestions for improvement?</label>
-            <textarea className="form-control" rows="5" id="feedbackItem3" />
+            <textarea
+              name="feedbackAction"
+              className="form-control"
+              rows="5"
+              id="feedbackItem3"
+              onChange={this.handleChange.bind(this)}
+            />
           </div>
         </form>
       </div>
@@ -60,4 +86,12 @@ class Feedback extends React.Component {
   }
 }
 
-export default Feedback;
+//export default Feedback;
+
+const mapContextToProps = context => {
+  return {
+    ...mapMessageContextToProps(context)
+  };
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(Feedback);

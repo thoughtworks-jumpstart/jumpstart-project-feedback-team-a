@@ -7,7 +7,7 @@ const FeedbackSchema = new mongoose.Schema(
       lowercase: true,
       required: [true, "cannot be blank"],
       match: [/\S+@\S+\.\S+/, "is invalid"]
-    }
+    },
     // giverEmail: {
     //   type: String,
     //   lowercase: true,
@@ -16,9 +16,9 @@ const FeedbackSchema = new mongoose.Schema(
     //   match: [/\S+@\S+\.\S+/, "is invalid"],
     //   index: true
     // },
-    // feedbackGood: String,
-    // feedbackImprove: String,
-    // feedbackAction: String,
+    feedbackGood: String,
+    feedbackImprove: String,
+    feedbackAction: String
 
     // status: String
   },
