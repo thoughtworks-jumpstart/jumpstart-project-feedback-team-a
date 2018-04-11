@@ -9,21 +9,20 @@ const FeedbackSchema = new mongoose.Schema(
       required: [true, "cannot be blank"],
       match: [/\S+@\S+\.\S+/, "is invalid"],
       index: true
-    },
-    giverEmail: {
-      type: String,
-      lowercase: true,
-      unique: true,
-      required: [true, "cannot be blank"],
-      match: [/\S+@\S+\.\S+/, "is invalid"],
-      index: true
-    },
-    feedbackContents: {
-      ofMixed: [mongoose.Schema.Types.Mixed]
-    },
-    created_at: Date,
-    modified: Date,
-    status: String
+    }
+    // giverEmail: {
+    //   type: String,
+    //   lowercase: true,
+    //   unique: true,
+    //   required: [true, "cannot be blank"],
+    //   match: [/\S+@\S+\.\S+/, "is invalid"],
+    //   index: true
+    // },
+    // feedbackGood: String,
+    // feedbackImprove: String,
+    // feedbackAction: String,
+
+    // status: String
   },
   { timestamps: true }
 );
