@@ -37,5 +37,9 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,json,css}": ["prettier --write", "git add"]
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "reactstrap": "^5.0.0"
   }
 }
