@@ -6,7 +6,6 @@ import registerServiceWorker from "./registerServiceWorker";
 import "whatwg-fetch";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
-// import "./index.css";
 import "./Common.css";
 import "./components/Footer.css";
 import "./components/Header.css";
