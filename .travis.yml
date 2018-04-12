@@ -14,6 +14,8 @@ jobs:
   include:
     - stage: unit tests
       script: yarn test
+    - stage: e2e tests
+      script: yarn test:cypress-headless
     - stage: build
       script: yarn build
     - stage: deploy to staging
