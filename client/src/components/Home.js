@@ -6,7 +6,7 @@ import {
   mapMessageContextToProps,
   messageContextPropType
 } from "../components/context_helper";
-
+import "./Home.css";
 class Home extends React.Component {
   static propTypes = {
     history: object.isRequired,

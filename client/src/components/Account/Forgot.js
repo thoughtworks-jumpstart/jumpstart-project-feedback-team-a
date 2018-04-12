@@ -6,7 +6,7 @@ import {
   mapMessageContextToProps,
   messageContextPropType
 } from "../context_helper";
-
+import "./Forgot.css";
 class Forgot extends React.Component {
   static propTypes = {
     ...messageContextPropType

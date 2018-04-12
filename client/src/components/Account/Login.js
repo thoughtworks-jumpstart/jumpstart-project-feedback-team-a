@@ -12,6 +12,8 @@ import {
   sessionContextPropType
 } from "../context_helper";
 
+import "./Login.css";
+
 class Login extends React.Component {
   static propTypes = {
     history: object.isRequired,

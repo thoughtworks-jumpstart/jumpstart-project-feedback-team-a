@@ -1,6 +1,6 @@
 import React from "react";
 import { object } from "prop-types";
-
+import "./Messages.css";
 class Messages extends React.Component {
   static propTypes = {
     messages: object.isRequired
