@@ -1,7 +1,10 @@
 import React from "react";
 import { saveFeedback } from "../actions/feedbackProcess";
 import Messages from "../components/Messages";
-import { mapMessageContextToProps } from "./context_helper";
+import {
+  mapMessageContextToProps,
+  mapSessionContextToProps
+} from "./context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 //import NavigationPrompt from "react-router-navigation-prompt";
 import { Prompt } from "react-router-dom";
@@ -23,6 +26,7 @@ class Feedback extends React.Component {
     event.preventDefault();
     saveFeedback({
       email: this.state.email,
+      giver: this.props.sessionContext.user.email,
       feedbackGood: this.state.feedbackGood,
       feedbackImprove: this.state.feedbackImprove,
       feedbackAction: this.state.feedbackAction,
@@ -125,7 +129,8 @@ class Feedback extends React.Component {
 
 const mapContextToProps = context => {
   return {
-    ...mapMessageContextToProps(context)
+    ...mapMessageContextToProps(context),
+    ...mapSessionContextToProps(context)
   };
 };
 

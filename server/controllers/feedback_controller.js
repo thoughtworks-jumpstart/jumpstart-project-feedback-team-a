@@ -3,6 +3,7 @@ const Feedback = require("../models/Feedback");
 async function saveFeedback(req, res) {
   let feedback = new Feedback();
   feedback.receiverEmail = req.body.feedback.receiverEmail;
+  feedback.giverEmail = req.body.feedback.giverEmail;
   feedback.feedbackGood = req.body.feedback.feedbackGood;
   feedback.feedbackImprove = req.body.feedback.feedbackImprove;
   feedback.feedbackAction = req.body.feedback.feedbackAction;

@@ -1,5 +1,6 @@
 export function saveFeedback({
   email,
+  giver,
   feedbackGood,
   feedbackImprove,
   feedbackAction,
@@ -12,6 +13,7 @@ export function saveFeedback({
     body: JSON.stringify({
       feedback: {
         receiverEmail: email,
+        giverEmail: giver,
         feedbackGood: feedbackGood,
         feedbackImprove: feedbackImprove,
         feedbackAction: feedbackAction
