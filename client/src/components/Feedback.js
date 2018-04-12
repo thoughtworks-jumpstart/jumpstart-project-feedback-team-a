@@ -3,14 +3,23 @@ import { saveFeedback } from "../actions/feedbackProcess";
 import Messages from "../components/Messages";
 import { mapMessageContextToProps } from "./context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
+import NavigationPrompt from "react-router-navigation-prompt";
+//import { Prompt } from "react-router-dom";
 
 class Feedback extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "" };
+    this.state = {
+      email: "",
+      isBlocking: false
+    };
   }
+
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({
+      isBlocking: false
+    });
     saveFeedback({
       email: this.state.email,
       feedbackGood: this.state.feedbackGood,
@@ -21,9 +30,14 @@ class Feedback extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      [event.target.name]: event.target.value,
+      isBlocking: event.target.value.length > 0
+    });
   }
   render() {
+    //const { isBlocking } = this.state;
+
     return (
       <div className="container">
         <Messages messages={this.props.messageContext.messages} />
@@ -85,8 +99,6 @@ class Feedback extends React.Component {
     );
   }
 }
-
-//export default Feedback;
 
 const mapContextToProps = context => {
   return {
