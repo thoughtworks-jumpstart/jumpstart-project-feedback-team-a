@@ -42,10 +42,13 @@ class Header extends React.Component {
                 this.props.sessionContext.user.picture ||
                 this.props.sessionContext.user.gravatar
               }
-            />{" "}
-            {this.props.sessionContext.user.name ||
-              this.props.sessionContext.user.email ||
-              this.props.sessionContext.user.id}{" "}
+            />
+            <span id="user-name">
+              {" "}
+              {this.props.sessionContext.user.name ||
+                this.props.sessionContext.user.email ||
+                this.props.sessionContext.user.id}{" "}
+            </span>
             <i className="caret" />
           </a>
           <ul className="dropdown-menu">
@@ -64,12 +67,12 @@ class Header extends React.Component {
     ) : (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <NavLink to="/login" activeStyle={active}>
+          <NavLink to="/login" activeStyle={active} id="log-in">
             Log in
           </NavLink>
         </li>
         <li>
-          <NavLink to="/signup" activeStyle={active}>
+          <NavLink to="/signup" activeStyle={active} id="sign-up">
             Sign up
           </NavLink>
         </li>
