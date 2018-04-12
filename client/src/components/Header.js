@@ -28,6 +28,12 @@ class Header extends React.Component {
 
   render() {
     const active = { borderBottomColor: "#3f51b5" };
+    const feedbackLink = (
+      <NavLink exact to="/feedback" activeStyle={active}>
+        Give Feedback
+      </NavLink>
+    );
+
     const rightNav = this.props.sessionContext.token ? (
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
@@ -104,11 +110,7 @@ class Header extends React.Component {
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink exact to="/feedback" activeStyle={active}>
-                  Give Feedback
-                </NavLink>
-              </li>
+              <li>{this.props.sessionContext.token && feedbackLink}</li>
             </ul>
             {rightNav}
           </div>

@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "set NODE_ENV=local&&nodemon server.js",
-    "test": "set NODE_ENV=test&&jest",
+    "dev": "NODE_ENV=local nodemon server.js",
+    "test": "NODE_ENV=test jest",
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test -- --coverage"
   },
