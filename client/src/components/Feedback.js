@@ -3,7 +3,7 @@ import { saveFeedback } from "../actions/feedbackProcess";
 import Messages from "../components/Messages";
 import { mapMessageContextToProps } from "./context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
-import NavigationPrompt from "react-router-navigation-prompt";
+//import NavigationPrompt from "react-router-navigation-prompt";
 //import { Prompt } from "react-router-dom";
 
 class Feedback extends React.Component {
