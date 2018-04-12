@@ -63,7 +63,11 @@ class Header extends React.Component {
             </li>
             <li className="divider" />
             <li>
-              <a href="about:blank" onClick={this.handleLogout.bind(this)}>
+              <a
+                href="about:blank"
+                onClick={this.handleLogout.bind(this)}
+                id="log-out"
+              >
                 Logout
               </a>
             </li>
