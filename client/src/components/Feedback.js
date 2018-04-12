@@ -4,22 +4,23 @@ import Messages from "../components/Messages";
 import { mapMessageContextToProps } from "./context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 //import NavigationPrompt from "react-router-navigation-prompt";
-//import { Prompt } from "react-router-dom";
+import { Prompt } from "react-router-dom";
 
 class Feedback extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      isBlocking: false
+      feedbackGood: "",
+      feedbackAction: "",
+      feedbackImprove: ""
     };
+    this.isBlocking = this.isBlocking.bind(this);
+    this.totalCharCount = this.totalCharCount.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      isBlocking: false
-    });
     saveFeedback({
       email: this.state.email,
       feedbackGood: this.state.feedbackGood,
@@ -29,15 +30,30 @@ class Feedback extends React.Component {
     });
   }
 
+  isBlocking() {
+    if (this.totalCharCount() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
-      isBlocking: event.target.value.length > 0
+      [event.target.name]: event.target.value
     });
   }
-  render() {
-    //const { isBlocking } = this.state;
 
+  totalCharCount() {
+    let totalCharCount =
+      this.state.email.length +
+      this.state.feedbackAction.length +
+      this.state.feedbackGood.length +
+      this.state.feedbackImprove.length;
+    return totalCharCount;
+  }
+
+  render() {
     return (
       <div className="container">
         <Messages messages={this.props.messageContext.messages} />
@@ -95,6 +111,13 @@ class Feedback extends React.Component {
             />
           </div>
         </form>
+
+        <Prompt
+          when={this.isBlocking()}
+          message={location =>
+            `Are you sure you want to go to ${location.pathname}`
+          }
+        />
       </div>
     );
   }
