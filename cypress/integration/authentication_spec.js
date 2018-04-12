@@ -1,9 +1,4 @@
-const URL =
-  process.env.NODE_ENV === "staging"
-    ? "http://my-feedback-team-a-staging.herokuapp.com/"
-    : "http://localhost:3000/";
-
-console.log("node env is", process.env.NODE_ENV);
+const URL = Cypress.env("baseUrl");
 
 describe("User Signup", () => {
   it("should sign up successfully", () => {

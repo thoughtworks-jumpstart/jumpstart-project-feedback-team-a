@@ -17,8 +17,7 @@
       "concurrently --kill-others-on-fail \"yarn start:dev:server\" \"yarn start:client\"",
     "start:prod:server": "cd server&&yarn start",
     "start:client": "cd client&&yarn start",
-    "test:cypress": "cypress open",
-    "test:cypress-headless": "cypress run"
+    "test:cypress": "cypress open"
   },
   "engines": {
     "node": "^9.6.0",

@@ -15,7 +15,7 @@ jobs:
     - stage: unit tests
       script: yarn test
     - stage: e2e tests
-      script: yarn test:cypress-headless
+      script: $(yarn bin)/cypress run --env baseUrl=https://my-feedback-team-a-staging.herokuapp.com/
     - stage: build
       script: yarn build
     - stage: deploy to staging
