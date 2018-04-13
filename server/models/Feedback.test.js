@@ -10,8 +10,8 @@ describe("Feedback model", () => {
   const giverEmail = "gavin@example.com";
   const receiverEmail = "kevin@example.com";
   let feedback = new Feedback({
-    //receiverEmail: receiverEmail,
-    //giverEmail: giverEmail,
+    receiverEmail: receiverEmail,
+    giverEmail: giverEmail,
     feedbackGood: "good feedback",
     feedbackImprove: "improvement feedback",
     feedbackAction: "action feedback"
