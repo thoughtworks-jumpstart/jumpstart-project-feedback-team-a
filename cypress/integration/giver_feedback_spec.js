@@ -38,7 +38,7 @@ describe("Giver Feedback Form", () => {
     cy.get(".alert-success").contains(/^(?!\s*$).+/);
   });
 
-  it.only("should see error message that saving his feedback was unsuccessful", () => {
+  it("should see error message that saving his feedback was unsuccessful", () => {
     cy.get("#feedback").click();
     cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
     cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");

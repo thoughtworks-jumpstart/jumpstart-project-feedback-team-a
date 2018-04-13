@@ -9,7 +9,7 @@
     "temp": "echo 'running'",
     "test": "(cd client && CI=true && yarn test) && (cd server && yarn test)",
     "test:windows":
-      "(cd client&&set CI=true&&yarn test)&&(cd ../server&&yarn test)",
+      "(cd client&&set CI=true&&yarn test)&&(cd ../server&&yarn test:windows)",
     "build": "concurrently \"cd client&&yarn build\"",
     "heroku-postbuild": "yarn build",
     "start:dev:server:windows": "cd server&&yarn dev:windows",

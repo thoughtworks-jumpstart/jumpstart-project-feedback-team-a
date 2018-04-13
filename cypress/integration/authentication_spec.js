@@ -9,6 +9,7 @@ describe("User Signup", () => {
     cy.get("input#name").type("Bob");
     cy.get("input#email").type(`${Date.now()}@a.com`);
     cy.get("input#password").type("password");
+    cy.get("input#confirm").type("password");
 
     cy.get("[type='submit']").click();
     cy.get("#user-name").contains("Bob");
