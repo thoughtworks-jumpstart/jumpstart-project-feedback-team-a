@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
-import Header from "./Header";
-import Footer from "./Footer";
-import Home from "./Home";
-import NotFound from "./NotFound";
-import Login from "./Account/Login";
-import WrappedSignup from "./Account/WrappedSignup";
-import Profile from "./Account/Profile";
-import Forgot from "./Account/Forgot";
-import Reset from "./Account/Reset";
-import Feedback from "../components/Feedback";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+import Home from "./Home/Home";
+import NotFound from "./NotFound/NotFound";
+import Login from "./Account/Login/Login";
+import WrappedSignup from "./Account/Signup/WrappedSignup";
+import Profile from "./Account/Profile/Profile";
+import Forgot from "./Account/Forgot/Forgot";
+import Reset from "./Account/Reset/Reset";
+import Feedback from "./Feedback/Feedback";
 
 import { Provider, subscribe } from "react-contextual";
 

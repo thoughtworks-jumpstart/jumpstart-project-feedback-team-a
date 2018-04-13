@@ -1,6 +1,6 @@
 import React from "react";
 import Signup from "./Signup";
-import { signup } from "../../actions/auth";
+import { signup } from "../../../actions/auth";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 
@@ -10,7 +10,7 @@ import {
   mapSessionContextToProps,
   messageContextPropType,
   sessionContextPropType
-} from "../context_helper";
+} from "../../context_helper";
 
 export class WrappedSignup extends React.Component {
   static propTypes = {
