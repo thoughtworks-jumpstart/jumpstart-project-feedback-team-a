@@ -3,8 +3,8 @@ import {
   updateProfile,
   changePassword,
   deleteAccount
-} from "../../actions/auth";
-import Messages from "../Messages";
+} from "../../../actions/auth";
+import Messages from "../../Messages/Messages";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
@@ -13,7 +13,7 @@ import {
   mapSessionContextToProps,
   messageContextPropType,
   sessionContextPropType
-} from "../context_helper";
+} from "../../context_helper";
 
 class Profile extends React.Component {
   static propTypes = {

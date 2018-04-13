@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { signup } from "../../actions/auth";
+import { signup } from "../../../actions/auth";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
-import Messages from "../Messages";
+import Messages from "../../Messages/Messages";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapMessageContextToProps,
   mapSessionContextToProps,
   messageContextPropType,
   sessionContextPropType
-} from "../context_helper";
+} from "../../context_helper";
 
 class Signup extends React.Component {
   static propTypes = {

@@ -1,11 +1,11 @@
 import React from "react";
-import Messages from "./Messages";
+import Messages from "../Messages/Messages";
 import { object } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapMessageContextToProps,
   messageContextPropType
-} from "../components/context_helper";
+} from "../context_helper";
 import "./Home.css";
 class Home extends React.Component {
   static propTypes = {
@@ -27,7 +27,7 @@ class Home extends React.Component {
               <div className="panel-body">
                 <h3>myFeedback</h3>
                 <p>Welcome to myFeedback. Click on Sign Up to start</p>
-                <a href="about:blank" role="button" className="btn btn-default">
+                <a href="about:blank" role="button" className="btn btn-success">
                   View details
                 </a>
               </div>

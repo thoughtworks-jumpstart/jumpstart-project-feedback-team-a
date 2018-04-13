@@ -1,12 +1,12 @@
 import React from "react";
-import { resetPassword } from "../../actions/auth";
-import Messages from "../Messages";
+import { resetPassword } from "../../../actions/auth";
+import Messages from "../../Messages/Messages";
 import { object, shape, string } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapMessageContextToProps,
   messageContextPropType
-} from "../context_helper";
+} from "../../context_helper";
 
 class Reset extends React.Component {
   static propTypes = {

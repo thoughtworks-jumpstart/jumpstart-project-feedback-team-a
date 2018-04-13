@@ -1,14 +1,14 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
-import { logout } from "../actions/auth";
+import { logout } from "../../actions/auth";
 import { withRouter } from "react-router";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapSessionContextToProps,
   sessionContextPropType
-} from "../components/context_helper";
+} from "../context_helper";
 import "./Header.css";
 class Header extends React.Component {
   static propTypes = {
@@ -29,7 +29,12 @@ class Header extends React.Component {
   render() {
     const active = { borderBottomColor: "#3f51b5" };
     const feedbackLink = (
-      <NavLink exact to="/feedback" activeStyle={active}>
+      <NavLink
+        exact
+        to="/feedback"
+        activeStyle={active}
+        style={{ color: "white" }}
+      >
         Give Feedback
       </NavLink>
     );
@@ -41,6 +46,7 @@ class Header extends React.Component {
             href="about:blank"
             data-toggle="dropdown"
             className="navbar-avatar dropdown-toggle"
+            style={{ color: "white" }}
           >
             <img
               alt="avatar"
@@ -77,12 +83,22 @@ class Header extends React.Component {
     ) : (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <NavLink to="/login" activeStyle={active} id="log-in">
+          <NavLink
+            to="/login"
+            activeStyle={active}
+            id="log-in"
+            style={{ color: "white" }}
+          >
             Log in
           </NavLink>
         </li>
         <li>
-          <NavLink to="/signup" activeStyle={active} id="sign-up">
+          <NavLink
+            to="/signup"
+            activeStyle={active}
+            id="sign-up"
+            style={{ color: "white" }}
+          >
             Sign up
           </NavLink>
         </li>
@@ -104,13 +120,18 @@ class Header extends React.Component {
               <span className="icon-bar" />
             </button>
             <NavLink exact to="/" className="navbar-brand">
-              Project name
+              myFeedback
             </NavLink>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
               <li>
-                <NavLink exact to="/" activeStyle={active}>
+                <NavLink
+                  exact
+                  to="/"
+                  activeStyle={active}
+                  style={{ color: "white" }}
+                >
                   Home
                 </NavLink>
               </li>

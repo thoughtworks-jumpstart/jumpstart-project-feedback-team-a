@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
-import { login } from "../../actions/auth";
-import Messages from "../Messages";
+import { login } from "../../../actions/auth";
+import Messages from "../../Messages/Messages";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
@@ -10,8 +10,7 @@ import {
   mapSessionContextToProps,
   messageContextPropType,
   sessionContextPropType
-} from "../context_helper";
-
+} from "../../context_helper";
 import "./Login.css";
 
 class Login extends React.Component {

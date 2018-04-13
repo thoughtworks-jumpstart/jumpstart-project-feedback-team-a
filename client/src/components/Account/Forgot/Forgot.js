@@ -1,11 +1,11 @@
 import React from "react";
-import { forgotPassword } from "../../actions/auth";
-import Messages from "../Messages";
+import { forgotPassword } from "../../../actions/auth";
+import Messages from "../../Messages/Messages";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapMessageContextToProps,
   messageContextPropType
-} from "../context_helper";
+} from "../../context_helper";
 import "./Forgot.css";
 class Forgot extends React.Component {
   static propTypes = {
