@@ -43,38 +43,46 @@ export function signup({
   name,
   email,
   password,
+  confirm,
   history,
   cookies,
   messageContext,
   sessionContext
 }) {
   messageContext.clearMessages();
-  return fetch("/api/users/signup", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user: {
-        name: name,
-        email: email,
-        password: password
-      }
-    })
-  }).then(response => {
-    return response.json().then(json => {
-      if (response.ok) {
-        sessionContext.saveSession(json.token, json.user);
-        cookies.set("token", json.token, {
-          expires: moment()
-            .add(1, "hour")
-            .toDate()
-        });
-        history.push("/");
-      } else {
-        const messages = Array.isArray(json) ? json : [json];
-        messageContext.setErrorMessages(messages);
-      }
+  if (password !== confirm) {
+    const messages = [
+      { msg: "Your confirmed password does not match the new password" }
+    ];
+    messageContext.setErrorMessages(messages);
+  } else {
+    return fetch("/api/users/signup", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: {
+          name: name,
+          email: email,
+          password: password
+        }
+      })
+    }).then(response => {
+      return response.json().then(json => {
+        if (response.ok) {
+          sessionContext.saveSession(json.token, json.user);
+          cookies.set("token", json.token, {
+            expires: moment()
+              .add(1, "hour")
+              .toDate()
+          });
+          history.push("/");
+        } else {
+          const messages = Array.isArray(json) ? json : [json];
+          messageContext.setErrorMessages(messages);
+        }
+      });
     });
-  });
+  }
 }
 
 export function logout({ history, cookies, sessionContext }) {
