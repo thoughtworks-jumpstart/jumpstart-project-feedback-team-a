@@ -33,7 +33,7 @@ class Header extends React.Component {
         exact
         to="/feedback"
         activeStyle={active}
-        style={{ color: "white" }}
+        style={{ color: "white" }} id="feedback"
       >
         Give Feedback
       </NavLink>
