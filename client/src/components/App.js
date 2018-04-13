@@ -54,6 +54,7 @@ class App extends React.Component {
             <div>
               <Header />
               <Switch>
+                <h1>Hello</h1>
                 <Route path="/" exact component={Home} />
                 <Route path="/feedback" component={Feedback} />
                 <Route path="/login" component={Login} />
