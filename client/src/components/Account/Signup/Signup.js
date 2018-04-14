@@ -7,7 +7,7 @@ const Signup = props => (
     <div className="panel">
       <div className="panel-body">
         <Messages messages={props.messageContext.messages} />
-        <form onSubmit={props.handleSignup.bind(this)}>
+        <form onSubmit={props.handleSignup}>
           <legend>Create an account</legend>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -19,7 +19,7 @@ const Signup = props => (
               autoFocus
               className="form-control"
               value={props.name}
-              onChange={props.handleChange.bind(this)}
+              onChange={props.handleChange}
             />
           </div>
           <div className="form-group">
@@ -31,7 +31,7 @@ const Signup = props => (
               placeholder="Email"
               className="form-control"
               value={props.email}
-              onChange={props.handleChange.bind(this)}
+              onChange={props.handleChange}
             />
           </div>
           <div className="form-group">
@@ -43,7 +43,7 @@ const Signup = props => (
               placeholder="Password"
               className="form-control"
               value={props.password}
-              onChange={props.handleChange.bind(this)}
+              onChange={props.handleChange}
             />
           </div>
           <div className="form-group">
@@ -55,7 +55,7 @@ const Signup = props => (
               placeholder="Password"
               className="form-control"
               value={props.confirm}
-              onChange={props.handleChange.bind(this)}
+              onChange={props.handleChange}
             />
           </div>
           <div className="form-group">
