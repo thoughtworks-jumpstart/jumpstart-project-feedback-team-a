@@ -3,10 +3,22 @@
 exports[`WrappedSignup should should have the following structure 1`] = `
 <Signup
   confirm=""
+  cookies={[Function]}
   email=""
   handleChange={[Function]}
   handleSignup={[Function]}
+  history={Object {}}
+  messageContext={
+    Object {
+      "messages": Object {},
+    }
+  }
   name=""
   password=""
+  sessionContext={
+    Object {
+      "session": Object {},
+    }
+  }
 />
 `;
