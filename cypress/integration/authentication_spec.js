@@ -15,7 +15,7 @@ describe("User Signup", () => {
     cy.get("#user-name").contains("Bob");
   });
 
-  it.only("should display error message when password and confirm fields don't match", () => {
+  it("should display error message when password and confirm fields don't match", () => {
     cy.visit(URL);
 
     cy.get("#sign-up").click();
