@@ -49,22 +49,17 @@ export function signup({
   messageContext,
   sessionContext
 }) {
+  const TIMEOUTFOR = 3000;
   messageContext.clearMessages();
-  let alertFlag = false;
-  name.length === 0 && (alertFlag = true);
-  email.length === 0 && (alertFlag = true);
-  password.length === 0 && (alertFlag = true);
-  confirm.length === 0 && (alertFlag = true);
-  if (alertFlag) {
+
+  if (alertFlag(name, email, password, confirm)) {
     const messages = [{ msg: "Please fill in all fields" }];
-    messageContext.setErrorMessages(messages);
-    setTimeout(() => messageContext.clearMessages(), 3000);
+    timeOut(messageContext, messages, TIMEOUTFOR);
   } else if (password !== confirm) {
     const messages = [
       { msg: "Your confirmed password does not match the new password" }
     ];
-    messageContext.setErrorMessages(messages);
-    setTimeout(() => messageContext.clearMessages(), 3000);
+    timeOut(messageContext, messages, TIMEOUTFOR);
   } else {
     return fetch("/api/users/signup", {
       method: "post",
@@ -88,8 +83,7 @@ export function signup({
           history.push("/");
         } else {
           const messages = Array.isArray(json) ? json : [json];
-          messageContext.setErrorMessages(messages);
-          setTimeout(() => messageContext.clearMessages(), 3000);
+          timeOut(messageContext, messages, TIMEOUTFOR);
         }
       });
     });
@@ -255,4 +249,17 @@ export function deleteAccount({
       });
     }
   });
+}
+
+export function alertFlag(name, email, password, confirm) {
+  let alertFlag = false;
+  name.length === 0 && (alertFlag = true);
+  email.length === 0 && (alertFlag = true);
+  password.length === 0 && (alertFlag = true);
+  confirm.length === 0 && (alertFlag = true);
+  return alertFlag;
+}
+export function timeOut(messageContext, messages, TIMEOUTFOR) {
+  messageContext.setErrorMessages(messages);
+  setTimeout(() => messageContext.clearMessages(), TIMEOUTFOR);
 }

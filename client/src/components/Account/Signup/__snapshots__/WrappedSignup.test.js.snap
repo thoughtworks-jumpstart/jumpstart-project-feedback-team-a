@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WrappedSignup should should have the following structure 1`] = `
+<Signup
+  confirm=""
+  email=""
+  handleChange={[Function]}
+  handleSignup={[Function]}
+  name=""
+  password=""
+/>
+`;
