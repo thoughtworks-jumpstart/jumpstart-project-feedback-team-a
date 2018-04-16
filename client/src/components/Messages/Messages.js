@@ -14,7 +14,7 @@ class Messages extends React.Component {
         ))}
       </div>
     ) : this.props.messages.error ? (
-      <div role="alert" className="alert alert-danger">
+      <div role="alert" className="alert alert-danger .alert-dismissible">
         {this.props.messages.error.map((message, index) => (
           <div key={index}>{message.msg}</div>
         ))}

@@ -50,11 +50,21 @@ export function signup({
   sessionContext
 }) {
   messageContext.clearMessages();
-  if (password !== confirm) {
+  let alertFlag = false;
+  name.length === 0 && (alertFlag = true);
+  email.length === 0 && (alertFlag = true);
+  password.length === 0 && (alertFlag = true);
+  confirm.length === 0 && (alertFlag = true);
+  if (alertFlag) {
+    const messages = [{ msg: "Please fill in all fields" }];
+    messageContext.setErrorMessages(messages);
+    setTimeout(() => messageContext.clearMessages(), 3000);
+  } else if (password !== confirm) {
     const messages = [
       { msg: "Your confirmed password does not match the new password" }
     ];
     messageContext.setErrorMessages(messages);
+    setTimeout(() => messageContext.clearMessages(), 3000);
   } else {
     return fetch("/api/users/signup", {
       method: "post",
@@ -79,6 +89,7 @@ export function signup({
         } else {
           const messages = Array.isArray(json) ? json : [json];
           messageContext.setErrorMessages(messages);
+          setTimeout(() => messageContext.clearMessages(), 3000);
         }
       });
     });

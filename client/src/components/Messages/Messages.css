@@ -12,6 +12,7 @@
   border-color: #1d8141;
 }
 
+/* The element to apply the animation to */
 .alert-danger {
   color: #b61b17;
   background-color: #ffcdd2;

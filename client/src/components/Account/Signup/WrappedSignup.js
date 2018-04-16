@@ -29,6 +29,8 @@ export class WrappedSignup extends React.Component {
     this.props.messageContext.clearMessages();
   }
 
+  componentDidMount() {}
+
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
