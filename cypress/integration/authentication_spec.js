@@ -15,6 +15,20 @@ describe("User Signup", () => {
     cy.get("#user-name").contains("Bob");
   });
 
+  it.only("should display error message when password and confirm fields don't match", () => {
+    cy.visit(URL);
+
+    cy.get("#sign-up").click();
+
+    cy.get("input#name").type("Bob");
+    cy.get("input#email").type(`${Date.now()}@a.com`);
+    cy.get("input#password").type("password");
+    cy.get("input#confirm").type("differentpassword");
+
+    cy.get("[type='submit']").click();
+    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+  });
+
   it("should display an error message when user already exists", () => {
     cy.visit(URL);
 
