@@ -22,7 +22,8 @@ describe("Feedback Process", () => {
         setSuccessMessages: mockSetSuccessMessages,
         clearMessages: mockClearMessages,
         setErrorMessages: mockSetErrorMessages
-      }
+      },
+      routerHistory: { push: () => {} }
     };
   });
 

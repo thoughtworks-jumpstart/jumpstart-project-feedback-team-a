@@ -4,7 +4,8 @@ export function saveFeedback({
   feedbackGood,
   feedbackImprove,
   feedbackAction,
-  messageContext
+  messageContext,
+  routerHistory
 }) {
   messageContext.clearMessages();
   return fetch("/api/feedbacks/save", {
@@ -21,6 +22,7 @@ export function saveFeedback({
     })
   }).then(response => {
     if (response.ok) {
+      routerHistory.push("/");
       return response.json().then(json => {
         messageContext.setSuccessMessages([json]);
       });

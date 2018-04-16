@@ -1,11 +1,7 @@
 import React from "react";
 import { saveFeedback } from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
-import {
-  mapMessageContextToProps,
-  mapSessionContextToProps
-} from "../context_helper";
-import { ProviderContext, subscribe } from "react-contextual";
+
 //import NavigationPrompt from "react-router-navigation-prompt";
 import { Prompt } from "react-router-dom";
 
@@ -16,13 +12,14 @@ class Feedback extends React.Component {
       email: "",
       feedbackGood: "",
       feedbackAction: "",
-      feedbackImprove: ""
+      feedbackImprove: "",
+      isDraft: false
     };
-    this.isBlocking = this.isBlocking.bind(this);
     this.totalCharCount = this.totalCharCount.bind(this);
   }
 
   handleSubmit(event) {
+    this.setState({ isDraft: false });
     event.preventDefault();
     saveFeedback({
       email: this.state.email,
@@ -30,27 +27,20 @@ class Feedback extends React.Component {
       feedbackGood: this.state.feedbackGood,
       feedbackImprove: this.state.feedbackImprove,
       feedbackAction: this.state.feedbackAction,
-      messageContext: this.props.messageContext
+      messageContext: this.props.messageContext,
+      routerHistory: this.props.history
     });
-  }
-
-  isBlocking() {
-    if (this.totalCharCount() > 0) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      isDraft: this.totalCharCount() > 0
     });
   }
 
   totalCharCount() {
     let totalCharCount =
-      this.state.email.length +
       this.state.feedbackAction.length +
       this.state.feedbackGood.length +
       this.state.feedbackImprove.length;
@@ -117,7 +107,7 @@ class Feedback extends React.Component {
         </form>
 
         <Prompt
-          when={this.isBlocking()}
+          when={this.state.isDraft}
           message={location =>
             `Are you sure you want to go to ${location.pathname}`
           }
@@ -127,11 +117,4 @@ class Feedback extends React.Component {
   }
 }
 
-const mapContextToProps = context => {
-  return {
-    ...mapMessageContextToProps(context),
-    ...mapSessionContextToProps(context)
-  };
-};
-
-export default subscribe(ProviderContext, mapContextToProps)(Feedback);
+export default Feedback;

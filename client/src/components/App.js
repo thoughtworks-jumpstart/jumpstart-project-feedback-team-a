@@ -10,7 +10,7 @@ import WrappedSignup from "./Account/Signup/WrappedSignup";
 import Profile from "./Account/Profile/Profile";
 import Forgot from "./Account/Forgot/Forgot";
 import Reset from "./Account/Reset/Reset";
-import Feedback from "./Feedback/Feedback";
+import WrappedFeedback from "./Feedback/WrappedFeedback";
 
 import { Provider, subscribe } from "react-contextual";
 
@@ -55,7 +55,7 @@ class App extends React.Component {
               <Header />
               <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/feedback" component={Feedback} />
+                <Route path="/feedback" component={WrappedFeedback} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={WrappedSignup} />
                 <PrivateRoute path="/account" component={Profile} />
