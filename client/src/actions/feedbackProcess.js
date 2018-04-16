@@ -22,14 +22,17 @@ export function saveFeedback({
   }).then(response => {
     if (response.ok) {
       return response.json().then(json => {
-        //console.log(json);
         messageContext.setSuccessMessages([json]);
       });
     } else {
       return response.json().then(json => {
-        const messages = Array.isArray(json) ? json : [json];
-        //console.log(json);
-        messageContext.setErrorMessages(messages);
+        if (json.msg === undefined) {
+          const messages = [{ msg: "Server error. Please try again later" }];
+          messageContext.setErrorMessages(messages);
+        } else {
+          const messages = [json];
+          messageContext.setErrorMessages(messages);
+        }
       });
     }
   });
