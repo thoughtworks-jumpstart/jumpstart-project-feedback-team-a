@@ -7,7 +7,7 @@
     "install": "(cd client && yarn) && (cd server && yarn)",
     "install:windows": "cd client&&yarn&&cd ../server&&yarn",
     "temp": "echo 'running'",
-    "test": "(cd client && CI=true && yarn test) && (cd server && yarn test)",
+    "test": "(cd client && CI=true yarn test) && (cd server && yarn test)",
     "test:windows":
       "(cd client&&set CI=true&&yarn test)&&(cd ../server&&yarn test:windows)",
     "build": "concurrently \"cd client&&yarn build\"",
