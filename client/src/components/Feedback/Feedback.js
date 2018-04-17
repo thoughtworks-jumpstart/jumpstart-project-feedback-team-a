@@ -32,11 +32,11 @@ class Feedback extends React.Component {
     });
   }
 
-  handleChange(event) {
-    this.setState({
+  async handleChange(event) {
+    await this.setState({
       [event.target.name]: event.target.value
     });
-    this.setState({
+    await this.setState({
       isDraft: this.totalCharCount() > 0
     });
   }
@@ -59,6 +59,7 @@ class Feedback extends React.Component {
           <button
             style={{ display: "inline" }}
             className="btn btn-success pull-right"
+            disabled={!this.state.isDraft}
           >
             Send
           </button>
