@@ -111,9 +111,7 @@ class Feedback extends React.Component {
 
         <Prompt
           when={this.state.isDraft}
-          message={location =>
-            `Are you sure you want to go to ${location.pathname}`
-          }
+          message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
         />
       </div>
     );

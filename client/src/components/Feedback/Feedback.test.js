@@ -1,6 +1,7 @@
 import React from "react";
 import Feedback from "./Feedback";
 import { shallow } from "enzyme";
+import { withRouter } from "react-router-dom";
 import * as feedbackProcess from "../../actions/feedbackProcess.js";
 
 describe("Feedback", () => {
@@ -16,11 +17,15 @@ describe("Feedback", () => {
     const props = { messageContext: { messages: {} } };
     const wrapper = shallow(<Feedback {...props} />);
     const event = { target: { value: "1", name: "email" } };
+    const prompt = wrapper.find("Prompt");
     wrapper
       .find("input")
       .props()
       .onChange(event);
     expect(wrapper.state().isDraft).toEqual(true);
+
+    wrapper.update();
+    expect(wrapper.find("Prompt").props().when).toEqual(true);
   });
 
   it("should save feedback when handleSubmit is called", () => {
