@@ -19,6 +19,27 @@ async function saveFeedback(req, res) {
   }
 }
 
+async function listIncomingFeedback(req, res) {
+  let feedback = new Feedback();
+  //console.log(req.body.json);
+  try {
+    console.log(req.params.email);
+
+    const feedbackData = await Feedback.find(
+      { receiverEmail: req.params.email },
+      (err, data) => {
+        return data;
+      }
+    );
+    res.json(feedbackData);
+  } catch (err) {
+    return res
+      .status(401)
+      .json({ msg: "There was a problem. Please try again later." });
+  }
+}
+
 module.exports = {
-  saveFeedback
+  saveFeedback,
+  listIncomingFeedback
 };

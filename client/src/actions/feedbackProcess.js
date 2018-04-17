@@ -39,3 +39,13 @@ export function saveFeedback({
     }
   });
 }
+
+export function listIncomingFeedback({ email }) {
+  return fetch("/api/feedbacks/listIncomingFeedback").then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      //console.log(json);
+    }
+  });
+}

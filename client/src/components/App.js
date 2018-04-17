@@ -12,6 +12,8 @@ import Forgot from "./Account/Forgot/Forgot";
 import Reset from "./Account/Reset/Reset";
 import WrappedFeedback from "./Feedback/WrappedFeedback";
 
+import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
+
 import { Provider, subscribe } from "react-contextual";
 
 const store = {
@@ -55,7 +57,15 @@ class App extends React.Component {
               <Header />
               <Switch>
                 <Route path="/" exact component={Home} />
+<<<<<<< HEAD
                 <Route path="/feedback" component={WrappedFeedback} />
+=======
+                <Route path="/feedback" component={Feedback} />
+                <Route
+                  path="/listIncomingFeedback"
+                  component={listIncomingFeedback}
+                />
+>>>>>>> [Ben/Victor][#7] Added API route for feedback_controller.js GET feedback
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={WrappedSignup} />
                 <PrivateRoute path="/account" component={Profile} />
