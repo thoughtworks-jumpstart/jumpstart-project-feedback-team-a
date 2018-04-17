@@ -13,12 +13,11 @@ describe("Feedback", () => {
     expect(wrapper.find("button")).toHaveLength(1);
   });
 
-  it("should set isDraft to true when total character count on the form is more than 0", () => {
+  it("should set isDraft to true when total character count on the form is more than 0", async () => {
     const props = { messageContext: { messages: {} } };
     const wrapper = shallow(<Feedback {...props} />);
     const event = { target: { value: "1", name: "email" } };
-    const prompt = wrapper.find("Prompt");
-    wrapper
+    await wrapper
       .find("input")
       .props()
       .onChange(event);
