@@ -1,0 +1,40 @@
+import React from "react";
+import Feedback from "./Feedback";
+import { shallow } from "enzyme";
+import * as feedbackProcess from "../../actions/feedbackProcess.js";
+
+describe("Feedback", () => {
+  it("should render correctly", () => {
+    const props = { messageContext: { messages: {} } };
+    const wrapper = shallow(<Feedback {...props} />);
+    expect(wrapper.find("input")).toHaveLength(1);
+    expect(wrapper.find("textarea")).toHaveLength(3);
+    expect(wrapper.find("button")).toHaveLength(1);
+  });
+
+  it("should set isDraft to true when total character count on the form is more than 0", () => {
+    const props = { messageContext: { messages: {} } };
+    const wrapper = shallow(<Feedback {...props} />);
+    const event = { target: { value: "1", name: "email" } };
+    wrapper
+      .find("input")
+      .props()
+      .onChange(event);
+    expect(wrapper.state().isDraft).toEqual(true);
+  });
+
+  it("should save feedback when handleSubmit is called", () => {
+    feedbackProcess.saveFeedback = jest.fn();
+    const props = {
+      messageContext: { messages: {} },
+      sessionContext: { user: { email: "" } }
+    };
+    const wrapper = shallow(<Feedback {...props} />);
+    const event = { preventDefault: () => {} };
+    wrapper
+      .find("form")
+      .props()
+      .onSubmit(event);
+    expect(feedbackProcess.saveFeedback).toHaveBeenCalledTimes(1);
+  });
+});

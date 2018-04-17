@@ -1,5 +1,5 @@
 import React from "react";
-import { saveFeedback } from "../../actions/feedbackProcess";
+import * as feedbackProcess from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
 
 //import NavigationPrompt from "react-router-navigation-prompt";
@@ -21,7 +21,7 @@ class Feedback extends React.Component {
   handleSubmit(event) {
     this.setState({ isDraft: false });
     event.preventDefault();
-    saveFeedback({
+    feedbackProcess.saveFeedback({
       email: this.state.email,
       giver: this.props.sessionContext.user.email,
       feedbackGood: this.state.feedbackGood,
@@ -34,13 +34,16 @@ class Feedback extends React.Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
+    });
+    this.setState({
       isDraft: this.totalCharCount() > 0
     });
   }
 
   totalCharCount() {
     let totalCharCount =
+      this.state.email.length +
       this.state.feedbackAction.length +
       this.state.feedbackGood.length +
       this.state.feedbackImprove.length;
