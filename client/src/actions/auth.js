@@ -52,7 +52,7 @@ export function signup({
   const TIMEOUTFOR = 3000;
   messageContext.clearMessages();
 
-  if (alertFlag(name, email, password, confirm)) {
+  if (showAlert(name, email, password, confirm)) {
     const messages = [{ msg: "Please fill in all fields" }];
     timeOut(messageContext, messages, TIMEOUTFOR);
   } else if (password !== confirm) {
@@ -251,14 +251,21 @@ export function deleteAccount({
   });
 }
 
-export function alertFlag(name, email, password, confirm) {
-  let alertFlag = false;
-  name.length === 0 && (alertFlag = true);
-  email.length === 0 && (alertFlag = true);
-  password.length === 0 && (alertFlag = true);
-  confirm.length === 0 && (alertFlag = true);
-  return alertFlag;
+export function showAlert(name, email, password, confirm) {
+  // let alertFlag = false;
+  // name.length === 0 && (alertFlag = true);
+  // email.length === 0 && (alertFlag = true);
+  // password.length === 0 && (alertFlag = true);
+  // confirm.length === 0 && (alertFlag = true);
+  // return alertFlag;
+  return (
+    name.length === 0 ||
+    email.length === 0 ||
+    password.length === 0 ||
+    confirm.length === 0
+  );
 }
+
 export function timeOut(messageContext, messages, TIMEOUTFOR) {
   messageContext.setErrorMessages(messages);
   setTimeout(() => messageContext.clearMessages(), TIMEOUTFOR);
