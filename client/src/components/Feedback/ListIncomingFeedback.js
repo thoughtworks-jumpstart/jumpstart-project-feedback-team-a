@@ -6,6 +6,7 @@ import {
   mapSessionContextToProps
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
+import moment from "moment";
 
 class ListIncomingFeedback extends Component {
   constructor(props) {
@@ -26,14 +27,26 @@ class ListIncomingFeedback extends Component {
       this.setState({ feedbackArray: data });
       console.log(data);
     });
-    //console.log(listIncomingFeedback);
-    //this.setState({ feedbackArray: data });
   }
   render() {
     return (
       <div className="container">
         <Messages messages={this.props.messageContext.messages} />
-
+        Date Received
+        {this.state.feedbackArray.map((feedback, i) => {
+          return (
+            <div className="row" key={i}>
+              <li className="list-unstyled">
+                <div className="col-sm-4" style={{ display: "inline" }}>
+                  date={moment(feedback.createdAt).format("DD/MM/YYYY")}
+                </div>
+                <div className="col-sm-8" style={{ display: "inline" }}>
+                  name={feedback.giverEmail}
+                </div>
+              </li>
+            </div>
+          );
+        })}
         <h1 style={{ display: "inline" }}>Collect Feedback</h1>
         <button
           style={{ display: "inline" }}
@@ -42,7 +55,6 @@ class ListIncomingFeedback extends Component {
         >
           Send
         </button>
-
         <hr />
       </div>
     );
