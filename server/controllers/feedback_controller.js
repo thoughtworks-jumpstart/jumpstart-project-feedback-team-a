@@ -1,4 +1,5 @@
 const Feedback = require("../models/Feedback");
+const User = require("../models/User");
 
 async function saveFeedback(req, res) {
   let feedback = new Feedback();
@@ -19,25 +20,25 @@ async function saveFeedback(req, res) {
   }
 }
 
-async function listIncomingFeedback(req, res) {
-  let feedback = new Feedback();
-  //console.log(req.body.json);
+const listIncomingFeedback = async (req, res) => {
+  let finalOutput = [];
   try {
-    console.log(req.params.email);
+    let feedbackData = await Feedback.find({ receiverEmail: req.params.email });
 
-    const feedbackData = await Feedback.find(
-      { receiverEmail: req.params.email },
-      (err, data) => {
-        return data;
-      }
-    );
-    res.json(feedbackData);
+    const output = await feedbackData.map(async feedback => {
+      let user = await User.findOne({ email: feedback.giverEmail });
+
+      return { feedback: feedback, user: user.name };
+    });
+    const finalOutput = await Promise.all(output);
+
+    res.json(finalOutput);
   } catch (err) {
     return res
       .status(401)
       .json({ msg: "There was a problem. Please try again later." });
   }
-}
+};
 
 module.exports = {
   saveFeedback,

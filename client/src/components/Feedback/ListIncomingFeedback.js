@@ -41,7 +41,7 @@ class ListIncomingFeedback extends Component {
                   date={moment(feedback.createdAt).format("DD/MM/YYYY")}
                 </div>
                 <div className="col-sm-8" style={{ display: "inline" }}>
-                  name={feedback.giverEmail}
+                  name={feedback.user}
                 </div>
               </li>
             </div>
