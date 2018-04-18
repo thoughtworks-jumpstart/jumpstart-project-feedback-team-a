@@ -16,17 +16,6 @@ import WrappedFeedback from "./Feedback/WrappedFeedback";
 import RequestFeedback from "./RequestFeedback/RequestFeedback";
 import Inbox from "./Inbox/Inbox";
 
-const store = {
-  initialState: { jwtToken: null, user: {}, messages: {} },
-  actions: {
-    saveSession: (jwtToken, user) => ({ jwtToken, user }),
-    clearSession: () => ({ jwtToken: null, user: {} }),
-    clearMessages: () => ({ messages: {} }),
-    setErrorMessages: errors => ({ messages: { error: errors } }),
-    setSuccessMessages: success => ({ messages: { success: success } })
-  }
-};
-
 const isAuthenticated = props => props.jwtToken !== null;
 
 const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
@@ -48,6 +37,25 @@ const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
 ));
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      store: {
+        initialState: {
+          jwtToken: props.cookies.get("token"),
+          user: {},
+          messages: {}
+        },
+        actions: {
+          saveSession: (jwtToken, user) => ({ jwtToken, user }),
+          clearSession: () => ({ jwtToken: null, user: {} }),
+          clearMessages: () => ({ messages: {} }),
+          setErrorMessages: errors => ({ messages: { error: errors } }),
+          setSuccessMessages: success => ({ messages: { success: success } })
+        }
+      }
+    };
+  }
   render() {
     return (
       <Provider {...store}>
@@ -76,4 +84,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withCookies(App);
