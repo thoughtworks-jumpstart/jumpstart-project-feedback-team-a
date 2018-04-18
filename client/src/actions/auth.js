@@ -1,4 +1,5 @@
 import moment from "moment";
+const TIMEOUTFOR = 3000;
 
 export function login({
   email,
@@ -49,17 +50,17 @@ export function signup({
   messageContext,
   sessionContext
 }) {
-  const TIMEOUTFOR = 3000;
   messageContext.clearMessages();
+  let messages;
 
-  if (showAlert(name, email, password, confirm)) {
-    const messages = [{ msg: "Please fill in all fields" }];
-    timeOut(messageContext, messages, TIMEOUTFOR);
+  if (isInvalidSignup(name, email, password, confirm)) {
+    messages = [{ msg: "Please fill in all fields" }];
+    setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
   } else if (password !== confirm) {
-    const messages = [
+    messages = [
       { msg: "Your confirmed password does not match the new password" }
     ];
-    timeOut(messageContext, messages, TIMEOUTFOR);
+    setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
   } else {
     return fetch("/api/users/signup", {
       method: "post",
@@ -71,22 +72,32 @@ export function signup({
           password: password
         }
       })
-    }).then(response => {
-      return response.json().then(json => {
+    })
+      .then(response => {
+        if (response.status !== 200)
+          throw new Error("Network response was not ok.");
+
         if (response.ok) {
-          sessionContext.saveSession(json.token, json.user);
-          cookies.set("token", json.token, {
-            expires: moment()
-              .add(1, "hour")
-              .toDate()
+          return response.json().then(json => {
+            sessionContext.saveSession(json.token, json.user);
+            cookies.set("token", json.token, {
+              expires: moment()
+                .add(1, "hour")
+                .toDate()
+            });
+            history.push("/");
           });
-          history.push("/");
         } else {
-          const messages = Array.isArray(json) ? json : [json];
-          timeOut(messageContext, messages, TIMEOUTFOR);
+          return response.json().then(json => {
+            const messages = Array.isArray(json) ? json : [json];
+            setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
+          });
         }
+      })
+      .catch(function(error) {
+        messages = [{ msg: "There's some error. Please try again later." }];
+        setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
       });
-    });
   }
 }
 
@@ -251,13 +262,7 @@ export function deleteAccount({
   });
 }
 
-export function showAlert(name, email, password, confirm) {
-  // let alertFlag = false;
-  // name.length === 0 && (alertFlag = true);
-  // email.length === 0 && (alertFlag = true);
-  // password.length === 0 && (alertFlag = true);
-  // confirm.length === 0 && (alertFlag = true);
-  // return alertFlag;
+export function isInvalidSignup(name, email, password, confirm) {
   return (
     name.length === 0 ||
     email.length === 0 ||
@@ -266,7 +271,12 @@ export function showAlert(name, email, password, confirm) {
   );
 }
 
-export function timeOut(messageContext, messages, TIMEOUTFOR) {
+export function setErrorMessageWithTimeout(
+  messageContext,
+  messages,
+  TIMEOUTFOR
+) {
+  console.log(messages);
   messageContext.setErrorMessages(messages);
   setTimeout(() => messageContext.clearMessages(), TIMEOUTFOR);
 }
