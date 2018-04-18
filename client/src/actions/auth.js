@@ -54,13 +54,15 @@ export function signup({
   let messages;
 
   if (isInvalidSignup(name, email, password, confirm)) {
-    messages = [{ msg: "Please fill in all fields" }];
-    setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
+    const messages = [{ msg: "Please fill in all fields" }];
+    const idenfitier = "error";
+    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, idenfitier);
   } else if (password !== confirm) {
     messages = [
       { msg: "Your confirmed password does not match the new password" }
     ];
-    setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
+    const idenfitier = "error";
+    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, idenfitier);
   } else {
     return fetch("/api/users/signup", {
       method: "post",
@@ -74,9 +76,6 @@ export function signup({
       })
     })
       .then(response => {
-        if (response.status !== 200)
-          throw new Error("Network response was not ok.");
-
         if (response.ok) {
           return response.json().then(json => {
             sessionContext.saveSession(json.token, json.user);
@@ -90,13 +89,24 @@ export function signup({
         } else {
           return response.json().then(json => {
             const messages = Array.isArray(json) ? json : [json];
-            setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
+            const identifier = "error";
+            setMessageWithTimeout(
+              messageContext,
+              messages,
+              TIMEOUTFOR,
+              identifier
+            );
           });
         }
       })
-      .catch(function(error) {
-        messages = [{ msg: "There's some error. Please try again later." }];
-        setErrorMessageWithTimeout(messageContext, messages, TIMEOUTFOR);
+      .catch(error => {
+        const identifier = "error";
+        setMessageWithTimeout(
+          messageContext,
+          [{ msg: "Unexpected error. Please try again later." }],
+          TIMEOUTFOR,
+          identifier
+        );
       });
   }
 }
@@ -251,7 +261,8 @@ export function deleteAccount({
     if (response.ok) {
       return response.json().then(json => {
         logout({ history, cookies, sessionContext });
-        messageContext.setSuccessMessages([json]);
+        // messageContext.setSuccessMessages([json], "success");
+        messageContext.setSuccessMessages([json], "success");
       });
     } else {
       return response.json().then(json => {
@@ -271,12 +282,16 @@ export function isInvalidSignup(name, email, password, confirm) {
   );
 }
 
-export function setErrorMessageWithTimeout(
+export function setMessageWithTimeout(
   messageContext,
   messages,
-  TIMEOUTFOR
+  TIMEOUTFOR,
+  identifier
 ) {
-  console.log(messages);
-  messageContext.setErrorMessages(messages);
+  if (identifier === "success") {
+    messageContext.setSuccessMessages(messages);
+  } else {
+    messageContext.setErrorMessages(messages);
+  }
   setTimeout(() => messageContext.clearMessages(), TIMEOUTFOR);
 }

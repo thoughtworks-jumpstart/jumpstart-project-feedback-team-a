@@ -1,3 +1,6 @@
+import { setMessageWithTimeout } from "./auth";
+const TIMEOUTFOR = 3000;
+
 export function saveFeedback({
   email,
   giver,
@@ -24,16 +27,30 @@ export function saveFeedback({
     if (response.ok) {
       routerHistory.push("/");
       return response.json().then(json => {
-        messageContext.setSuccessMessages([json]);
+        const messages = [json];
+        const identifier = "success";
+        setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
       return response.json().then(json => {
         if (json.msg === undefined) {
           const messages = [{ msg: "Server error. Please try again later" }];
-          messageContext.setErrorMessages(messages);
+          const identifier = "error";
+          setMessageWithTimeout(
+            messageContext,
+            messages,
+            TIMEOUTFOR,
+            identifier
+          );
         } else {
           const messages = [json];
-          messageContext.setErrorMessages(messages);
+          const idenfitier = "error";
+          setMessageWithTimeout(
+            messageContext,
+            messages,
+            TIMEOUTFOR,
+            idenfitier
+          );
         }
       });
     }

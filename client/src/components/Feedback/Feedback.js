@@ -38,12 +38,14 @@ class Feedback extends React.Component {
     });
     await this.setState({
       isDraft: this.totalCharCount() > 0
+      // &&
+      // this.state.email.includes("@") &&
+      // this.state.email.includes(".com")
     });
   }
 
   totalCharCount() {
     let totalCharCount =
-      this.state.email.length +
       this.state.feedbackAction.length +
       this.state.feedbackGood.length +
       this.state.feedbackImprove.length;
