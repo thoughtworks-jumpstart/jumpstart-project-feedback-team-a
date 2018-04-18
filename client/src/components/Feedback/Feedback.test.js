@@ -16,12 +16,13 @@ describe("Feedback", () => {
   it("should set isDraft to true when total character count on the form is more than 0", async () => {
     const props = { messageContext: { messages: {} } };
     const wrapper = shallow(<Feedback {...props} />);
-    const event = {
+    let event = {
       target: {
-        name: "feedbackGood",
-        value: "1"
+        name: "email",
+        value: "email@email.com"
       }
     };
+    wrapper.state().feedbackGood = "1";
     await wrapper
       .find("input")
       .props()

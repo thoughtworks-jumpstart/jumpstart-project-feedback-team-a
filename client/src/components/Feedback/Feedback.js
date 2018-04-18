@@ -38,9 +38,8 @@ class Feedback extends React.Component {
     });
     await this.setState({
       isDraft:
-        this.totalCharCount() > 0 &&
-        this.state.email.includes("@") &&
-        this.state.email.includes(".com")
+        // this.totalCharCount() > 0 &&
+        this.state.email.includes("@") && this.state.email.includes(".com")
     });
   }
 
