@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { listIncomingFeedback } from "../../actions/feedbackProcess";
+import ListFeedbackItems from "../Feedback/ListFeedbackItems";
 import Messages from "../Messages/Messages";
 import {
   mapMessageContextToProps,
   mapSessionContextToProps
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
-import moment from "moment";
 
 class ListIncomingFeedback extends Component {
   constructor(props) {
@@ -25,37 +25,36 @@ class ListIncomingFeedback extends Component {
       messageContext: this.props.messageContext
     }).then(data => {
       this.setState({ feedbackArray: data });
-      console.log(data);
     });
   }
+
+  componentDidMount() {
+    listIncomingFeedback({
+      email: this.props.sessionContext.user.email,
+
+      messageContext: this.props.messageContext
+    }).then(data => {
+      this.setState({ feedbackArray: data });
+    });
+  }
+
   render() {
     return (
       <div className="container">
         <Messages messages={this.props.messageContext.messages} />
-        Date Received
+        <h1>Your Feedback ({this.state.feedbackArray.length})</h1>
+        <div className="row">
+          <div className="col-lg-12">
+            <h4 style={{ display: "inline" }}>Date Received</h4>
+          </div>
+        </div>
         {this.state.feedbackArray.map((feedback, i) => {
           return (
-            <div className="row" key={i}>
-              <li className="list-unstyled">
-                <div className="col-sm-4" style={{ display: "inline" }}>
-                  date={moment(feedback.createdAt).format("DD/MM/YYYY")}
-                </div>
-                <div className="col-sm-8" style={{ display: "inline" }}>
-                  name={feedback.user}
-                </div>
-              </li>
+            <div className="row" key={i} style={{ display: "inline" }}>
+              <ListFeedbackItems feedback={feedback} />
             </div>
           );
         })}
-        <h1 style={{ display: "inline" }}>Collect Feedback</h1>
-        <button
-          style={{ display: "inline" }}
-          className="btn btn-success pull-right"
-          onClick={this.handleClick.bind(this)}
-        >
-          Send
-        </button>
-        <hr />
       </div>
     );
   }
