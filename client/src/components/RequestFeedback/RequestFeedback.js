@@ -12,14 +12,17 @@ class RequestFeedback extends React.Component {
   }
 
   handleSubmit(event) {
-    this.setState({ isDraft: false });
     event.preventDefault();
-    feedbackProcess.saveFeedback({
-      email: this.state.email,
-      giver: this.props.sessionContext.user.email,
-      messageContext: this.props.messageContext,
-      routerHistory: this.props.history
-    });
+    if (
+      window.confirm(
+        `Please confirm if you would like to send this request to the following recipient: ${
+          this.state.email
+        }?`
+      )
+    ) {
+      this.setState({ isDraft: false });
+      window.confirm(`Sent!`);
+    }
   }
 
   async handleChange(event) {
@@ -35,7 +38,7 @@ class RequestFeedback extends React.Component {
     return (
       <div className="container">
         {/* <Messages messages={this.props.messageContext.messages} /> */}
-        <form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <h1 style={{ display: "inline" }}>Request for Feedback</h1>
           <button
             style={{ display: "inline" }}
