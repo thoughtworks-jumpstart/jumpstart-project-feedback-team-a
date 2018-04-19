@@ -10,24 +10,34 @@ class ListFeedbackItem extends Component {
   render() {
     return (
       <div>
-        <div className="col-lg-3">
-          {moment(this.props.feedback.createdAt).format("DD MMMM YYYY")}
-        </div>
-        <div className="col-lg-9">
-          {this.props.feedback.user} has left you feedback!
-        </div>
-        <div className="col-lg-3" />
-        <div className="col-lg-9">
-          <div className="col-lg-3">What I did well</div>
+        <div className="row">
+          <div className="col-lg-3">
+            {moment(this.props.feedback.feedback.createdAt).format(
+              "DD MMMM YYYY, h:mm a"
+            )}
+          </div>
           <div className="col-lg-9">
+            <strong>{this.props.feedback.user} has left you feedback!</strong>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-3" />
+          <div className="col-lg-3">What I did well</div>
+          <div className="col-lg-6">
             {this.props.feedback.feedback.feedbackGood}
           </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-3" />
           <div className="col-lg-3">What could be better</div>
-          <div className="col-lg-9">
+          <div className="col-lg-6">
             {this.props.feedback.feedback.feedbackImprove}
           </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-3" />
           <div className="col-lg-3">Suggestions for Improvement</div>
-          <div className="col-lg-9">
+          <div className="col-lg-6">
             {this.props.feedback.feedback.feedbackAction}
           </div>
         </div>
