@@ -26,7 +26,9 @@ describe("User Signup", () => {
     cy.get("input#confirm").type("differentpassword");
 
     cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+    cy
+      .get(".alert-danger")
+      .contains("Your confirmed password does not match the new password");
   });
 
   it("should display an error message when user already exists", () => {
@@ -37,9 +39,14 @@ describe("User Signup", () => {
     cy.get("input#name").type("Bob");
     cy.get("input#email").type("bob@bob.com");
     cy.get("input#password").type("password");
+    cy.get("input#confirm").type("password");
 
     cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+    cy
+      .get(".alert-danger")
+      .contains(
+        "The email address you have entered is already associated with another account."
+      );
   });
 });
 
@@ -66,7 +73,7 @@ describe("User Login", () => {
     cy.get("input#password").type("password");
 
     cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+    cy.get(".alert-danger").contains("Your email or password is invalid");
 
     cy
       .get("input#email")
@@ -78,6 +85,6 @@ describe("User Login", () => {
       .type("invalid");
 
     cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+    cy.get(".alert-danger").contains("Your email or password is invalid");
   });
 });
