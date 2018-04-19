@@ -1,0 +1,71 @@
+import React, { Component } from "react";
+import { listIncomingFeedback } from "../../actions/feedbackProcess";
+import ListFeedbackItems from "../Feedback/ListFeedbackItems";
+import Messages from "../Messages/Messages";
+import {
+  mapMessageContextToProps,
+  mapSessionContextToProps
+} from "../context_helper";
+import { ProviderContext, subscribe } from "react-contextual";
+
+class ListIncomingFeedback extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      feedbackArray: []
+    };
+  }
+
+  handleClick(event) {
+    listIncomingFeedback({
+      //email: this.state.email,
+      email: this.props.sessionContext.user.email,
+
+      messageContext: this.props.messageContext
+    }).then(data => {
+      this.setState({ feedbackArray: data });
+    });
+  }
+
+  componentDidMount() {
+    listIncomingFeedback({
+      email: this.props.sessionContext.user.email,
+
+      messageContext: this.props.messageContext
+    }).then(data => {
+      this.setState({ feedbackArray: data });
+    });
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <Messages messages={this.props.messageContext.messages} />
+        <h1>Your Feedback ({this.state.feedbackArray.length})</h1>
+        <div className="row">
+          <div className="col-lg-12">
+            <h4 style={{ display: "inline" }}>Date Received</h4>
+          </div>
+        </div>
+        {this.state.feedbackArray.map((feedback, i) => {
+          return (
+            <div className="row" key={i} style={{ display: "inline" }}>
+              <ListFeedbackItems feedback={feedback} />
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+}
+const mapContextToProps = context => {
+  return {
+    ...mapMessageContextToProps(context),
+    ...mapSessionContextToProps(context)
+  };
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(
+  ListIncomingFeedback
+);
