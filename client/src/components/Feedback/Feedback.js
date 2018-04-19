@@ -19,17 +19,26 @@ class Feedback extends React.Component {
   }
 
   handleSubmit(event) {
-    this.setState({ isDraft: false });
     event.preventDefault();
-    feedbackProcess.saveFeedback({
-      email: this.state.email,
-      giver: this.props.sessionContext.user.email,
-      feedbackGood: this.state.feedbackGood,
-      feedbackImprove: this.state.feedbackImprove,
-      feedbackAction: this.state.feedbackAction,
-      messageContext: this.props.messageContext,
-      routerHistory: this.props.history
-    });
+
+    if (
+      window.confirm(
+        `Please confirm if you would like to send this feedback to the following recipient: ${
+          this.state.email
+        }?`
+      )
+    ) {
+      this.setState({ isDraft: false });
+      feedbackProcess.saveFeedback({
+        email: this.state.email,
+        giver: this.props.sessionContext.user.email,
+        feedbackGood: this.state.feedbackGood,
+        feedbackImprove: this.state.feedbackImprove,
+        feedbackAction: this.state.feedbackAction,
+        messageContext: this.props.messageContext,
+        routerHistory: this.props.history
+      });
+    }
   }
 
   async handleChange(event) {

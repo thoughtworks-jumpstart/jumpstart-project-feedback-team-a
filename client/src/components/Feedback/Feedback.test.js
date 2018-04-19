@@ -34,6 +34,7 @@ describe("Feedback", () => {
   });
 
   it("should save feedback when handleSubmit is called", () => {
+    window.confirm = jest.fn(() => true);
     feedbackProcess.saveFeedback = jest.fn();
     const props = {
       messageContext: { messages: {} },
