@@ -40,10 +40,14 @@ describe("Giver Feedback Form", () => {
 
   it("should see error message that saving his feedback was unsuccessful", () => {
     cy.get("#feedback").click();
+    cy.get("input#emailAddress").type("a");
     cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
     cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");
     cy.get("textarea#feedbackItem3").type("Now I am trying to save feedback");
     cy.get("button.btn-success").click();
-    cy.get(".alert-danger").contains(/^(?!\s*$).+/);
+    cy.get("textarea#feedbackItem1").clear();
+    cy.get("textarea#feedbackItem2").clear();
+    cy.get("textarea#feedbackItem3").clear();
+    cy.get("button.btn-success").should("be.disabled");
   });
 });
