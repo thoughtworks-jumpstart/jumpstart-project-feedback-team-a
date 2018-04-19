@@ -9,6 +9,7 @@ import {
   mapSessionContextToProps,
   sessionContextPropType
 } from "../context_helper";
+// import { store } from "../App";
 import "./Header.css";
 class Header extends React.Component {
   static propTypes = {

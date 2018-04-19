@@ -15,6 +15,11 @@ import Reset from "./Account/Reset/Reset";
 import WrappedFeedback from "./Feedback/WrappedFeedback";
 import RequestFeedback from "./RequestFeedback/RequestFeedback";
 import Inbox from "./Inbox/Inbox";
+import { getCurrentUser } from "../actions/auth";
+
+import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
+import { withCookies } from "react-cookie";
+import { Provider, subscribe } from "react-contextual";
 
 const isAuthenticated = props => props.jwtToken !== null;
 
@@ -36,26 +41,39 @@ const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
   />
 ));
 
+export const store = {
+  initialState: {
+    jwtToken: document.cookie.split("=")[1],
+    user: {},
+    messages: {}
+  },
+  actions: {
+    saveSession: (jwtToken, user) => {
+      return { jwtToken, user };
+    },
+    clearSession: () => ({ jwtToken: null, user: {} }),
+    clearMessages: () => ({ messages: {} }),
+    setErrorMessages: errors => ({ messages: { error: errors } }),
+    setSuccessMessages: success => ({ messages: { success: success } })
+  }
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      store: {
-        initialState: {
-          jwtToken: props.cookies.get("token"),
-          user: {},
-          messages: {}
-        },
-        actions: {
-          saveSession: (jwtToken, user) => ({ jwtToken, user }),
-          clearSession: () => ({ jwtToken: null, user: {} }),
-          clearMessages: () => ({ messages: {} }),
-          setErrorMessages: errors => ({ messages: { error: errors } }),
-          setSuccessMessages: success => ({ messages: { success: success } })
-        }
-      }
+      user: {}
     };
   }
+
+  async componentDidMount() {
+    const currentUser = await getCurrentUser(this.props.cookies.get("token"));
+
+    await this.setState({
+      user: currentUser
+    });
+  }
+
   render() {
     return (
       <Provider {...store}>

@@ -295,3 +295,15 @@ export function setMessageWithTimeout(
   }
   setTimeout(() => messageContext.clearMessages(), TIMEOUTFOR);
 }
+
+export function getCurrentUser(token) {
+  if (token === undefined) {
+    return {};
+  }
+
+  return fetch("/api/user", {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+    .then(res => res.json())
+    .then(result => result.user);
+}
