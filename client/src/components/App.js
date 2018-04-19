@@ -11,9 +11,8 @@ import Profile from "./Account/Profile/Profile";
 import Forgot from "./Account/Forgot/Forgot";
 import Reset from "./Account/Reset/Reset";
 import WrappedFeedback from "./Feedback/WrappedFeedback";
-
+import RequestFeedback from "./RequestFeedback/RequestFeedback";
 import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
-
 import { Provider, subscribe } from "react-contextual";
 
 const store = {
@@ -62,6 +61,7 @@ class App extends React.Component {
                   path="/listIncomingFeedback"
                   component={listIncomingFeedback}
                 />
+                <Route path="/requestFeedback" component={RequestFeedback} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={WrappedSignup} />
                 <PrivateRoute path="/account" component={Profile} />

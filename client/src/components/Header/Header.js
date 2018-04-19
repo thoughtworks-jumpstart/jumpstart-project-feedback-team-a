@@ -39,6 +39,17 @@ class Header extends React.Component {
         Give Feedback
       </NavLink>
     );
+    const requestFeedbackLink = (
+      <NavLink
+        exact
+        to="/requestFeedback"
+        activeStyle={active}
+        style={{ color: "white" }}
+        id="requestFeedback"
+      >
+        Request Feedback
+      </NavLink>
+    );
     const listIncomingLink = (
       <NavLink
         exact
@@ -47,7 +58,7 @@ class Header extends React.Component {
         style={{ color: "white" }}
         id="listIncomingFeedback"
       >
-        Incoming Feedback
+        Inbox
       </NavLink>
     );
 
@@ -147,8 +158,9 @@ class Header extends React.Component {
                   Home
                 </NavLink>
               </li>
-              <li>{this.props.sessionContext.token && feedbackLink}</li>
               <li>{this.props.sessionContext.token && listIncomingLink}</li>
+              <li>{this.props.sessionContext.token && feedbackLink}</li>
+              <li>{this.props.sessionContext.token && requestFeedbackLink}</li>
             </ul>
             {rightNav}
           </div>
