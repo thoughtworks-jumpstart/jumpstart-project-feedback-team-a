@@ -24,6 +24,10 @@ export function login({
     if (response.ok) {
       return response.json().then(json => {
         sessionContext.saveSession(json.token, json.user);
+        sessionStorage.setItem(
+          "currentLoggedInUser",
+          JSON.stringify(json.user)
+        );
         cookies.set("token", json.token, {
           expires: moment()
             .add(1, "hour")
@@ -113,6 +117,7 @@ export function signup({
 
 export function logout({ history, cookies, sessionContext }) {
   cookies.remove("token");
+  sessionStorage.removeItem("currentLoggedInUser");
   sessionContext.clearSession();
   history.push("/");
 }

@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { CookiesProvider } from "react-cookie";
-import { Provider, subscribe } from "react-contextual";
-
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Home from "./Home/Home";
@@ -19,7 +16,8 @@ import { getCurrentUser } from "../actions/auth";
 
 import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
 import { withCookies } from "react-cookie";
-import { Provider, subscribe } from "react-contextual";
+import { ProviderContext, subscribe } from "react-contextual";
+import { mapSessionContextToProps } from "./context_helper";
 
 const isAuthenticated = props => props.jwtToken !== null;
 
@@ -41,65 +39,44 @@ const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
   />
 ));
 
-export const store = {
-  initialState: {
-    jwtToken: document.cookie.split("=")[1],
-    user: {},
-    messages: {}
-  },
-  actions: {
-    saveSession: (jwtToken, user) => {
-      return { jwtToken, user };
-    },
-    clearSession: () => ({ jwtToken: null, user: {} }),
-    clearMessages: () => ({ messages: {} }),
-    setErrorMessages: errors => ({ messages: { error: errors } }),
-    setSuccessMessages: success => ({ messages: { success: success } })
-  }
-};
-
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {}
-    };
-  }
-
   async componentDidMount() {
     const currentUser = await getCurrentUser(this.props.cookies.get("token"));
-
-    await this.setState({
-      user: currentUser
-    });
+    this.props.sessionContext.saveSession(
+      this.props.sessionContext.token,
+      currentUser
+    );
+    sessionStorage.setItem("currentLoggedInUser", JSON.stringify(currentUser));
   }
 
   render() {
     return (
-      <Provider {...store}>
-        <CookiesProvider>
-          <BrowserRouter>
-            <div>
-              <Header />
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/feedback" component={WrappedFeedback} />
-                <Route path="/inbox" component={Inbox} />
-                <Route path="/requestFeedback" component={RequestFeedback} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={WrappedSignup} />
-                <PrivateRoute path="/account" component={Profile} />
-                <Route path="/forgot" component={Forgot} />
-                <Route path="/reset/:token" component={Reset} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-              <Footer />
-            </div>
-          </BrowserRouter>
-        </CookiesProvider>
-      </Provider>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/feedback" component={WrappedFeedback} />
+            <Route
+              path="/listIncomingFeedback"
+              component={listIncomingFeedback}
+            />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={WrappedSignup} />
+            <PrivateRoute path="/account" component={Profile} />
+            <Route path="/forgot" component={Forgot} />
+            <Route path="/reset/:token" component={Reset} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }
 
-export default withCookies(App);
+const mapContextToProps = context => {
+  return mapSessionContextToProps(context);
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(withCookies(App));

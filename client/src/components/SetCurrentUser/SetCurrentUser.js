@@ -18,9 +18,3 @@ class SetCurrentUser extends Component {
     return <div>{this.props.children}</div>;
   }
 }
-
-const mapContextToProps = context => {
-  return mapSessionContextToProps(context);
-};
-
-export default subscribe(ProviderContext, mapContextToProps)(SetCurrentUser);

@@ -20,7 +20,7 @@ router.post("/user/forgot-password", handleAsyncError(sendPasswordResetEmail));
 
 router.post("/user/reset-password/:token", handleAsyncError(resetPassword));
 
-router.get("/user", jwt.required, handleAsyncError(getCurrentUser));
+router.get("/user", jwt.required, handleAsyncError(getCurrentUser)); //User object is cached in session storage on the client side. Advise not to send over sensitive information like passwords
 
 router.put("/user", jwt.required, handleAsyncError(updateCurrentUser));
 
