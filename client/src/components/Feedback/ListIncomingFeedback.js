@@ -17,17 +17,6 @@ class ListIncomingFeedback extends Component {
     };
   }
 
-  handleClick(event) {
-    listIncomingFeedback({
-      //email: this.state.email,
-      email: this.props.sessionContext.user.email,
-
-      messageContext: this.props.messageContext
-    }).then(data => {
-      this.setState({ feedbackArray: data });
-    });
-  }
-
   componentDidMount() {
     listIncomingFeedback({
       email: this.props.sessionContext.user.email,
