@@ -68,3 +68,15 @@ export function listIncomingFeedback(email) {
     }
   );
 }
+
+export function sendRequestFeedbackEmail(email) {
+  return fetch(`/api/feedbacks/sendRequestFeedbackEmail/${email}`).then(
+    response => {
+      if (response.ok) {
+        return response.json().then(json => console.log(json));
+      } else {
+        console.log(response.json());
+      }
+    }
+  );
+}
