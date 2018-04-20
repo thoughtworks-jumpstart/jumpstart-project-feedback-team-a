@@ -10,6 +10,10 @@ let dummyUser;
 let functionParameters;
 let mockHistoryPush;
 
+global.sessionStorage = {
+  setItem: jest.fn()
+};
+
 describe("Auth", () => {
   beforeEach(() => {
     mockSaveSession = jest.fn();
