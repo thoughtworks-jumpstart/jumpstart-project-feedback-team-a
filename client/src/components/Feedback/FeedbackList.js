@@ -17,15 +17,14 @@ export class FeedbackList extends Component {
     };
   }
 
-  componentDidMount() {
-    feedbackProcess
-      .listIncomingFeedback({
-        email: this.props.sessionContext.user.email,
-        messageContext: this.props.messageContext
-      })
-      .then(data => {
-        this.setState({ feedbackArray: data });
-      });
+  async componentDidMount() {
+    const data = await feedbackProcess.listIncomingFeedback({
+      email: this.props.sessionContext.user.email,
+      messageContext: this.props.messageContext
+    });
+    // .then(data => {
+    await this.setState({ feedbackArray: data });
+    // });
   }
 
   render() {

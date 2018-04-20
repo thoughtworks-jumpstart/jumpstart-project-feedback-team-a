@@ -21,7 +21,7 @@ describe("App", () => {
   });
 
   it("should have the following structure", () => {
-    expect(wrapper.find("Route")).toHaveLength(8);
+    expect(wrapper.find("Route")).toHaveLength(9);
     expect(wrapper.find("SubscribeWrap")).toHaveLength(1);
   });
 

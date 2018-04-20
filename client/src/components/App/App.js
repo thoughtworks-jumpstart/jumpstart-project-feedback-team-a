@@ -16,6 +16,7 @@ import Inbox from "../Inbox/Inbox";
 import { withCookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps } from "../context_helper";
+import RequestFeedback from "../RequestFeedback/RequestFeedback";
 
 const isAuthenticated = props => props.jwtToken !== null;
 
@@ -56,6 +57,7 @@ export class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/requestFeedback" exact component={RequestFeedback} />
             <Route path="/feedback" component={WrappedFeedback} />
             <Route path="/inbox" component={Inbox} />
             <Route path="/login" component={Login} />
