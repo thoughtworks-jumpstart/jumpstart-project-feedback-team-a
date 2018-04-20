@@ -8,7 +8,7 @@ import {
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 
-export class ListIncomingFeedback extends Component {
+export class FeedbackList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +56,4 @@ const mapContextToProps = context => {
   };
 };
 
-export default subscribe(ProviderContext, mapContextToProps)(
-  ListIncomingFeedback
-);
+export default subscribe(ProviderContext, mapContextToProps)(FeedbackList);
