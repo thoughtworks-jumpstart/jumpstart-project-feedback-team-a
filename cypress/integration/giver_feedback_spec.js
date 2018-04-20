@@ -1,11 +1,37 @@
 const URL = Cypress.env("baseUrl");
 
 describe("Giver Feedback Form", () => {
+  const user1 = `${Math.random()}@a.com`;
+  const password = "1";
+
+  before(() => {
+    cy.visit(URL);
+    cy.get("#sign-up").click();
+
+    cy.get("input#name").type("Bob");
+    cy.get("input#email").type(user1);
+    cy.get("input#password").type(password);
+    cy.get("input#confirm").type(password);
+    cy.get("[type='submit']").click();
+  });
+
+  after(() => {
+    cy.visit(URL);
+    cy.get("#log-in").click();
+    cy.get("input#email").type(user1);
+    cy.get("input#password").type(password);
+    cy.get("[type='submit']").click();
+
+    cy.get(".navbar-avatar").click();
+    cy.get("#my-account").click();
+    cy.get("button.btn-danger").click();
+  });
+
   beforeEach(() => {
     cy.visit(URL);
     cy.get("#log-in").click();
-    cy.get("input#email").type("bob@bob.com");
-    cy.get("input#password").type("password");
+    cy.get("input#email").type(user1);
+    cy.get("input#password").type(password);
     cy.get("[type='submit']").click();
   });
 

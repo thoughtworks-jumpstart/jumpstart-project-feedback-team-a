@@ -89,7 +89,9 @@ class Header extends React.Component {
           </a>
           <ul className="dropdown-menu">
             <li>
-              <Link to="/account">My Account</Link>
+              <Link to="/account" id="my-account">
+                My Account
+              </Link>
             </li>
             <li className="divider" />
             <li>
