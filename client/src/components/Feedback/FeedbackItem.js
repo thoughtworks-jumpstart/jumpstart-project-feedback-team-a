@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
-import {
-  mapMessageContextToProps,
-  mapSessionContextToProps
-} from "../context_helper";
-import { ProviderContext, subscribe } from "react-contextual";
 
-class ListFeedbackItem extends Component {
+class FeedbackItem extends Component {
   render() {
     return (
       <React.Fragment>
@@ -51,12 +46,4 @@ class ListFeedbackItem extends Component {
     );
   }
 }
-
-const mapContextToProps = context => {
-  return {
-    ...mapMessageContextToProps(context),
-    ...mapSessionContextToProps(context)
-  };
-};
-
-export default subscribe(ProviderContext, mapContextToProps)(ListFeedbackItem);
+export default FeedbackItem;

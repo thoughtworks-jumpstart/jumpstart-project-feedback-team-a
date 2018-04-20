@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { listIncomingFeedback } from "../../actions/feedbackProcess";
-import ListFeedbackItems from "../Feedback/ListFeedbackItems";
+import FeedbackItem from "../Feedback/FeedbackItem";
 import Messages from "../Messages/Messages";
 import {
   mapMessageContextToProps,
@@ -8,7 +8,7 @@ import {
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 
-class ListIncomingFeedback extends Component {
+export class ListIncomingFeedback extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ class ListIncomingFeedback extends Component {
         {this.state.feedbackArray.map((feedback, i) => {
           return (
             <div className="row" key={i} style={{ display: "inline" }}>
-              <ListFeedbackItems feedback={feedback} />
+              <FeedbackItem feedback={feedback} />
             </div>
           );
         })}
