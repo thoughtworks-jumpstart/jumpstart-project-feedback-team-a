@@ -1,7 +1,6 @@
 import React from "react";
 import FeedbackForm from "./FeedbackForm";
 import { shallow } from "enzyme";
-import { withRouter } from "react-router-dom";
 import * as feedbackProcess from "../../actions/feedbackProcess.js";
 
 describe("FeedbackForm", () => {

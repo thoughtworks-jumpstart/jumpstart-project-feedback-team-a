@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WrappedSignup should should have the following structure 1`] = `
+<Signup
+  confirm=""
+  cookies={[Function]}
+  email=""
+  handleChange={[Function]}
+  handleSignup={[Function]}
+  history={Object {}}
+  messageContext={
+    Object {
+      "clearMessages": [Function],
+      "messages": Object {},
+      "setErrorMessages": [Function],
+      "setSuccessMessages": [Function],
+    }
+  }
+  name=""
+  password=""
+  sessionContext={
+    Object {
+      "clearSession": [Function],
+      "saveSession": [Function],
+      "session": Object {},
+    }
+  }
+/>
+`;

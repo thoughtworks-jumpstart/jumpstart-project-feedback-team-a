@@ -1,23 +1,21 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Home from "./Home/Home";
-import NotFound from "./NotFound/NotFound";
-import Login from "./Account/Login/Login";
-import WrappedSignup from "./Account/Signup/WrappedSignup";
-import Profile from "./Account/Profile/Profile";
-import Forgot from "./Account/Forgot/Forgot";
-import Reset from "./Account/Reset/Reset";
-import WrappedFeedback from "./Feedback/WrappedFeedback";
-import RequestFeedback from "./RequestFeedback/RequestFeedback";
-import Inbox from "./Inbox/Inbox";
-import { getCurrentUser } from "../actions/auth";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import Home from "../Home/Home";
+import NotFound from "../NotFound/NotFound";
+import Login from "../Account/Login/Login";
+import WrappedSignup from "../Account/Signup/WrappedSignup";
+import Profile from "../Account/Profile/Profile";
+import Forgot from "../Account/Forgot/Forgot";
+import Reset from "../Account/Reset/Reset";
+import WrappedFeedback from "../Feedback/WrappedFeedback";
+import * as actions from "../../actions/auth";
 
-import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
+import listIncomingFeedback from "../Feedback/ListIncomingFeedback";
 import { withCookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
-import { mapSessionContextToProps } from "./context_helper";
+import { mapSessionContextToProps } from "../context_helper";
 
 const isAuthenticated = props => props.jwtToken !== null;
 
@@ -39,9 +37,11 @@ const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
   />
 ));
 
-class App extends React.Component {
+export class App extends React.Component {
   async componentDidMount() {
-    const currentUser = await getCurrentUser(this.props.cookies.get("token"));
+    const currentUser = await actions.getCurrentUser(
+      this.props.cookies.get("token")
+    );
     this.props.sessionContext.saveSession(
       this.props.sessionContext.token,
       currentUser
