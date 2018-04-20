@@ -53,10 +53,10 @@ class Header extends React.Component {
     const listIncomingLink = (
       <NavLink
         exact
-        to="/listIncomingFeedback"
+        to="/inbox"
         activeStyle={active}
         style={{ color: "white" }}
-        id="listIncomingFeedback"
+        id="inbox"
       >
         Inbox
       </NavLink>

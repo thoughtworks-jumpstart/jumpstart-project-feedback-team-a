@@ -54,7 +54,7 @@ describe("List of Incoming Feedbacks", () => {
     cy.get("input#email").type(user2);
     cy.get("input#password").type("1");
     cy.get("[type='submit']").click();
-    cy.get("#listIncomingFeedback").click();
+    cy.get("#inbox").click();
 
     cy.get("#feedback-date").contains(/^(?!\s*$).+/);
     cy.get("#feedback-giver").contains(/^(?!\s*$).+/);
@@ -79,7 +79,7 @@ describe("Empty Incoming Feedback", () => {
 
     cy.get("[type='submit']").click();
 
-    cy.get("#listIncomingFeedback").click();
+    cy.get("#inbox").click();
 
     cy.get("#feedback-date").should("have.length", 0);
   });
