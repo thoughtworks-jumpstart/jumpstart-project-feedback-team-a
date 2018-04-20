@@ -1,4 +1,5 @@
 const URL = Cypress.env("baseUrl");
+const testUserEmail = `${Date.now()}@a.com`;
 
 describe("User Signup", () => {
   it("should sign up successfully", () => {
@@ -7,7 +8,7 @@ describe("User Signup", () => {
     cy.get("#sign-up").click();
 
     cy.get("input#name").type("Bob");
-    cy.get("input#email").type(`${Date.now()}@a.com`);
+    cy.get("input#email").type(testUserEmail);
     cy.get("input#password").type("password");
     cy.get("input#confirm").type("password");
 
@@ -37,7 +38,7 @@ describe("User Signup", () => {
     cy.get("#sign-up").click();
 
     cy.get("input#name").type("Bob");
-    cy.get("input#email").type("bob@bob.com");
+    cy.get("input#email").type(testUserEmail);
     cy.get("input#password").type("password");
     cy.get("input#confirm").type("password");
 
