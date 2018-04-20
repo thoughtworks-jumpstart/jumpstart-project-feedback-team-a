@@ -19,7 +19,7 @@ export class ListIncomingFeedback extends Component {
 
   componentDidMount() {
     feedbackProcess
-      .mockListIncomingFeedback({
+      .listIncomingFeedback({
         email: this.props.sessionContext.user.email,
         messageContext: this.props.messageContext
       })
