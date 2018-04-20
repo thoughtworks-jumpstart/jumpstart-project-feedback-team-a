@@ -63,7 +63,7 @@ class Feedback extends React.Component {
       <div className="container">
         <Messages messages={this.props.messageContext.messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <h1 style={{ display: "inline" }}>Collect Feedback</h1>
+          <h1 style={{ display: "inline" }}>Send Feedback</h1>
           <button
             style={{ display: "inline" }}
             className="btn btn-success pull-right"

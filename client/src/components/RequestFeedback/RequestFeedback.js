@@ -1,6 +1,4 @@
 import React from "react";
-import * as feedbackProcess from "../../actions/feedbackProcess";
-// import Messages from "../Messages/Messages";
 
 class RequestFeedback extends React.Component {
   constructor(props) {
@@ -37,7 +35,6 @@ class RequestFeedback extends React.Component {
   render() {
     return (
       <div className="container">
-        {/* <Messages messages={this.props.messageContext.messages} /> */}
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h1 style={{ display: "inline" }}>Request for Feedback</h1>
           <button
