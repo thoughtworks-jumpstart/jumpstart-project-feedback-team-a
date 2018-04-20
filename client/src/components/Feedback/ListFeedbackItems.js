@@ -9,7 +9,7 @@ import { ProviderContext, subscribe } from "react-contextual";
 class ListFeedbackItem extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className="row">
           <div className="col-lg-3" id="feedback-date">
             {moment(this.props.feedback.feedback.createdAt).format(
@@ -47,7 +47,7 @@ class ListFeedbackItem extends Component {
             {this.props.feedback.feedback.feedbackAction}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
