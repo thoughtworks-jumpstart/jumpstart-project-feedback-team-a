@@ -1,93 +1,87 @@
 const URL = Cypress.env("baseUrl");
-const testUserEmail = `${Date.now()}@a.com`;
+const TEST_USER_EMAIL = `${Date.now()}@a.com`;
+const PASSWORD = "1";
 
-describe("User Signup", () => {
-  it("should sign up successfully", () => {
-    cy.visit(URL);
+describe("Authentication", () => {
+  context("Sign Up", () => {
+    it("test that password and confirm fields must match", () => {
+      cy.visit(URL);
+      cy.get("#sign-up").click();
+      cy.get("input#name").type("Bob");
+      cy.get("input#email").type(TEST_USER_EMAIL);
+      cy.get("input#password").type(PASSWORD);
+      cy.get("input#confirm").type("differentpassword");
+      cy.get("[type='submit']").click();
+      cy
+        .get(".alert-danger")
+        .contains("Your confirmed password does not match the new password");
+    });
 
-    cy.get("#sign-up").click();
+    it("successful signup", () => {
+      cy
+        .get("input#confirm")
+        .clear()
+        .type(PASSWORD);
+      cy.get("[type='submit']").click();
+      cy.get("#user-name").contains("Bob");
+    });
 
-    cy.get("input#name").type("Bob");
-    cy.get("input#email").type(testUserEmail);
-    cy.get("input#password").type("password");
-    cy.get("input#confirm").type("password");
+    it("successful logout", () => {
+      cy.get(".navbar-avatar").click();
+      cy.get("a#log-out").click();
+    });
 
-    cy.get("[type='submit']").click();
-    cy.get("#user-name").contains("Bob");
-    cy.get(".navbar-avatar").click();
-    cy.get("a#log-out").click();
+    it("existing user should not be able to sign-up", () => {
+      cy.get("#sign-up").click();
+      cy.get("input#name").type("Bob");
+      cy.get("input#email").type(TEST_USER_EMAIL);
+      cy.get("input#password").type(PASSWORD);
+      cy.get("input#confirm").type(PASSWORD);
+      cy.get("[type='submit']").click();
+      cy
+        .get(".alert-danger")
+        .contains(
+          "The email address you have entered is already associated with another account."
+        );
+    });
   });
 
-  it("should display error message when password and confirm fields don't match", () => {
-    cy.visit(URL);
+  context("Log in", () => {
+    it("validate email and password", () => {
+      cy.get("#log-in").click();
+      cy.get("input#email").type("invalid@bob.com");
+      cy.get("input#password").type(PASSWORD);
 
-    cy.get("#sign-up").click();
+      cy.get("[type='submit']").click();
+      cy.get(".alert-danger").contains("Your email or password is invalid");
 
-    cy.get("input#name").type("Bob");
-    cy.get("input#email").type(`${Date.now()}@a.com`);
-    cy.get("input#password").type("password");
-    cy.get("input#confirm").type("differentpassword");
+      cy
+        .get("input#email")
+        .clear()
+        .type("Bob@bob.com");
+      cy
+        .get("input#password")
+        .clear()
+        .type("invalid");
 
-    cy.get("[type='submit']").click();
-    cy
-      .get(".alert-danger")
-      .contains("Your confirmed password does not match the new password");
-  });
+      cy.get("[type='submit']").click();
+      cy.get(".alert-danger").contains("Your email or password is invalid");
+    });
 
-  it("should display an error message when user already exists", () => {
-    cy.visit(URL);
+    it("successful login", () => {
+      cy.visit(URL);
+      cy.get("#log-in").click();
 
-    cy.get("#sign-up").click();
+      cy.get("input#email").type(TEST_USER_EMAIL);
+      cy.get("input#password").type(PASSWORD);
 
-    cy.get("input#name").type("Bob");
-    cy.get("input#email").type(testUserEmail);
-    cy.get("input#password").type("password");
-    cy.get("input#confirm").type("password");
+      cy.get("[type='submit']").click();
+      cy.url().should("eq", URL);
 
-    cy.get("[type='submit']").click();
-    cy
-      .get(".alert-danger")
-      .contains(
-        "The email address you have entered is already associated with another account."
-      );
-  });
-});
+      cy.get(".navbar-avatar").click();
+      cy.get("#log-out").click();
 
-describe("User Login", () => {
-  beforeEach(() => {
-    cy.visit(URL);
-    cy.get("#log-in").click();
-  });
-  it("should redirect to home page after valid login", () => {
-    cy.get("input#email").type("bob@bob.com");
-    cy.get("input#password").type("password");
-
-    cy.get("[type='submit']").click();
-    cy.url().should("eq", URL);
-
-    cy.get(".navbar-avatar").click();
-    cy.get("#log-out").click();
-
-    cy.getCookie("token").should("eq", null);
-  });
-
-  it("should be notified if my email or password is invalid", () => {
-    cy.get("input#email").type("invalid@bob.com");
-    cy.get("input#password").type("password");
-
-    cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains("Your email or password is invalid");
-
-    cy
-      .get("input#email")
-      .clear()
-      .type("Bob@bob.com");
-    cy
-      .get("input#password")
-      .clear()
-      .type("invalid");
-
-    cy.get("[type='submit']").click();
-    cy.get(".alert-danger").contains("Your email or password is invalid");
+      cy.getCookie("token").should("eq", null);
+    });
   });
 });
