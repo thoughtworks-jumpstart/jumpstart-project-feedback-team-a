@@ -13,7 +13,7 @@ class RequestFeedback extends React.Component {
     };
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     if (
       window.confirm(
@@ -22,7 +22,7 @@ class RequestFeedback extends React.Component {
         }?`
       )
     ) {
-      this.setState({ isDraft: !this.state.isDraft });
+      await this.setState({ isDraft: !this.state.isDraft });
       feedbackProcess.sendRequestFeedbackEmail(this.state.email);
     }
   }

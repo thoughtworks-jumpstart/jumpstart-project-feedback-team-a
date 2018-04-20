@@ -2,9 +2,12 @@ import React from "react";
 import { shallow } from "enzyme";
 import RequestFeedback from "./RequestFeedback";
 
-const wrapper = shallow(<RequestFeedback />);
+let wrapper;
 
 describe("RequestFeedback", () => {
+  beforeEach(() => {
+    wrapper = shallow(<RequestFeedback />);
+  });
   it("should have the following elements", () => {
     expect(wrapper.find("form")).toHaveLength(1);
     expect(wrapper.find("input")).toHaveLength(1);
@@ -26,12 +29,15 @@ describe("RequestFeedback", () => {
     expect(wrapper.find("Prompt").props().when).toEqual(true);
   });
 
-  it("should save feedback when handleSubmit is called", () => {
-    const event = { preventDefault: () => {} };
-    wrapper
+  it("should save feedback when handleSubmit is called", async () => {
+    const event = {
+      preventDefault: () => {}
+    };
+    await wrapper
       .find("form")
       .props()
       .onSubmit(event);
+    wrapper.update();
     expect(wrapper.state().isDraft).toEqual(false);
   });
 });
