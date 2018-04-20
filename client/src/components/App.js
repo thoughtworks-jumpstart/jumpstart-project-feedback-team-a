@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
+import { Provider, subscribe } from "react-contextual";
+
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Home from "./Home/Home";
@@ -12,8 +14,7 @@ import Forgot from "./Account/Forgot/Forgot";
 import Reset from "./Account/Reset/Reset";
 import WrappedFeedback from "./Feedback/WrappedFeedback";
 import RequestFeedback from "./RequestFeedback/RequestFeedback";
-import listIncomingFeedback from "./Feedback/ListIncomingFeedback";
-import { Provider, subscribe } from "react-contextual";
+import Inbox from "./Inbox/Inbox";
 
 const store = {
   initialState: { jwtToken: null, user: {}, messages: {} },
@@ -57,10 +58,7 @@ class App extends React.Component {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/feedback" component={WrappedFeedback} />
-                <Route
-                  path="/listIncomingFeedback"
-                  component={listIncomingFeedback}
-                />
+                <Route path="/inbox" component={Inbox} />
                 <Route path="/requestFeedback" component={RequestFeedback} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={WrappedSignup} />
