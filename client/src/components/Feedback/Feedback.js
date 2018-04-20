@@ -1,8 +1,6 @@
 import React from "react";
 import * as feedbackProcess from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
-
-//import NavigationPrompt from "react-router-navigation-prompt";
 import { Prompt } from "react-router-dom";
 
 class Feedback extends React.Component {
@@ -83,8 +81,6 @@ class Feedback extends React.Component {
             />
           </div>
           <hr />
-
-          <h4>Feedback for Roy</h4>
 
           <div style={{ marginTop: "20px" }} className="form-group">
             <label>What I did well?</label>
