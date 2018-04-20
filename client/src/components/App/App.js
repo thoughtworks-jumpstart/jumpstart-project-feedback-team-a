@@ -12,7 +12,7 @@ import Reset from "../Account/Reset/Reset";
 import WrappedFeedback from "../Feedback/WrappedFeedback";
 import * as actions from "../../actions/auth";
 
-import listIncomingFeedback from "../Feedback/ListIncomingFeedback";
+import Inbox from "../Inbox/Inbox";
 import { withCookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps } from "../context_helper";
@@ -57,10 +57,7 @@ export class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/feedback" component={WrappedFeedback} />
-            <Route
-              path="/listIncomingFeedback"
-              component={listIncomingFeedback}
-            />
+            <Route path="/inbox" component={Inbox} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={WrappedSignup} />
             <PrivateRoute path="/account" component={Profile} />
