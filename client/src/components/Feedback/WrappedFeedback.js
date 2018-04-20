@@ -1,4 +1,4 @@
-import Feedback from "./Feedback";
+import FeedbackForm from "./FeedbackForm";
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapMessageContextToProps,
@@ -14,5 +14,5 @@ const mapContextToProps = context => {
 };
 
 export default withRouter(
-  subscribe(ProviderContext, mapContextToProps)(Feedback)
+  subscribe(ProviderContext, mapContextToProps)(FeedbackForm)
 );
