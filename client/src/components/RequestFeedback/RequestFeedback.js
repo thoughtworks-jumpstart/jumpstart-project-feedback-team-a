@@ -1,4 +1,5 @@
 import React from "react";
+import { Prompt } from "react-router-dom";
 
 class RequestFeedback extends React.Component {
   constructor(props) {
@@ -11,16 +12,7 @@ class RequestFeedback extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (
-      window.confirm(
-        `Please confirm if you would like to send this request to the following recipient: ${
-          this.state.email
-        }?`
-      )
-    ) {
-      this.setState({ isDraft: false });
-      window.confirm(`Sent!`);
-    }
+    this.setState({ isDraft: !this.state.isDraft });
   }
 
   async handleChange(event) {
@@ -57,6 +49,7 @@ class RequestFeedback extends React.Component {
             />
           </div>
           <hr />
+          <Prompt when={this.state.isDraft} message="Leaving?" />
         </form>
       </div>
     );
