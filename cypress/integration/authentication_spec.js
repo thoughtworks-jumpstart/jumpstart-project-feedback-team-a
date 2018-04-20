@@ -14,6 +14,8 @@ describe("User Signup", () => {
 
     cy.get("[type='submit']").click();
     cy.get("#user-name").contains("Bob");
+    cy.get(".navbar-avatar").click();
+    cy.get("a#log-out").click();
   });
 
   it("should display error message when password and confirm fields don't match", () => {
