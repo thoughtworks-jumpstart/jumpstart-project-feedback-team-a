@@ -15,24 +15,19 @@ describe("Giver Feedback Form", () => {
     cy.get("[type='submit']").click();
   });
 
-  after(() => {
-    cy.visit(URL);
-    cy.get("#log-in").click();
-    cy.get("input#email").type(user1);
-    cy.get("input#password").type(password);
-    cy.get("[type='submit']").click();
-
-    cy.get(".navbar-avatar").click();
-    cy.get("#my-account").click();
-    cy.get("button.btn-danger").click();
-  });
-
   beforeEach(() => {
     cy.visit(URL);
     cy.get("#log-in").click();
     cy.get("input#email").type(user1);
     cy.get("input#password").type(password);
     cy.get("[type='submit']").click();
+  });
+
+  after(() => {
+    cy.get(".navbar-avatar").click();
+    cy.get("#my-account").click();
+
+    cy.get("button.btn-danger").click();
   });
 
   it("should see the Give Feedback link after log in", () => {
@@ -75,5 +70,37 @@ describe("Giver Feedback Form", () => {
     cy.get("textarea#feedbackItem2").clear();
     cy.get("textarea#feedbackItem3").clear();
     cy.get("button.btn-success").should("be.disabled");
+  });
+
+  it("should click Cancel and email addr in prompt", () => {
+    cy.get("#feedback").click();
+    cy.get("input#emailAddress").type("bond@bond.com");
+    cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
+    cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");
+    cy.get("textarea#feedbackItem3").type("Now I am trying to save feedback");
+    cy.get("button.btn-success").click();
+
+    cy.on("window:confirm", str => {
+      expect(str).to.contains("bond@bond.com");
+      return false;
+      done();
+    });
+    cy.url().should("eq", `${URL}feedback`);
+  });
+
+  it("should click OK and email addr in prompt", () => {
+    cy.get("#feedback").click();
+    cy.get("input#emailAddress").type("bond@bond.com");
+    cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
+    cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");
+    cy.get("textarea#feedbackItem3").type("Now I am trying to save feedback");
+    cy.get("button.btn-success").click();
+
+    cy.on("window:confirm", str => {
+      expect(str).to.contains("bond@bond.com");
+      return true;
+      done();
+    });
+    cy.url().should("eq", URL);
   });
 });
