@@ -84,8 +84,7 @@ const sendRequestFeedbackEmail = async (req, res) => {
   mailer.sendText(fromAddress, toAddress, subject, text);
 
   res.send({
-    msg:
-      "An email has been sent to " + toAddress + " with further instructions."
+    msg: "An email has been sent to " + toAddress + " to request for feedback."
   });
 };
 

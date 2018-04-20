@@ -3,7 +3,7 @@ import * as feedbackProcess from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
 import { Prompt } from "react-router-dom";
 
-class Feedback extends React.Component {
+class FeedbackForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,4 +123,4 @@ class Feedback extends React.Component {
   }
 }
 
-export default Feedback;
+export default FeedbackForm;
