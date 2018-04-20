@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { listIncomingFeedback } from "../../actions/feedbackProcess";
+import * as feedbackProcess from "../../actions/feedbackProcess";
 import FeedbackItem from "../Feedback/FeedbackItem";
 import Messages from "../Messages/Messages";
 import {
@@ -18,13 +18,14 @@ export class ListIncomingFeedback extends Component {
   }
 
   componentDidMount() {
-    listIncomingFeedback({
-      email: this.props.sessionContext.user.email,
-
-      messageContext: this.props.messageContext
-    }).then(data => {
-      this.setState({ feedbackArray: data });
-    });
+    feedbackProcess
+      .mockListIncomingFeedback({
+        email: this.props.sessionContext.user.email,
+        messageContext: this.props.messageContext
+      })
+      .then(data => {
+        this.setState({ feedbackArray: data });
+      });
   }
 
   render() {
