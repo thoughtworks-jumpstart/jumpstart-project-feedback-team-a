@@ -58,10 +58,10 @@ export function saveFeedback({
 }
 
 export function listIncomingFeedback(email) {
-  return fetch(`/api/feedbacks/listIncomingFeedback/${email.email}`).then(
+  return fetch(`/api/feedbacks/listIncomingFeedback/${email}`).then(
     response => {
       if (response.ok) {
-        return response.json();
+        return response.json().then(data => console.log(data));
       } else {
         console.log(response.json);
       }

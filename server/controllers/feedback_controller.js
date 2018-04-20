@@ -58,7 +58,6 @@ const getHostAndPort = req => {
 const sendRequestFeedbackEmail = async (req, res) => {
   const token = await random(16);
   const toAddress = req.params.email;
-
   const user = await User.findOne({ email: toAddress });
   if (!user) {
     return res.status(400).send({

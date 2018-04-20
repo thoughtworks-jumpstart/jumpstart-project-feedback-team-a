@@ -15,7 +15,16 @@ class RequestFeedback extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ isDraft: !this.state.isDraft });
+    if (
+      window.confirm(
+        `Please confirm if you would like to send this feedback to the following recipient: ${
+          this.state.email
+        }?`
+      )
+    ) {
+      this.setState({ isDraft: !this.state.isDraft });
+      feedbackProcess.sendRequestFeedbackEmail(this.state.email);
+    }
   }
 
   async handleChange(event) {
