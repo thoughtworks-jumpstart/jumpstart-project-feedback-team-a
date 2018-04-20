@@ -58,9 +58,9 @@ describe("List of Incoming Feedbacks", () => {
 
     cy.get("#feedback-date").contains(/^(?!\s*$).+/);
     cy.get("#feedback-giver").contains(/^(?!\s*$).+/);
-    cy.get("#feedback-well").contains(/^(?!\s*$).+/);
-    cy.get("#feedback-better").contains(/^(?!\s*$).+/);
+    cy.get("#feedback-good").contains(/^(?!\s*$).+/);
     cy.get("#feedback-improve").contains(/^(?!\s*$).+/);
+    cy.get("#feedback-action").contains(/^(?!\s*$).+/);
   });
 });
 

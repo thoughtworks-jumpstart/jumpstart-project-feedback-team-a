@@ -61,7 +61,6 @@ export function listIncomingFeedback(email) {
   return fetch(`/api/feedbacks/listIncomingFeedback/${email.email}`).then(
     response => {
       if (response.ok) {
-        console.log(response);
         return response.json();
       } else {
         console.log(response.json);
