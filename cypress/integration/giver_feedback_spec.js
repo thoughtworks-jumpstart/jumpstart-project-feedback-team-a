@@ -1,4 +1,5 @@
 const URL = Cypress.env("baseUrl");
+const RECIPIENT_EMAIL = "bond@bond.com";
 
 describe("Giver Feedback Form", () => {
   const user1 = `${Math.random()}@a.com`;
@@ -12,14 +13,6 @@ describe("Giver Feedback Form", () => {
     cy.get("input#email").type(user1);
     cy.get("input#password").type(password);
     cy.get("input#confirm").type(password);
-    cy.get("[type='submit']").click();
-  });
-
-  beforeEach(() => {
-    cy.visit(URL);
-    cy.get("#log-in").click();
-    cy.get("input#email").type(user1);
-    cy.get("input#password").type(password);
     cy.get("[type='submit']").click();
   });
 
@@ -72,35 +65,22 @@ describe("Giver Feedback Form", () => {
     cy.get("button.btn-success").should("be.disabled");
   });
 
-  it("should click Cancel and email addr in prompt", () => {
+  it("create feedback successfully", () => {
     cy.get("#feedback").click();
-    cy.get("input#emailAddress").type("bond@bond.com");
+    cy.get("input#emailAddress").type(RECIPIENT_EMAIL);
     cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
     cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");
     cy.get("textarea#feedbackItem3").type("Now I am trying to save feedback");
     cy.get("button.btn-success").click();
 
     cy.on("window:confirm", str => {
-      expect(str).to.contains("bond@bond.com");
-      return false;
-      done();
-    });
-    cy.url().should("eq", `${URL}feedback`);
-  });
-
-  it("should click OK and email addr in prompt", () => {
-    cy.get("#feedback").click();
-    cy.get("input#emailAddress").type("bond@bond.com");
-    cy.get("textarea#feedbackItem1").type("Now I am trying to save feedback");
-    cy.get("textarea#feedbackItem2").type("Now I am trying to save feedback");
-    cy.get("textarea#feedbackItem3").type("Now I am trying to save feedback");
-    cy.get("button.btn-success").click();
-
-    cy.on("window:confirm", str => {
-      expect(str).to.contains("bond@bond.com");
+      expect(str).to.contains(
+        "Please confirm if you would like to send this feedback"
+      );
+      expect(str).to.contains(RECIPIENT_EMAIL);
       return true;
-      done();
     });
+
     cy.url().should("eq", URL);
   });
 });
