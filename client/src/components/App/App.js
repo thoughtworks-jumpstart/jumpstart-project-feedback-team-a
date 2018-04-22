@@ -13,6 +13,7 @@ import WrappedFeedback from "../Feedback/WrappedFeedback";
 import * as actions from "../../actions/auth";
 
 import Inbox from "../Inbox/Inbox";
+
 import { withCookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps } from "../context_helper";
@@ -55,6 +56,7 @@ export class App extends React.Component {
       <BrowserRouter>
         <div>
           <Header />
+
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/requestFeedback" exact component={RequestFeedback} />
@@ -67,6 +69,7 @@ export class App extends React.Component {
             <Route path="/reset/:token" component={Reset} />
             <Route path="*" component={NotFound} />
           </Switch>
+
           <Footer />
         </div>
       </BrowserRouter>

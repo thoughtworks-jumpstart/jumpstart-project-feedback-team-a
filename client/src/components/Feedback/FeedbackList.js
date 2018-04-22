@@ -18,12 +18,16 @@ export class FeedbackList extends Component {
   }
 
   async componentDidMount() {
-    const data = await feedbackProcess.listIncomingFeedback({
-      email: this.props.sessionContext.user.email,
-      messageContext: this.props.messageContext
-    });
-    // .then(data => {
-    await this.setState({ feedbackArray: data });
+    try {
+      const data = await feedbackProcess.listIncomingFeedback({
+        email: this.props.sessionContext.user.email,
+        messageContext: this.props.messageContext
+      });
+
+      // .then(data => {
+      await this.setState({ feedbackArray: data });
+      console.log(this.state.feedbackArray);
+    } catch (err) {}
     // });
   }
 

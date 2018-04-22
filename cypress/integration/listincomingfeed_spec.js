@@ -67,7 +67,7 @@ describe("Inbox", () => {
   });
 
   it("should have a empty list if user is new", () => {
-    cy.visit(URL);
+    //cy.visit(URL);
 
     cy.get("#log-in").click();
     cy.get("input#email").type(user1);

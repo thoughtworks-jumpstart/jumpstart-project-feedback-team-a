@@ -1,9 +1,12 @@
 import React from "react";
 import FeedbackList from "../Feedback/FeedbackList";
+import ErrorBoundary from "../Error/ErrorBoundary";
 
 const Inbox = () => (
   <div>
-    <FeedbackList />
+    <ErrorBoundary>
+      <FeedbackList />
+    </ErrorBoundary>
   </div>
 );
 

@@ -63,7 +63,7 @@ export function listIncomingFeedback(email) {
       if (response.ok) {
         return response.json().then(json => json);
       } else {
-        console.log(response.json);
+        return response.status();
       }
     }
   );
@@ -75,7 +75,7 @@ export function sendRequestFeedbackEmail(email) {
       if (response.ok) {
         return response.json().then(json => json);
       } else {
-        console.log(response.json());
+        return response.status();
       }
     }
   );

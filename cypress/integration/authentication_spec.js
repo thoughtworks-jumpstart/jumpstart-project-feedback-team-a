@@ -69,11 +69,17 @@ describe("Authentication", () => {
     });
 
     it("successful login", () => {
-      cy.visit(URL);
+      //cy.visit(URL);
       cy.get("#log-in").click();
 
-      cy.get("input#email").type(TEST_USER_EMAIL);
-      cy.get("input#password").type(PASSWORD);
+      cy
+        .get("input#email")
+        .clear()
+        .type(TEST_USER_EMAIL);
+      cy
+        .get("input#password")
+        .clear()
+        .type(PASSWORD);
 
       cy.get("[type='submit']").click();
       cy.url().should("eq", URL);
