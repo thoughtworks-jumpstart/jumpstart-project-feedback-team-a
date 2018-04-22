@@ -6,7 +6,7 @@ describe("Give Feedback Form", () => {
   const PASSWORD = "1";
 
   before(() => {
-    cy.visit(URL);
+    //cy.visit(URL);
     cy.get("#sign-up").click();
 
     cy.get("input#name").type("Bob");

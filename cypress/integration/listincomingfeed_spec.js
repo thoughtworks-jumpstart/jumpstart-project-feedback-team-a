@@ -6,7 +6,7 @@ describe("Inbox", () => {
   let user2 = `${Math.random()}@a.com`;
 
   before(() => {
-    cy.visit(URL);
+    //cy.visit(URL);
 
     cy.get("#sign-up").click();
 
