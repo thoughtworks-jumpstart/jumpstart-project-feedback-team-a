@@ -33,7 +33,7 @@ export class FeedbackList extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <Messages messages={this.props.messageContext.messages} />
         <h1>Your Feedback ({this.state.feedbackArray.length})</h1>
         <div className="row">
