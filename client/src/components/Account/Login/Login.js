@@ -59,8 +59,8 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login-container container">
-        <div className="panel">
+      <div className="login-container">
+        <div className="panel" id="login-panel">
           <div className="panel-body">
             <Messages messages={this.props.messageContext.messages} />
             <form onSubmit={this.handleLogin.bind(this)}>

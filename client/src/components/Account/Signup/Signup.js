@@ -2,9 +2,11 @@ import React from "react";
 import Messages from "../../Messages/Messages";
 import { Link } from "react-router-dom";
 
+import "./Signup.css";
+
 const Signup = props => (
-  <div className="login-container container">
-    <div className="panel">
+  <div className="signup-container">
+    <div className="panel" id="login-panel">
       <div className="panel-body">
         <Messages messages={props.messageContext.messages} />
         <form onSubmit={props.handleSignup}>

@@ -1,10 +1,10 @@
-.login-container {
+.signup-container {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #0dc2b9, #0dbaf0);
   padding: 10px;
 }
 
-#login-panel {
+#signup-panel {
   max-width: 555px;
   margin: 10px auto;
   background: rgba(255, 255, 255, 0.5);

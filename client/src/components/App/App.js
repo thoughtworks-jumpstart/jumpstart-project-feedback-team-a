@@ -21,6 +21,7 @@ import RequestFeedback from "../RequestFeedback/RequestFeedback";
 
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
+import "./App.css";
 export class App extends React.Component {
   isAuthenticated = false;
 
@@ -43,23 +44,24 @@ export class App extends React.Component {
       <BrowserRouter>
         <div>
           <Header />
-
-          <Switch>
-            <PrivateRoute path="/" exact component={Home} />
-            <PrivateRoute
-              path="/requestFeedback"
-              exact
-              component={RequestFeedback}
-            />
-            <PrivateRoute path="/feedback" component={WrappedFeedback} />
-            <PrivateRoute path="/inbox" component={Inbox} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={WrappedSignup} />
-            <PrivateRoute path="/account" component={Profile} />
-            <PrivateRoute path="/forgot" component={Forgot} />
-            <PrivateRoute path="/reset/:token" component={Reset} />
-            <Route path="*" component={NotFound} />
-          </Switch>
+          <div>
+            <Switch>
+              <PrivateRoute path="/" exact component={Home} />
+              <PrivateRoute
+                path="/requestFeedback"
+                exact
+                component={RequestFeedback}
+              />
+              <PrivateRoute path="/feedback" component={WrappedFeedback} />
+              <PrivateRoute path="/inbox" component={Inbox} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={WrappedSignup} />
+              <PrivateRoute path="/account" component={Profile} />
+              <PrivateRoute path="/forgot" component={Forgot} />
+              <PrivateRoute path="/reset/:token" component={Reset} />
+              <Route path="*" component={NotFound} />
+            </Switch>
+          </div>
 
           <Footer />
         </div>

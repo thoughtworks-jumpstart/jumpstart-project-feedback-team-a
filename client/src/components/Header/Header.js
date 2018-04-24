@@ -131,7 +131,7 @@ class Header extends React.Component {
       </ul>
     );
     return (
-      <nav className="navbar navbar-default navbar-static-top">
+      <nav className="navbar navbar-default navbar-static-top header-container">
         <div className="container">
           <div className="navbar-header">
             <button
