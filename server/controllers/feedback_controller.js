@@ -9,6 +9,17 @@ const {
   applicationName
 } = require("../config");
 
+async function updateFeedback(req, res) {
+  try {
+    await Feedback.findByIdAndUpdate(req.body.feedback._id, req.body.feedback);
+    return res.json({ msg: "Your feedback is updated successfully." });
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ msg: "There was a problem. Please try again later." });
+  }
+}
+
 async function saveFeedback(req, res) {
   let feedback = new Feedback();
   feedback.receiverEmail = req.body.feedback.receiverEmail;
@@ -97,5 +108,6 @@ const sendRequestFeedbackEmail = async (req, res) => {
 module.exports = {
   saveFeedback,
   listIncomingFeedback,
-  sendRequestFeedbackEmail
+  sendRequestFeedbackEmail,
+  updateFeedback
 };

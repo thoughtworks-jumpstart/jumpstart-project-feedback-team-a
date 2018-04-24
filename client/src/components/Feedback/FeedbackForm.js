@@ -2,6 +2,7 @@ import React from "react";
 import * as feedbackProcess from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
 import { Prompt } from "react-router-dom";
+import * as qs from "query-string";
 
 class FeedbackForm extends React.Component {
   constructor(props) {
@@ -19,6 +20,11 @@ class FeedbackForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const queryString = qs.parse(this.props.location.search);
+
+    if (this.props.location.search !== "") {
+      console.log(queryString.id);
+    }
 
     if (
       window.confirm(
@@ -27,17 +33,33 @@ class FeedbackForm extends React.Component {
         }?`
       )
     ) {
-      this.setState({ isDraft: false });
-      feedbackProcess.saveFeedback({
-        email: this.state.email,
-        giver: this.props.sessionContext.user.email,
-        feedbackGood: this.state.feedbackGood,
-        feedbackImprove: this.state.feedbackImprove,
-        feedbackAction: this.state.feedbackAction,
-        messageContext: this.props.messageContext,
-        routerHistory: this.props.history,
-        isPending: false
-      });
+      //if id in query string exists, we run the feedbackProcess.updateFeedback
+      //
+      if (this.props.location.search === "") {
+        this.setState({ isDraft: false });
+        feedbackProcess.saveFeedback({
+          email: this.state.email,
+          giver: this.props.sessionContext.user.email,
+          feedbackGood: this.state.feedbackGood,
+          feedbackImprove: this.state.feedbackImprove,
+          feedbackAction: this.state.feedbackAction,
+          messageContext: this.props.messageContext,
+          routerHistory: this.props.history,
+          isPending: false
+        });
+      } else {
+        this.setState({ isDraft: false });
+        feedbackProcess.updateFeedback({
+          id: qs.parse(this.props.location.search).id,
+          email: this.state.email,
+          giver: this.props.sessionContext.user.email,
+          feedbackGood: this.state.feedbackGood,
+          feedbackImprove: this.state.feedbackImprove,
+          feedbackAction: this.state.feedbackAction,
+          messageContext: this.props.messageContext,
+          routerHistory: this.props.history
+        });
+      }
     }
   }
 

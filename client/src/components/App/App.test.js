@@ -21,8 +21,7 @@ describe("App", () => {
   });
 
   it("should have the following structure", () => {
-    expect(wrapper.find("Route")).toHaveLength(10);
-    expect(wrapper.find("SubscribeWrap")).toHaveLength(1);
+    expect(wrapper.find("Route")).toHaveLength(4);
   });
 
   it("should fetch user and set jwtToken and user", async () => {
