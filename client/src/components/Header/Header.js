@@ -28,7 +28,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const active = { borderBottomColor: "#3f51b5" };
+    const active = { borderBottomColor: "lightgrey" };
     const feedbackLink = (
       <NavLink
         exact

@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 import Login from "../Account/Login/Login";
@@ -62,8 +61,6 @@ export class App extends React.Component {
               <Route path="*" component={NotFound} />
             </Switch>
           </div>
-
-          <Footer />
         </div>
       </BrowserRouter>
     );

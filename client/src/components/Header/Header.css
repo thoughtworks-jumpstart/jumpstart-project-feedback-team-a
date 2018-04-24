@@ -1,3 +1,5 @@
+/* Note: there are inline styles in Header.js that override styles here */
+
 .navbar-default .navbar-nav > li > a {
   color: #262626;
   border-bottom: 3px solid transparent;
@@ -8,7 +10,7 @@
 
 .navbar-default .navbar-nav > li > a:hover {
   background-color: transparent;
-  border-bottom-color: #bdbdbd;
+  border-bottom-color: grey;
 }
 
 .navbar-default .navbar-nav > li > a.navbar-avatar {
@@ -22,12 +24,12 @@
   height: 30px;
 }
 
-.navbar-default .navbar-nav > li.active > a {
-  border-bottom-color: #3f51b5;
+.navbar-default .navbar-nav > li > a.active {
   background-color: transparent;
   color: #262626;
 }
 
 .header-container {
   margin-bottom: 0px;
+  border: 0px;
 }
