@@ -32,7 +32,10 @@ export class App extends React.Component {
       this.props.sessionContext.token,
       currentUser
     );
-    sessionStorage.setItem("currentLoggedInUser", JSON.stringify(currentUser));
+    this.props.sessionStorage.setItem(
+      "currentLoggedInUser",
+      JSON.stringify(currentUser)
+    );
   }
 
   render() {
@@ -42,7 +45,7 @@ export class App extends React.Component {
           <Header />
 
           <Switch>
-            <Route path="/" exact component={Home} />
+            <PrivateRoute path="/" exact component={Home} />
             <PrivateRoute
               path="/requestFeedback"
               exact

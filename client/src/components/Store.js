@@ -3,7 +3,8 @@ export const store = (document, sessionStorage) => {
     initialState: {
       jwtToken: document.cookie.split("=")[1] || "",
       user: JSON.parse(sessionStorage.getItem("currentLoggedInUser")) || {},
-      messages: {}
+      messages: {},
+      sessionStorage: sessionStorage
     },
     actions: {
       saveSession: (jwtToken, user) => {

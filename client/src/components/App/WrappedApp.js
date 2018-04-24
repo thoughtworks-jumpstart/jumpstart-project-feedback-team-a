@@ -9,7 +9,7 @@ export class WrappedApp extends Component {
     return (
       <CookiesProvider>
         <Provider {...store(this.props.document, this.props.sessionStorage)}>
-          <App />
+          <App sessionStorage={this.props.sessionStorage} />
         </Provider>
       </CookiesProvider>
     );
