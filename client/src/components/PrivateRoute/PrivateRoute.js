@@ -2,7 +2,7 @@ import React from "react";
 import { subscribe } from "react-contextual";
 import { Route, Redirect } from "react-router-dom";
 
-let isAuthenticated = props => props.hasOwnProperty("jwtToken");
+let isAuthenticated;
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   if (rest.sessionStorage.getItem("currentLoggedInUser") === null) {
