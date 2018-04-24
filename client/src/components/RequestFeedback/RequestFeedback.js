@@ -1,6 +1,9 @@
 import React from "react";
 import { Prompt } from "react-router-dom";
 import * as feedbackProcess from "../../actions/feedbackProcess";
+import { mapMessageContextToProps } from "../context_helper";
+import { ProviderContext, subscribe } from "react-contextual";
+import Messages from "../Messages/Messages";
 
 // import Messages from "../Messages/Messages";
 
@@ -23,7 +26,10 @@ class RequestFeedback extends React.Component {
       )
     ) {
       await this.setState({ isDraft: !this.state.isDraft });
-      feedbackProcess.sendRequestFeedbackEmail(this.state.email);
+      feedbackProcess.sendRequestFeedbackEmail({
+        email: this.state.email,
+        messageContext: this.props.messageContext
+      });
     }
   }
 
@@ -39,6 +45,7 @@ class RequestFeedback extends React.Component {
   render() {
     return (
       <div className="container">
+        <Messages messages={this.props.messageContext.messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h1 style={{ display: "inline" }}>Request for Feedback</h1>
           <button
@@ -68,4 +75,9 @@ class RequestFeedback extends React.Component {
   }
 }
 
-export default RequestFeedback;
+const mapContextToProps = context => {
+  return {
+    ...mapMessageContextToProps(context)
+  };
+};
+export default subscribe(ProviderContext, mapContextToProps)(RequestFeedback);

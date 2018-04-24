@@ -69,13 +69,42 @@ export function listIncomingFeedback(email) {
   );
 }
 
-export function sendRequestFeedbackEmail(email) {
+export function sendRequestFeedbackEmail({ email, messageContext }) {
   return fetch(`/api/feedbacks/sendRequestFeedbackEmail/${email}`).then(
     response => {
       if (response.ok) {
-        return response.json().then(json => json);
+        return response.json().then(json => {
+          const messages = [json];
+          const identifier = "success";
+          setMessageWithTimeout(
+            messageContext,
+            messages,
+            TIMEOUTFOR,
+            identifier
+          );
+        });
       } else {
-        return response.status();
+        return response.json().then(json => {
+          if (json.msg === undefined) {
+            const messages = [{ msg: "Server error. Please try again later" }];
+            const identifier = "error";
+            setMessageWithTimeout(
+              messageContext,
+              messages,
+              TIMEOUTFOR,
+              identifier
+            );
+          } else {
+            const messages = [json];
+            const idenfitier = "error";
+            setMessageWithTimeout(
+              messageContext,
+              messages,
+              TIMEOUTFOR,
+              idenfitier
+            );
+          }
+        });
       }
     }
   );

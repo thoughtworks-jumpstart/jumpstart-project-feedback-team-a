@@ -19,27 +19,36 @@ import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps } from "../context_helper";
 import RequestFeedback from "../RequestFeedback/RequestFeedback";
 
-const isAuthenticated = props => props.jwtToken !== null;
+//const isAuthenticated = props => props.jwtToken !== null;
 
-const PrivateRoute = subscribe()(({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated(props) ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-));
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  if (sessionStorage.getItem("currentLoggedInUser") === null) {
+    this.isAuthenticated = false;
+  } else if (sessionStorage.getItem("currentLoggedInUser").length > 2) {
+    this.isAuthenticated = true;
+  }
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        this.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+};
 
 export class App extends React.Component {
+  isAuthenticated = false;
+
   async componentDidMount() {
     const currentUser = await actions.getCurrentUser(
       this.props.cookies.get("token")
@@ -59,14 +68,18 @@ export class App extends React.Component {
 
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/requestFeedback" exact component={RequestFeedback} />
-            <Route path="/feedback" component={WrappedFeedback} />
-            <Route path="/inbox" component={Inbox} />
+            <PrivateRoute
+              path="/requestFeedback"
+              exact
+              component={RequestFeedback}
+            />
+            <PrivateRoute path="/feedback" component={WrappedFeedback} />
+            <PrivateRoute path="/inbox" component={Inbox} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={WrappedSignup} />
             <PrivateRoute path="/account" component={Profile} />
-            <Route path="/forgot" component={Forgot} />
-            <Route path="/reset/:token" component={Reset} />
+            <PrivateRoute path="/forgot" component={Forgot} />
+            <PrivateRoute path="/reset/:token" component={Reset} />
             <Route path="*" component={NotFound} />
           </Switch>
 

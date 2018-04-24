@@ -25,7 +25,10 @@ export class FeedbackList extends Component {
       });
 
       await this.setState({ feedbackArray: data });
-    } catch (err) {}
+    } catch (err) {
+      throw err;
+    }
+    // });
   }
 
   render() {
