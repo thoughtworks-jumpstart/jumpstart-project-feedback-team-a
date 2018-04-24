@@ -3,7 +3,7 @@ import FeedbackList from "../Feedback/FeedbackList";
 import ErrorBoundary from "../Error/ErrorBoundary";
 
 const Inbox = () => (
-  <div>
+  <div className="container">
     <ErrorBoundary>
       <FeedbackList />
     </ErrorBoundary>

@@ -24,11 +24,8 @@ export class FeedbackList extends Component {
         messageContext: this.props.messageContext
       });
 
-      // .then(data => {
       await this.setState({ feedbackArray: data });
-      console.log(this.state.feedbackArray);
     } catch (err) {}
-    // });
   }
 
   render() {
