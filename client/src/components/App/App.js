@@ -19,32 +19,7 @@ import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps } from "../context_helper";
 import RequestFeedback from "../RequestFeedback/RequestFeedback";
 
-//const isAuthenticated = props => props.jwtToken !== null;
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  if (sessionStorage.getItem("currentLoggedInUser") === null) {
-    this.isAuthenticated = false;
-  } else if (sessionStorage.getItem("currentLoggedInUser").length > 2) {
-    this.isAuthenticated = true;
-  }
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        this.isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location }
-            }}
-          />
-        )
-      }
-    />
-  );
-};
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export class App extends React.Component {
   isAuthenticated = false;
