@@ -1,9 +1,18 @@
 import React from "react";
 import { Prompt } from "react-router-dom";
 import * as feedbackProcess from "../../actions/feedbackProcess";
-import { mapMessageContextToProps } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 import Messages from "../Messages/Messages";
+import {
+  mapMessageContextToProps,
+  mapSessionContextToProps,
+  messageContextPropType,
+  sessionContextPropType
+} from "../context_helper";
+import { withCookies, Cookies } from "react-cookie";
+
+import { setMessageWithTimeout } from "../../actions/auth";
+const TIMEOUTFOR = 3000;
 
 // import Messages from "../Messages/Messages";
 
@@ -26,9 +35,58 @@ class RequestFeedback extends React.Component {
       )
     ) {
       await this.setState({ isDraft: !this.state.isDraft });
-      feedbackProcess.sendRequestFeedbackEmail({
-        email: this.state.email,
-        messageContext: this.props.messageContext
+      return fetch("/api/feedbacks/save", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          feedback: {
+            receiverEmail: this.state.email,
+            giverEmail: this.props.sessionContext.user.email,
+            feedbackGood: "",
+            feedbackImprove: "",
+            feedbackAction: "",
+            isPending: true
+          }
+        })
+      }).then(response => {
+        let routerHistory = this.props.history;
+        if (response.ok) {
+          routerHistory.push("/");
+          return response.json().then(data => {
+            // const messages = [{ msg: data.msg }];
+            const pendingRequestId = data.pendingRequestId;
+
+            feedbackProcess.sendRequestFeedbackEmail(
+              this.state.email,
+              this.props.messageContext,
+              pendingRequestId
+            );
+          });
+        } else {
+          return response.json().then(json => {
+            if (json.msg === undefined) {
+              const messages = [
+                { msg: "Server error. Please try again later" }
+              ];
+              const identifier = "error";
+              setMessageWithTimeout(
+                this.props.messageContext,
+                messages,
+                TIMEOUTFOR,
+                identifier
+              );
+            } else {
+              const messages = [json];
+              const idenfitier = "error";
+              setMessageWithTimeout(
+                this.props.messageContext,
+                messages,
+                TIMEOUTFOR,
+                idenfitier
+              );
+            }
+          });
+        }
       });
     }
   }
@@ -77,7 +135,11 @@ class RequestFeedback extends React.Component {
 
 const mapContextToProps = context => {
   return {
+    ...mapSessionContextToProps(context),
     ...mapMessageContextToProps(context)
   };
 };
-export default subscribe(ProviderContext, mapContextToProps)(RequestFeedback);
+
+export default subscribe(ProviderContext, mapContextToProps)(
+  withCookies(RequestFeedback)
+);

@@ -69,7 +69,11 @@ export function listIncomingFeedback(email) {
   );
 }
 
-export function sendRequestFeedbackEmail({ email, messageContext }) {
+export function sendRequestFeedbackEmail(
+  email,
+  messageContext,
+  pendingRequestId
+) {
   return fetch(`/api/feedbacks/sendRequestFeedbackEmail/${email}`).then(
     response => {
       if (response.ok) {
@@ -105,6 +109,7 @@ export function sendRequestFeedbackEmail({ email, messageContext }) {
             );
           }
         });
+        return response.status;
       }
     }
   );

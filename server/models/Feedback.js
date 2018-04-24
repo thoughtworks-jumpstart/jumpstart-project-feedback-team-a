@@ -16,8 +16,9 @@ const FeedbackSchema = new mongoose.Schema(
     },
     feedbackGood: String,
     feedbackImprove: String,
-    feedbackAction: String
-    // status: String
+    feedbackAction: String,
+    // status: String,
+    isPending: Boolean
   },
   { timestamps: true }
 );

@@ -16,11 +16,18 @@ async function saveFeedback(req, res) {
   feedback.feedbackGood = req.body.feedback.feedbackGood;
   feedback.feedbackImprove = req.body.feedback.feedbackImprove;
   feedback.feedbackAction = req.body.feedback.feedbackAction;
+  feedback.isPending = req.body.feedback.isPending;
 
   try {
-    await feedback.save();
-
-    return res.json({ msg: "Your feedback is saved successfully." });
+    const promise = await feedback.save();
+    const pendingRequestId = promise._id;
+    console.log(pendingRequestId);
+    console.log("Your feedback is saved successfully.");
+    return res.json({
+      msg: "Your feedback is saved successfully.",
+      pendingRequestId: pendingRequestId
+    });
+    getObject;
   } catch (error) {
     return res
       .status(401)

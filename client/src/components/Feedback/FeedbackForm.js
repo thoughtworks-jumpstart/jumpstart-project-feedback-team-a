@@ -11,7 +11,8 @@ class FeedbackForm extends React.Component {
       feedbackGood: "",
       feedbackAction: "",
       feedbackImprove: "",
-      isDraft: false
+      isDraft: false,
+      isPending: true
     };
     this.totalCharCount = this.totalCharCount.bind(this);
   }
@@ -34,7 +35,8 @@ class FeedbackForm extends React.Component {
         feedbackImprove: this.state.feedbackImprove,
         feedbackAction: this.state.feedbackAction,
         messageContext: this.props.messageContext,
-        routerHistory: this.props.history
+        routerHistory: this.props.history,
+        isPending: false
       });
     }
   }
