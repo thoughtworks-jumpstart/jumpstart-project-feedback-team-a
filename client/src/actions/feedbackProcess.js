@@ -126,7 +126,7 @@ export function listIncomingFeedback(email) {
       if (response.ok) {
         return response.json().then(json => json);
       } else {
-        return response.status();
+        return response.status;
       }
     }
   );

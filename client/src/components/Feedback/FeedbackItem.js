@@ -32,7 +32,6 @@ const FeedbackItem = props => {
         <div className="col-lg-3" />
         <div className="col-lg-3">Suggestions for Improvement</div>
         <div className="col-lg-6" id="feedback-action">
-          {" "}
           {props.feedback.feedback.feedbackAction}
         </div>
       </div>
