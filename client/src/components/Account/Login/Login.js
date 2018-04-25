@@ -44,7 +44,6 @@ class Login extends React.Component {
   }
 
   handleLogin(event) {
-    console.log(this.getRedirectReferer());
     event.preventDefault();
     login({
       email: this.state.email,
