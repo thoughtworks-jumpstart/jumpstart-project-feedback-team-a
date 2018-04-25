@@ -8,7 +8,7 @@ describe("WrappedSignup", () => {
   it("should should have the following structure", () => {
     const props = {
       history: {},
-      cookies: instanceOf(Cookies),
+      cookies: new Cookies(),
       messageContext: {
         clearMessages: () => {},
         messages: {},

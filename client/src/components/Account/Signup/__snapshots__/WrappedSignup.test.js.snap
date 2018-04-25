@@ -3,7 +3,13 @@
 exports[`WrappedSignup should should have the following structure 1`] = `
 <Signup
   confirm=""
-  cookies={[Function]}
+  cookies={
+    Cookies {
+      "HAS_DOCUMENT_COOKIE": true,
+      "cookies": Object {},
+      "hooks": undefined,
+    }
+  }
   email=""
   handleChange={[Function]}
   handleSignup={[Function]}
