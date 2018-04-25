@@ -22,14 +22,10 @@ class FeedbackForm extends React.Component {
     event.preventDefault();
     const queryString = qs.parse(this.props.location.search);
 
-    if (this.props.location.search !== "") {
-      console.log(queryString.id);
-    }
-
     if (
       window.confirm(
         `Please confirm if you would like to send this feedback to the following recipient: ${
-          this.state.email
+          this.state.email ? this.state.email : queryString.email
         }?`
       )
     ) {
@@ -51,7 +47,7 @@ class FeedbackForm extends React.Component {
         this.setState({ isDraft: false });
         feedbackProcess.updateFeedback({
           id: qs.parse(this.props.location.search).id,
-          email: this.state.email,
+          email: queryString.email,
           giver: this.props.sessionContext.user.email,
           feedbackGood: this.state.feedbackGood,
           feedbackImprove: this.state.feedbackImprove,
@@ -68,7 +64,7 @@ class FeedbackForm extends React.Component {
       [event.target.name]: event.target.value
     });
     await this.setState({
-      isDraft: this.totalCharCount() > 0 && this.state.email.length > 0
+      isDraft: this.totalCharCount() > 0 && this.state.email.length >= 0
     });
   }
 
@@ -98,9 +94,13 @@ class FeedbackForm extends React.Component {
             <input
               type="email"
               name="email"
+              value={qs.parse(this.props.location.search).email}
               className="form-control"
               id="emailAddress"
               placeholder="Email"
+              disabled={
+                qs.parse(this.props.location.search).email ? true : false
+              }
               onChange={this.handleChange.bind(this)}
             />
           </div>

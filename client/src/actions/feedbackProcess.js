@@ -146,44 +146,43 @@ export function listPendingRequest(email) {
 export function sendRequestFeedbackEmail(
   email,
   messageContext,
+  sessionContext,
   pendingRequestId
 ) {
-  return fetch(`/api/feedbacks/sendRequestFeedbackEmail/${email}`).then(
-    response => {
-      if (response.ok) {
-        return response.json().then(json => {
-          const messages = [json];
-          const identifier = "success";
+  return fetch(
+    `/api/feedbacks/sendRequestFeedbackEmail/${email}/${pendingRequestId}/${
+      sessionContext.user.email
+    }`
+  ).then(response => {
+    if (response.ok) {
+      return response.json().then(json => {
+        const messages = [json];
+        const identifier = "success";
+        setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
+      });
+    } else {
+      return response.json().then(json => {
+        if (json.msg === undefined) {
+          const messages = [{ msg: "Server error. Please try again later" }];
+          const identifier = "error";
           setMessageWithTimeout(
             messageContext,
             messages,
             TIMEOUTFOR,
             identifier
           );
-        });
-      } else {
-        return response.json().then(json => {
-          if (json.msg === undefined) {
-            const messages = [{ msg: "Server error. Please try again later" }];
-            const identifier = "error";
-            setMessageWithTimeout(
-              messageContext,
-              messages,
-              TIMEOUTFOR,
-              identifier
-            );
-          } else {
-            const messages = [json];
-            const idenfitier = "error";
-            setMessageWithTimeout(
-              messageContext,
-              messages,
-              TIMEOUTFOR,
-              idenfitier
-            );
-          }
-        });
-      }
+        } else {
+          const messages = [json];
+          const idenfitier = "error";
+          setMessageWithTimeout(
+            messageContext,
+            messages,
+            TIMEOUTFOR,
+            idenfitier
+          );
+        }
+      });
+      //return response.status;
     }
-  );
+  });
 }

@@ -32,13 +32,11 @@ async function saveFeedback(req, res) {
   try {
     const promise = await feedback.save();
     const pendingRequestId = promise._id;
-    console.log(pendingRequestId);
-    console.log("Your feedback is saved successfully.");
+
     return res.json({
       msg: "Your feedback is saved successfully.",
       pendingRequestId: pendingRequestId
     });
-    getObject;
   } catch (error) {
     return res
       .status(401)
@@ -95,8 +93,7 @@ const sendRequestFeedbackEmail = async (req, res) => {
     "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
     "http://" +
     getHostAndPort(req) +
-    "/feedback/" +
-    token +
+    `/feedback/?id=${req.params.id}&email=${req.params.recEmail}` +
     "\n\n";
   mailer.sendText(fromAddress, toAddress, subject, text);
 

@@ -15,7 +15,7 @@ router.get(
 );
 // router.get("/listPendingRequest/:email", handleAsyncError(listPendingRequest)); // TODO
 router.get(
-  "/sendRequestFeedbackEmail/:email",
+  "/sendRequestFeedbackEmail/:email/:id/:recEmail",
   handleAsyncError(sendRequestFeedbackEmail)
 );
 module.exports = router;

@@ -57,6 +57,7 @@ class RequestFeedback extends React.Component {
             feedbackProcess.sendRequestFeedbackEmail(
               this.state.email,
               this.props.messageContext,
+              this.props.sessionContext,
               pendingRequestId
             );
           });

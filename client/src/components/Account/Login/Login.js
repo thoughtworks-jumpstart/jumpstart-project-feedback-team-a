@@ -37,7 +37,7 @@ class Login extends React.Component {
   getRedirectReferer() {
     let locationState = this.props.location.state;
     if (locationState && locationState.from) {
-      return locationState.from.pathname;
+      return `${locationState.from.pathname + locationState.from.search}`;
     } else {
       return "/";
     }
