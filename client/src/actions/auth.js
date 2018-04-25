@@ -59,14 +59,14 @@ export function signup({
 
   if (isInvalidSignup(name, email, password, confirm)) {
     const messages = [{ msg: "Please fill in all fields" }];
-    const idenfitier = "error";
-    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, idenfitier);
+    const identifier = "error";
+    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
   } else if (password !== confirm) {
     messages = [
       { msg: "Your confirmed password does not match the new password" }
     ];
-    const idenfitier = "error";
-    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, idenfitier);
+    const identifier = "error";
+    setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
   } else {
     return fetch("/api/users/signup", {
       method: "post",
