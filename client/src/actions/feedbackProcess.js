@@ -11,7 +11,8 @@ export function updateFeedback({
   feedbackImprove,
   feedbackAction,
   messageContext,
-  routerHistory
+  routerHistory,
+  isPending
 }) {
   messageContext.clearMessages();
   return fetch("/api/feedbacks/update", {
@@ -24,7 +25,8 @@ export function updateFeedback({
         giverEmail: giver,
         feedbackGood: feedbackGood,
         feedbackImprove: feedbackImprove,
-        feedbackAction: feedbackAction
+        feedbackAction: feedbackAction,
+        isPending: isPending
       }
     })
   }).then(response => {

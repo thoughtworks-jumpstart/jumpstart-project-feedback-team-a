@@ -53,7 +53,8 @@ class FeedbackForm extends React.Component {
           feedbackImprove: this.state.feedbackImprove,
           feedbackAction: this.state.feedbackAction,
           messageContext: this.props.messageContext,
-          routerHistory: this.props.history
+          routerHistory: this.props.history,
+          isPending: false
         });
       }
     }
