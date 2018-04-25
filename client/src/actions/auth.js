@@ -88,6 +88,10 @@ export function signup({
                 .add(1, "hour")
                 .toDate()
             });
+            sessionStorage.setItem(
+              "currentLoggedInUser",
+              JSON.stringify(json.user)
+            );
             history.push("/");
           });
         } else {
