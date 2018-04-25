@@ -5,8 +5,12 @@ import * as feedbackProcess from "../../actions/feedbackProcess";
 
 describe("Listing of Incoming Feedbacks", () => {
   let props;
+  let FEEDBACK_LIST = ["feedback 1", "feedback 2"];
 
   beforeEach(() => {
+    feedbackProcess.listIncomingFeedback = jest.fn(() =>
+      Promise.resolve(FEEDBACK_LIST)
+    );
     props = {
       messageContext: {
         messages: {}
@@ -31,10 +35,6 @@ describe("Listing of Incoming Feedbacks", () => {
   });
 
   it("should setState with feedbacks after component mounts", async () => {
-    const FEEDBACK_LIST = ["feedback 1", "feedback 2"];
-    feedbackProcess.listIncomingFeedback = jest.fn(() =>
-      Promise.resolve(FEEDBACK_LIST)
-    );
     const wrapper = await shallow(<FeedbackList {...props} />);
 
     expect(wrapper.state().feedbackArray).toEqual(FEEDBACK_LIST);
