@@ -7,7 +7,6 @@ let wrapper;
 describe("RequestFeedback", () => {
   beforeEach(() => {
     wrapper = shallow(<RequestFeedback />);
-    console.log(wrapper.debug());
   });
   it.skip("should have the following elements", () => {
     expect(wrapper.find("form")).toHaveLength(1);

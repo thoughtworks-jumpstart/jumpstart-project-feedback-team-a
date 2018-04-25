@@ -125,7 +125,10 @@ class RequestFeedback extends React.Component {
             />
           </div>
           <hr />
-          <Prompt when={this.state.isDraft} message="Leaving?" />
+          <Prompt
+            when={this.state.isDraft}
+            message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
+          />
         </form>
       </div>
     );
