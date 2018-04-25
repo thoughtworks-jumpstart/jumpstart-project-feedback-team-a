@@ -162,7 +162,7 @@ export function sendRequestFeedbackEmail(
         setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
-      const messages = [json];
+      const messages = [{ msg: "Server error. Please try again later." }];
       const identifier = "error";
       setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
     }
