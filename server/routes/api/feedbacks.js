@@ -4,7 +4,8 @@ const {
   saveFeedback,
   updateFeedback,
   sendRequestFeedbackEmail,
-  listIncomingFeedback
+  listIncomingFeedback,
+  listPendingRequest
 } = require("../../controllers/feedback_controller");
 
 router.post("/save", handleAsyncError(saveFeedback));
@@ -13,7 +14,7 @@ router.get(
   "/listIncomingFeedback/:email",
   handleAsyncError(listIncomingFeedback)
 );
-// router.get("/listPendingRequest/:email", handleAsyncError(listPendingRequest)); // TODO
+router.get("/listPendingRequest/:email", handleAsyncError(listPendingRequest)); // TODO
 router.get(
   "/sendRequestFeedbackEmail/:email",
   handleAsyncError(sendRequestFeedbackEmail)

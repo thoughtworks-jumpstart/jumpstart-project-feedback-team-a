@@ -121,6 +121,9 @@ export function saveFeedback({
 export function listIncomingFeedback(email) {
   return fetch(`/api/feedbacks/listIncomingFeedback/${email.email}`).then(
     response => {
+      console.log("In feedbackProcess > listIncomingFeedback > fetch");
+      console.log(response);
+
       if (response.ok) {
         return response.json().then(json => json);
       } else {
@@ -131,16 +134,17 @@ export function listIncomingFeedback(email) {
 }
 
 export function listPendingRequest(email) {
-  console.log(email);
-  // return fetch(`/api/feedbacks/listPendingRequest/${email.email}`).then(
-  //   response => {
-  //     if (response.ok) {
-  //       return response.json().then(json => json);
-  //     } else {
-  //       return response.status();
-  //     }
-  //   }
-  // );
+  return fetch(`/api/feedbacks/listPendingRequest/${email.email}`).then(
+    response => {
+      if (response.ok) {
+        console.log("In feedback process > listPendingRequest > fetch");
+        console.log(response);
+        return response.json().then(json => json);
+      } else {
+        return response.status();
+      }
+    }
+  );
 }
 
 export function sendRequestFeedbackEmail(
@@ -148,6 +152,7 @@ export function sendRequestFeedbackEmail(
   messageContext,
   pendingRequestId
 ) {
+  console.log(`Pending request with ${pendingRequestId} saved.`);
   return fetch(`/api/feedbacks/sendRequestFeedbackEmail/${email}`).then(
     response => {
       if (response.ok) {
