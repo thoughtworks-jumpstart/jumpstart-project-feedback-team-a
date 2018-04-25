@@ -16,7 +16,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-navigation-prompt": "^1.6.0",
-    "react-scripts": "1.1.1",
+    "react-scripts": "1.1.4",
     "styled-components": "^3.2.5"
   },
   "devDependencies": {
@@ -32,7 +32,6 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.1.0",
-    "jest": "^22.4.3",
     "jest-enzyme": "^6.0.0",
     "prettier": "^1.11.1",
     "react-test-renderer": "^16.3.0",
