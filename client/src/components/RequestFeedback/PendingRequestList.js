@@ -22,8 +22,6 @@ class PendingRequestList extends React.Component {
         messageContext: this.props.messageContext
       });
 
-      console.log("In client PendingRequestList");
-      console.log(data);
       await this.setState({ data: data });
     } catch (err) {
       throw err;

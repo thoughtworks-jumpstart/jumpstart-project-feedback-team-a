@@ -70,7 +70,8 @@ export function saveFeedback({
   feedbackImprove,
   feedbackAction,
   messageContext,
-  routerHistory
+  routerHistory,
+  isPending
 }) {
   messageContext.clearMessages();
   //if id don't exist? run fetch save : run fetch put
@@ -83,7 +84,8 @@ export function saveFeedback({
         giverEmail: giver,
         feedbackGood: feedbackGood,
         feedbackImprove: feedbackImprove,
-        feedbackAction: feedbackAction
+        feedbackAction: feedbackAction,
+        isPending: isPending
       }
     })
   }).then(response => {

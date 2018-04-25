@@ -45,7 +45,10 @@ async function saveFeedback(req, res) {
 
 const listIncomingFeedback = async (req, res) => {
   try {
-    let feedbackData = await Feedback.find({ receiverEmail: req.params.email });
+    let feedbackData = await Feedback.find({
+      isPending: false,
+      receiverEmail: req.params.email
+    });
 
     const output = await feedbackData.map(async feedback => {
       let user = await User.findOne({ email: feedback.giverEmail });
