@@ -3,9 +3,7 @@ const handleAsyncError = require("express-async-wrap");
 const {
   saveFeedback,
   updateFeedback,
-  sendRequestFeedbackEmail
-} = require("../../controllers/feedback_controller");
-const {
+  sendRequestFeedbackEmail,
   listIncomingFeedback
 } = require("../../controllers/feedback_controller");
 
@@ -15,6 +13,7 @@ router.get(
   "/listIncomingFeedback/:email",
   handleAsyncError(listIncomingFeedback)
 );
+// router.get("/listPendingRequest/:email", handleAsyncError(listPendingRequest)); // TODO
 router.get(
   "/sendRequestFeedbackEmail/:email",
   handleAsyncError(sendRequestFeedbackEmail)

@@ -5,11 +5,9 @@ import { ProviderContext, subscribe } from "react-contextual";
 import Messages from "../Messages/Messages";
 import {
   mapMessageContextToProps,
-  mapSessionContextToProps,
-  messageContextPropType,
-  sessionContextPropType
+  mapSessionContextToProps
 } from "../context_helper";
-import { withCookies, Cookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 
 import { setMessageWithTimeout } from "../../actions/auth";
 const TIMEOUTFOR = 3000;

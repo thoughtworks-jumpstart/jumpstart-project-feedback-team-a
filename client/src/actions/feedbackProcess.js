@@ -130,6 +130,19 @@ export function listIncomingFeedback(email) {
   );
 }
 
+export function listPendingRequest(email) {
+  console.log(email);
+  // return fetch(`/api/feedbacks/listPendingRequest/${email.email}`).then(
+  //   response => {
+  //     if (response.ok) {
+  //       return response.json().then(json => json);
+  //     } else {
+  //       return response.status();
+  //     }
+  //   }
+  // );
+}
+
 export function sendRequestFeedbackEmail(
   email,
   messageContext,
@@ -170,7 +183,6 @@ export function sendRequestFeedbackEmail(
             );
           }
         });
-        return response.status;
       }
     }
   );
