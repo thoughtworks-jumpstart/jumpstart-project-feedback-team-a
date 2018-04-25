@@ -28,7 +28,6 @@ export class FeedbackList extends Component {
     } catch (err) {
       throw err;
     }
-    // });
   }
 
   render() {
