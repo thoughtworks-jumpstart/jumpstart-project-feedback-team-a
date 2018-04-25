@@ -1,6 +1,6 @@
 import React from "react";
 import Signup from "./Signup";
-import { signup } from "../../../actions/auth";
+import * as auth from "../../../actions/auth";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 
@@ -37,7 +37,7 @@ export class WrappedSignup extends React.Component {
 
   handleSignup(event) {
     event.preventDefault();
-    signup({
+    auth.signup({
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
