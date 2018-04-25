@@ -3,9 +3,17 @@ import FeedbackForm from "./FeedbackForm";
 import { shallow } from "enzyme";
 import * as feedbackProcess from "../../actions/feedbackProcess.js";
 
+let props;
 describe("FeedbackForm", () => {
+  beforeEach(() => {
+    props = {
+      messageContext: { messages: {} },
+      location: { search: "" },
+      sessionContext: { user: {} }
+    };
+  });
+
   it("should render correctly", () => {
-    const props = { messageContext: { messages: {} } };
     const wrapper = shallow(<FeedbackForm {...props} />);
     expect(wrapper.find("input")).toHaveLength(1);
     expect(wrapper.find("textarea")).toHaveLength(3);
@@ -13,7 +21,6 @@ describe("FeedbackForm", () => {
   });
 
   it("should set isDraft to true when total character count on the form is more than 0", async () => {
-    const props = { messageContext: { messages: {} } };
     const wrapper = shallow(<FeedbackForm {...props} />);
     let event = {
       target: {
@@ -32,13 +39,9 @@ describe("FeedbackForm", () => {
     expect(wrapper.find("Prompt").props().when).toEqual(true);
   });
 
-  it.skip("should save feedbackForm when handleSubmit is called", () => {
+  it("should save feedbackForm when handleSubmit is called", () => {
     window.confirm = jest.fn(() => true);
     feedbackProcess.saveFeedback = jest.fn();
-    const props = {
-      messageContext: { messages: {} },
-      sessionContext: { user: { email: "" } }
-    };
     const wrapper = shallow(<FeedbackForm {...props} />);
     const event = { preventDefault: () => {} };
     wrapper
