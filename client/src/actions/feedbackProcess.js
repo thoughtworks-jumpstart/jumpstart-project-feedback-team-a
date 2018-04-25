@@ -133,16 +133,15 @@ export function listIncomingFeedback(email) {
 }
 
 export function listPendingRequest(email) {
-  console.log(email);
-  // return fetch(`/api/feedbacks/listPendingRequest/${email.email}`).then(
-  //   response => {
-  //     if (response.ok) {
-  //       return response.json().then(json => json);
-  //     } else {
-  //       return response.status();
-  //     }
-  //   }
-  // );
+  return fetch(`/api/feedbacks/listPendingRequest/${email.email}`).then(
+    response => {
+      if (response.ok) {
+        return response.json().then(json => json);
+      } else {
+        return response.status();
+      }
+    }
+  );
 }
 
 export function sendRequestFeedbackEmail(
@@ -163,28 +162,9 @@ export function sendRequestFeedbackEmail(
         setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
-      return response.json().then(json => {
-        if (json.msg === undefined) {
-          const messages = [{ msg: "Server error. Please try again later" }];
-          const identifier = "error";
-          setMessageWithTimeout(
-            messageContext,
-            messages,
-            TIMEOUTFOR,
-            identifier
-          );
-        } else {
-          const messages = [json];
-          const idenfitier = "error";
-          setMessageWithTimeout(
-            messageContext,
-            messages,
-            TIMEOUTFOR,
-            idenfitier
-          );
-        }
-      });
-      //return response.status;
+      const messages = [json];
+      const identifier = "error";
+      setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
     }
   });
 }

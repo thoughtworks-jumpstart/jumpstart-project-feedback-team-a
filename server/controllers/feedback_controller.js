@@ -32,7 +32,6 @@ async function saveFeedback(req, res) {
   try {
     const promise = await feedback.save();
     const pendingRequestId = promise._id;
-
     return res.json({
       msg: "Your feedback is saved successfully.",
       pendingRequestId: pendingRequestId
@@ -56,6 +55,20 @@ const listIncomingFeedback = async (req, res) => {
     const finalOutput = await Promise.all(output);
 
     res.json(finalOutput);
+  } catch (err) {
+    return res
+      .status(401)
+      .json({ msg: "There was a problem. Please try again later." });
+  }
+};
+
+const listPendingRequest = async (req, res) => {
+  try {
+    let feedbackData = await Feedback.find({
+      isPending: true,
+      receiverEmail: req.params.email
+    });
+    res.json(feedbackData);
   } catch (err) {
     return res
       .status(401)
@@ -105,6 +118,7 @@ const sendRequestFeedbackEmail = async (req, res) => {
 module.exports = {
   saveFeedback,
   listIncomingFeedback,
+  listPendingRequest,
   sendRequestFeedbackEmail,
   updateFeedback
 };
