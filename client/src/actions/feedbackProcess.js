@@ -160,13 +160,15 @@ export function sendRequestFeedbackEmail(
     if (response.ok) {
       return response.json().then(json => {
         const messages = [json];
-        const identifier = "success";
-        setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
+        //const identifier = "success";
+        messageContext.setSuccessMessages(messages);
+        //setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
       const messages = [{ msg: "Server error. Please try again later." }];
-      const identifier = "error";
-      setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
+      //const identifier = "error";
+      messageContext.setErrorMessages(messages);
+      //setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
     }
   });
 }
