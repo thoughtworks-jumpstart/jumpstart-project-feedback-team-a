@@ -27,6 +27,7 @@ describe("App", () => {
   it("should fetch user and set jwtToken and user", async () => {
     actions.getCurrentUser = jest.fn();
     const wrapper = shallow(<App {...props} />);
+    wrapper.debug();
     expect(actions.getCurrentUser).toHaveBeenCalledTimes(1);
   });
 });

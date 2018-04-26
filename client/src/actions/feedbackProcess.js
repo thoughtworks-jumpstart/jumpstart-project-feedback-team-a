@@ -122,13 +122,13 @@ export function saveFeedback({
   });
 }
 
-export function listIncomingFeedback(email) {
-  return fetch(`/api/feedbacks/listIncomingFeedback/${email.email}`).then(
+export function listIncomingFeedback({ email }) {
+  return fetch(`/api/feedbacks/listIncomingFeedback/${email}`).then(
     response => {
       if (response.ok) {
         return response.json().then(json => json);
       } else {
-        return response.status;
+        return response.json().then(json => json);
       }
     }
   );

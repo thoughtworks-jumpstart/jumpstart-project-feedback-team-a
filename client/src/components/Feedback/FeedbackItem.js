@@ -2,8 +2,8 @@ import React from "react";
 import moment from "moment";
 
 const FeedbackItem = props => {
-  return (
-    <React.Fragment>
+  const feedbacklist = props.feedback.feedback ? (
+    <div>
       <div className="row">
         <div className="col-lg-3" id="feedback-date">
           {moment(props.feedback.feedback.createdAt).format(
@@ -35,7 +35,11 @@ const FeedbackItem = props => {
           {props.feedback.feedback.feedbackAction}
         </div>
       </div>
-    </React.Fragment>
+    </div>
+  ) : (
+    <div />
   );
+
+  return <div>{feedbacklist}</div>;
 };
 export default FeedbackItem;

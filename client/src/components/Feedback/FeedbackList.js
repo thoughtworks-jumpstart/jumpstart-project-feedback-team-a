@@ -20,7 +20,7 @@ export class FeedbackList extends Component {
   async componentDidMount() {
     try {
       const data = await feedbackProcess.listIncomingFeedback({
-        email: this.props.sessionContext.user.email,
+        email: JSON.parse(sessionStorage.currentLoggedInUser).email,
         messageContext: this.props.messageContext
       });
 

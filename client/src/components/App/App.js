@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "../Header/Header";
-import Home from "../Home/Home";
+//import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 import Login from "../Account/Login/Login";
 import WrappedSignup from "../Account/Signup/WrappedSignup";
@@ -45,7 +45,7 @@ export class App extends React.Component {
           <Header />
           <div>
             <Switch>
-              <PrivateRoute path="/" exact component={Home} />
+              <PrivateRoute path="/" exact component={Inbox} />
               <PrivateRoute
                 path="/requestFeedback"
                 exact

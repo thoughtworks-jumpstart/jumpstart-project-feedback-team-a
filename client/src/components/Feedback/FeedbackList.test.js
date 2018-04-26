@@ -3,6 +3,10 @@ import React from "react";
 import { shallow } from "enzyme";
 import * as feedbackProcess from "../../actions/feedbackProcess";
 
+global.sessionStorage = {
+  currentLoggedInUser: JSON.stringify({})
+};
+
 describe("Listing of Incoming Feedbacks", () => {
   let props;
   let FEEDBACK_LIST = ["feedback 1", "feedback 2"];

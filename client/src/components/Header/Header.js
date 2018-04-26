@@ -151,16 +151,6 @@ class Header extends React.Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li>
-                <NavLink
-                  exact
-                  to="/"
-                  activeStyle={active}
-                  style={{ color: "white" }}
-                >
-                  Home
-                </NavLink>
-              </li>
               <li>{this.props.sessionContext.token && listIncomingLink}</li>
               <li>{this.props.sessionContext.token && feedbackLink}</li>
               <li>{this.props.sessionContext.token && requestFeedbackLink}</li>
