@@ -7,6 +7,7 @@ import {
   mapSessionContextToProps
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
+import "./Feedback.css";
 
 export class FeedbackList extends Component {
   constructor(props) {
@@ -33,15 +34,11 @@ export class FeedbackList extends Component {
   render() {
     return (
       <div>
-        <div />
         <Messages messages={this.props.messageContext.messages} />
-        <h1>
-          Feedbacks <span class="badge">{this.state.feedbackArray.length}</span>
-        </h1>
-        <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div className="row" />
+        {this.props.setFeedbackCount(this.state.feedbackArray.length)}
+        <div className="panel-group" id="accordion">
+          <div className="panel panel-default">
+            <div className="panel-heading">
               {this.state.feedbackArray.map((feedback, i) => {
                 return (
                   <div className="row" key={i} style={{ display: "inline" }}>

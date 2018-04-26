@@ -127,7 +127,7 @@ class Profile extends React.Component {
               <div className="form-group">
                 <div className="col-sm-offset-3 col-sm-4">
                   <button type="submit" className="btn btn-success">
-                    Update Profile
+                    Update
                   </button>
                 </div>
               </div>
@@ -174,7 +174,7 @@ class Profile extends React.Component {
               <div className="form-group">
                 <div className="col-sm-4 col-sm-offset-3">
                   <button type="submit" className="btn btn-success">
-                    Change Password
+                    Change
                   </button>
                 </div>
               </div>
@@ -195,7 +195,7 @@ class Profile extends React.Component {
                 </p>
                 <div className="col-sm-offset-3 col-sm-9">
                   <button type="submit" className="btn btn-danger">
-                    Delete my account
+                    Delete
                   </button>
                 </div>
               </div>

@@ -9,8 +9,7 @@
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  background-color: transparent;
-  border-bottom-color: grey;
+  background-color: #6d7cc2;
 }
 
 .navbar-default .navbar-nav > li > a.navbar-avatar {
@@ -26,7 +25,6 @@
 
 .navbar-default .navbar-nav > li > a.active {
   background-color: transparent;
-  color: #262626;
 }
 
 .header-container {

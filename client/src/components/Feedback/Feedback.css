@@ -1,0 +1,28 @@
+.panel-group {
+  padding: 1px;
+  background-color: #f8f5f0;
+  border-radius: 1px;
+}
+
+.panel-heading {
+  padding-left: 50px;
+}
+
+.form-group {
+  padding-left: 20px;
+  max-width: 750px;
+}
+
+.feedback-container,
+.request-feedback-container {
+  border-radius: 5px;
+  padding-top: 20px;
+  margin: 100px auto;
+  background-color: #f8f5f0;
+  max-width: 800px;
+}
+
+.form-header {
+  padding: 20px;
+  max-width: 750px;
+}

@@ -1,4 +1,5 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
+/* @import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800"); */
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:700|Lato:100,400");
 
 html {
   position: relative;
@@ -6,10 +7,11 @@ html {
 }
 
 body {
-  background-color: #f4f4f4;
+  background-color: #cbe3e8;
   /* margin-bottom: 44px; */
   line-height: 1.57142857;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-family: "Lato", sans-serif;
 }
 
 h1,
@@ -18,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 a {
@@ -41,4 +43,31 @@ a:hover {
 .form-group > label {
   text-transform: uppercase;
   font-size: 13px;
+}
+
+.navbar-default {
+  background-color: #505e97;
+}
+
+.btn {
+  width: 100px;
+  background: #6d7cc2;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 100%;
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:hover {
+  background: blue;
+}
+
+.navbar-brand {
+  font-family: "Comfortaa", cursive;
 }

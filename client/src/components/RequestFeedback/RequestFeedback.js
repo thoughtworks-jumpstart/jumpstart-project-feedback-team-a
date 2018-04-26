@@ -7,11 +7,7 @@ import {
   mapSessionContextToProps
 } from "../context_helper";
 import { withCookies } from "react-cookie";
-import NavigationPrompt from "react-router-navigation-prompt";
-import { Modal, Button } from "react-bootstrap";
-
-// import { setMessageWithTimeout } from "../../actions/auth";
-// const TIMEOUTFOR = 3000;
+import "../Feedback/Feedback.css";
 
 class RequestFeedback extends React.Component {
   constructor(props) {
@@ -98,122 +94,80 @@ class RequestFeedback extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container" style={{ marginTop: "20px" }}>
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <h1 style={{ display: "inline" }}>Request for Feedback</h1>
-            <button
-              style={{ display: "inline" }}
-              className="btn btn-success pull-right"
-              disabled={!this.state.isDraft}
-              data-toggle="modal"
-              data-target="#myModal"
-            >
-              Send
-            </button>
-            <div style={{ marginTop: "20px" }} className="form-group">
-              <label>Add Registered User Email address</label>
-              <input
-                value={this.state.email}
-                style={{ display: "inline" }}
-                type="email"
-                name="email"
-                className="form-control"
-                id="emailAddress"
-                placeholder="Email"
-                onChange={this.handleChange.bind(this)}
-              />
-            </div>
-            <hr />
-            {this.state.isDraft && (
-              <NavigationPrompt
-                beforeConfirm={this.cleanup}
-                // Children will be rendered even if props.when is falsey and isActive is false:
-                renderIfNotActive={true}
-                // Confirm navigation if going to a path that does not start with current path:
-                when={(crntLocation, nextLocation) =>
-                  !nextLocation.pathname.startsWith(crntLocation.pathname)
-                }
-              >
-                {({ isActive, onCancel, onConfirm }) => {
-                  if (isActive) {
-                    return (
-                      <Modal show={this.state.show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <h4>Text in a modal</h4>
-                          <p>
-                            Duis mollis, est non commodo luctus, nisi erat
-                            porttitor ligula.
-                          </p>
-
-                          <h4>Popover in a modal</h4>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button onClick={this.handleClose}>Close</Button>
-                        </Modal.Footer>
-                      </Modal>
-                    );
-                  }
-                  return (
-                    <div>This is probably an anti-pattern but ya know...</div>
-                  );
-                }}
-              </NavigationPrompt>
-            )}
-          </form>
-        </div>
-
-        {/* <button
-          type="button"
-          class="btn btn-primary btn-lg"
-          data-toggle="modal"
-          data-target="#myModal"
-        >
-          Launch demo modal
-        </button> */}
-
-        <div
-          class="modal fade"
-          id="myModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="myModalLabel"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
+        <div className="request-feedback-container">
+          <div className="container">
+            <Messages messages={this.props.messageContext.messages} />
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <div className="form-header">
+                <h1 style={{ display: "inline" }}>Request for Feedback</h1>
                 <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
+                  style={{ display: "inline" }}
+                  className="btn btn-success pull-right"
+                  disabled={!this.state.isDraft}
+                  data-toggle="modal"
+                  data-target="#myModal"
                 >
-                  <span aria-hidden="true">&times;</span>
+                  Send
                 </button>
-                <h4 class="modal-title" id="myModalLabel">
-                  myTitle
-                </h4>
               </div>
-              <div class="modal-body">
-                <Messages messages={this.props.messageContext.messages} />
+              <div style={{ marginTop: "20px" }} className="form-group">
+                <label>Add Registered User Email address</label>
+                <input
+                  style={{ display: "inline" }}
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  id="emailAddress"
+                  placeholder="Email"
+                  onChange={this.handleChange.bind(this)}
+                />
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                {/* <button type="button" class="btn btn-primary">
-                  Save changes
-                </button> */}
-              </div>
-            </div>
+              <hr />
+            </form>
           </div>
-          <hr />
+
+          <div
+            class="modal fade"
+            id="myModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myModalLabel"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    myTitle
+                  </h4>
+                </div>
+                <div class="modal-body">
+                  <Messages messages={this.props.messageContext.messages} />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <Prompt
+              when={this.state.isDraft}
+              message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
+            />
+          </div>
         </div>
       </React.Fragment>
     );

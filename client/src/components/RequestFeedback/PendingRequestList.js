@@ -32,18 +32,18 @@ class PendingRequestList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div>
-          <h1>
-            Pending requests <span class="badge">{this.state.data.length}</span>
-          </h1>
-          <div className="pendingRequestContainer">
+        <div className="pendingRequestContainer">
+          {this.props.setPendingRequestCount(this.state.data.length)}
+          <div>
             <ul>
               {this.state.data.map((item, i) => (
                 <div key={i}>
                   <li>
+                    #{i + 1}
                     <strong>{item.giverEmail}</strong>{" "}
                     {moment(item.createdAt).format("DD MMMM YYYY, h:mm a")}
                   </li>
+                  <br />
                 </div>
               ))}
             </ul>

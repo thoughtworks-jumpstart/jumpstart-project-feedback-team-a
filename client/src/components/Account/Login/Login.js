@@ -94,7 +94,7 @@ class Login extends React.Component {
                   <strong>Forgot your password?</strong>
                 </Link>
               </div>
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-success pull-right">
                 Log in
               </button>
             </form>

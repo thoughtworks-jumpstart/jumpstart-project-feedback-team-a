@@ -5,6 +5,7 @@ import {
   mapSessionContextToProps
 } from "../context_helper";
 import { withRouter } from "react-router";
+import "./Feedback.css";
 
 const mapContextToProps = context => {
   return {

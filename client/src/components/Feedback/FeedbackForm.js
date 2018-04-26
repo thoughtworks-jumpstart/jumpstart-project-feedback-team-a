@@ -3,6 +3,7 @@ import * as feedbackProcess from "../../actions/feedbackProcess";
 import Messages from "../Messages/Messages";
 import { Prompt } from "react-router-dom";
 import * as qs from "query-string";
+import "./Feedback.css";
 
 class FeedbackForm extends React.Component {
   constructor(props) {
@@ -79,70 +80,73 @@ class FeedbackForm extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "20px" }} className="container">
-        <Messages messages={this.props.messageContext.messages} />
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <h1 style={{ display: "inline" }}>Send Feedback</h1>
-          <button
-            style={{ display: "inline" }}
-            className="btn btn-success pull-right"
-            disabled={!this.state.isDraft}
-          >
-            Send
-          </button>
-          <div style={{ marginTop: "20px" }} className="form-group">
-            <label>Add Email address</label>
-            <input
-              type="email"
-              name="email"
-              value={qs.parse(this.props.location.search).email}
-              className="form-control"
-              id="emailAddress"
-              placeholder="Email"
-              disabled={
-                qs.parse(this.props.location.search).email ? true : false
-              }
-              onChange={this.handleChange.bind(this)}
-            />
-          </div>
-          <hr />
+      <div className="feedback-container">
+        <div className="container">
+          <Messages messages={this.props.messageContext.messages} />
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <div className="form-header">
+              <h1 style={{ display: "inline" }}>Send Feedback</h1>
+              <button
+                style={{ display: "inline" }}
+                className="btn btn-success pull-right"
+                disabled={!this.state.isDraft}
+              >
+                Send
+              </button>
+            </div>
+            <div style={{ marginTop: "20px" }} className="form-group">
+              <label>Add Email address</label>
+              <input
+                type="email"
+                name="email"
+                value={qs.parse(this.props.location.search).email}
+                className="form-control"
+                id="emailAddress"
+                placeholder="Email"
+                disabled={
+                  qs.parse(this.props.location.search).email ? true : false
+                }
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
 
-          <div style={{ marginTop: "20px" }} className="form-group">
-            <label>What I did well?</label>
-            <textarea
-              name="feedbackGood"
-              className="form-control"
-              rows="5"
-              id="feedbackItem1"
-              onChange={this.handleChange.bind(this)}
-            />
-          </div>
-          <div style={{ marginTop: "20px" }} className="form-group">
-            <label>What could be better?</label>
-            <textarea
-              name="feedbackImprove"
-              className="form-control"
-              rows="5"
-              id="feedbackItem2"
-              onChange={this.handleChange.bind(this)}
-            />
-          </div>
-          <div style={{ marginTop: "20px" }} className="form-group">
-            <label>Suggestions for improvement?</label>
-            <textarea
-              name="feedbackAction"
-              className="form-control"
-              rows="5"
-              id="feedbackItem3"
-              onChange={this.handleChange.bind(this)}
-            />
-          </div>
-        </form>
+            <div style={{ marginTop: "20px" }} className="form-group">
+              <label>What I did well?</label>
+              <textarea
+                name="feedbackGood"
+                className="form-control"
+                rows="5"
+                id="feedbackItem1"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+            <div style={{ marginTop: "20px" }} className="form-group">
+              <label>What could be better?</label>
+              <textarea
+                name="feedbackImprove"
+                className="form-control"
+                rows="5"
+                id="feedbackItem2"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+            <div style={{ marginTop: "20px" }} className="form-group">
+              <label>Suggestions for improvement?</label>
+              <textarea
+                name="feedbackAction"
+                className="form-control"
+                rows="5"
+                id="feedbackItem3"
+                onChange={this.handleChange.bind(this)}
+              />
+            </div>
+          </form>
 
-        <Prompt
-          when={this.state.isDraft}
-          message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
-        />
+          <Prompt
+            when={this.state.isDraft}
+            message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
+          />
+        </div>
       </div>
     );
   }

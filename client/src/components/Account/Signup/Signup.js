@@ -67,7 +67,7 @@ const Signup = props => (
             </small>
           </div>
           <button type="submit" className="btn btn-success">
-            Create an account
+            Sign Up
           </button>
         </form>
       </div>
