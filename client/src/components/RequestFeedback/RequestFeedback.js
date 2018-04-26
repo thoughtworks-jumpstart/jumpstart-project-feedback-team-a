@@ -101,7 +101,7 @@ class RequestFeedback extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div style={{ marginTop: "20px" }} className="container">
         <Messages messages={this.props.messageContext.messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h1 style={{ display: "inline" }}>Request for Feedback</h1>
