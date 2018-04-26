@@ -55,6 +55,7 @@
     "jest": "^22.4.3",
     "query-string": "^6.0.0",
     "react-bootstrap": "^0.32.1",
+    "react-router-navigation-prompt": "^1.6.0",
     "reactstrap": "^5.0.0"
   }
 }
