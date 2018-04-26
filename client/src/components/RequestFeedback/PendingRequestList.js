@@ -18,7 +18,7 @@ class PendingRequestList extends React.Component {
   async componentDidMount() {
     try {
       const data = await feedbackProcess.listPendingRequest({
-        email: this.props.sessionContext.user.email,
+        email: JSON.parse(sessionStorage.currentLoggedInUser).email,
         messageContext: this.props.messageContext
       });
 
