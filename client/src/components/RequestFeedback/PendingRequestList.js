@@ -6,6 +6,7 @@ import {
 } from "../context_helper";
 import { ProviderContext, subscribe } from "react-contextual";
 import moment from "moment";
+import "./PendingRequestList.css";
 
 class PendingRequestList extends React.Component {
   constructor(props) {
@@ -31,16 +32,22 @@ class PendingRequestList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row">
-          You have pending requests from:
-          {this.state.data.map((item, i) => (
-            <div key={i}>
-              <p>
-                {item.giverEmail} received on{" "}
-                {moment(item.createdAt).format("DD MMMM YYYY, h:mm a")}
-              </p>
-            </div>
-          ))}
+        <div>
+          <h1>
+            Pending requests <span class="badge">{this.state.data.length}</span>
+          </h1>
+          <div className="pendingRequestContainer">
+            <ul>
+              {this.state.data.map((item, i) => (
+                <div key={i}>
+                  <li>
+                    <strong>{item.giverEmail}</strong>{" "}
+                    {moment(item.createdAt).format("DD MMMM YYYY, h:mm a")}
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
       </React.Fragment>
     );

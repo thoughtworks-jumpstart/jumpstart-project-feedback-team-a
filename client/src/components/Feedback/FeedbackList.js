@@ -33,20 +33,25 @@ export class FeedbackList extends Component {
   render() {
     return (
       <div>
+        <div />
         <Messages messages={this.props.messageContext.messages} />
-        <h1>Your Feedback ({this.state.feedbackArray.length})</h1>
-        <div className="row">
-          <div className="col-lg-12">
-            <h4 style={{ display: "inline" }}>Date Received</h4>
+        <h1>
+          Feedbacks <span class="badge">{this.state.feedbackArray.length}</span>
+        </h1>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div className="row" />
+              {this.state.feedbackArray.map((feedback, i) => {
+                return (
+                  <div className="row" key={i} style={{ display: "inline" }}>
+                    <FeedbackItem feedback={feedback} itemNumber={i + 1} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-        {this.state.feedbackArray.map((feedback, i) => {
-          return (
-            <div className="row" key={i} style={{ display: "inline" }}>
-              <FeedbackItem feedback={feedback} />
-            </div>
-          );
-        })}
       </div>
     );
   }
