@@ -98,7 +98,7 @@ class RequestFeedback extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className="container" style={{ marginTop: "20px" }}>
           <form onSubmit={this.handleSubmit.bind(this)}>
             <h1 style={{ display: "inline" }}>Request for Feedback</h1>
             <button
