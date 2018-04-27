@@ -144,7 +144,7 @@ class RequestFeedback extends React.Component {
                   data-dismiss="modal"
                   aria-label="Close"
                 >
-                  Send
+                  <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 className="modal-title" id="myModalLabel">
                   Info
