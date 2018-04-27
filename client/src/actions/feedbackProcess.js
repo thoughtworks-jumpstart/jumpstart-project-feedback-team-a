@@ -90,32 +90,35 @@ export function saveFeedback({
     })
   }).then(response => {
     if (response.ok) {
-      routerHistory.push("/");
+      //routerHistory.push("/");
       return response.json().then(json => {
         const messages = [json];
-        const identifier = "success";
-        setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
+        messageContext.setSuccessMessages(messages);
+        // const identifier = "success";
+        // setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
       return response.json().then(json => {
         if (json.msg === undefined) {
           const messages = [{ msg: "Server error. Please try again later" }];
-          const identifier = "error";
-          setMessageWithTimeout(
-            messageContext,
-            messages,
-            TIMEOUTFOR,
-            identifier
-          );
+          messageContext.setErrorMessages(messages);
+          // const identifier = "error";
+          // setMessageWithTimeout(
+          //   messageContext,
+          //   messages,
+          //   TIMEOUTFOR,
+          //   identifier
+          // );
         } else {
           const messages = [json];
-          const idenfitier = "error";
-          setMessageWithTimeout(
-            messageContext,
-            messages,
-            TIMEOUTFOR,
-            idenfitier
-          );
+          messageContext.setErrorMessages(messages);
+          // const idenfitier = "error";
+          // setMessageWithTimeout(
+          //   messageContext,
+          //   messages,
+          //   TIMEOUTFOR,
+          //   idenfitier
+          // );
         }
       });
     }
@@ -160,15 +163,13 @@ export function sendRequestFeedbackEmail(
     if (response.ok) {
       return response.json().then(json => {
         const messages = [json];
-        //const identifier = "success";
         messageContext.setSuccessMessages(messages);
-        //setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
       });
     } else {
-      const messages = [{ msg: "Server error. Please try again later." }];
-      //const identifier = "error";
-      messageContext.setErrorMessages(messages);
-      //setMessageWithTimeout(messageContext, messages, TIMEOUTFOR, identifier);
+      return response.json().then(json => {
+        const messages = [json];
+        messageContext.setErrorMessages(messages);
+      });
     }
   });
 }

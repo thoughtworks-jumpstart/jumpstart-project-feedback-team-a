@@ -1,4 +1,5 @@
 import React from "react";
+import { Prompt } from "react-router-dom";
 import * as feedbackProcess from "../../actions/feedbackProcess";
 import { ProviderContext, subscribe } from "react-contextual";
 import Messages from "../Messages/Messages";
@@ -15,6 +16,7 @@ class RequestFeedback extends React.Component {
     super(props);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.validEmail = this.validEmail.bind(this);
 
     this.state = {
       email: "",
@@ -50,12 +52,8 @@ class RequestFeedback extends React.Component {
         }
       })
     }).then(response => {
-      //let routerHistory = this.props.history;
       if (response.ok) {
-        //routerHistory.push("/");
-
         return response.json().then(data => {
-          // const messages = [{ msg: data.msg }];
           const pendingRequestId = data.pendingRequestId;
 
           feedbackProcess.sendRequestFeedbackEmail(
@@ -71,11 +69,9 @@ class RequestFeedback extends React.Component {
         return response.json().then(json => {
           if (json.msg === undefined) {
             const messages = [{ msg: "Server error. Please try again later" }];
-
             this.props.messageContext.setErrorMessages(messages);
           } else {
             const messages = [json];
-
             this.props.messageContext.setErrorMessages(messages);
           }
         });
@@ -88,8 +84,14 @@ class RequestFeedback extends React.Component {
       [event.target.name]: event.target.value
     });
     await this.setState({
-      isDraft: this.state.email.length > 0
+      isDraft: this.state.email.length > 0 && this.validEmail(this.state.email)
     });
+  }
+
+  validEmail(e) {
+    // eslint-disable-next-line
+    var filter = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+    return String(e).search(filter) !== -1;
   }
 
   render() {
@@ -98,22 +100,21 @@ class RequestFeedback extends React.Component {
         <div className="request-feedback-container">
           <div className="container">
             <Messages messages={this.props.messageContext.messages} />
-            <form onSubmit={this.handleSubmit.bind(this)}>
-              <div className="form-header">
-                <h1 style={{ display: "inline" }}>Request for Feedback</h1>
-                <button
-                  style={{ display: "inline" }}
-                  className="btn btn-success pull-right"
-                  disabled={!this.state.isDraft}
-                  data-toggle="modal"
-                  data-target="#myModal"
-                >
-                  Send
-                </button>
-              </div>
+            <div className="form-header">
+              <h1 style={{ display: "inline" }}>Request for Feedback</h1>
+              <button
+                style={{ display: "inline" }}
+                className="btn btn-success pull-right"
+                disabled={!this.state.isDraft}
+                data-toggle="modal"
+                data-target="#myModal"
+              >
+                Send
+              </button>
               <div style={{ marginTop: "20px" }} className="form-group">
                 <label>Add Registered User Email address</label>
                 <input
+                  value={this.state.email}
                   style={{ display: "inline" }}
                   type="email"
                   name="email"
@@ -123,44 +124,54 @@ class RequestFeedback extends React.Component {
                   onChange={this.handleChange.bind(this)}
                 />
               </div>
-              <br />
-            </form>
+              <hr />
+            </div>
           </div>
+        </div>
 
-          <div
-            class="modal fade"
-            id="myModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="myModalLabel"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">
-                    myTitle
-                  </h4>
-                </div>
-                <div class="modal-body">
-                  <Messages messages={this.props.messageContext.messages} />
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-default"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                </div>
+        <div
+          className="modal fade"
+          id="myModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Send
+                </button>
+                <h4 className="modal-title" id="myModalLabel">
+                  Info
+                </h4>
+              </div>
+              <div className="modal-body">
+                Are you sure you want to request feedback from{" "}
+                {this.state.email}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  data-dismiss="modal"
+                  onClick={this.handleSubmit.bind(this)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  data-dismiss="modal"
+                  onClick={() => this.props.messageContext.clearMessages()}
+                >
+                  No
+                </button>
               </div>
             </div>
 

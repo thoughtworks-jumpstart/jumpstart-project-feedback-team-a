@@ -16,6 +16,7 @@ export class FeedbackList extends Component {
       email: "",
       feedbackArray: []
     };
+    this.props.messageContext.clearMessages();
   }
 
   async componentDidMount() {

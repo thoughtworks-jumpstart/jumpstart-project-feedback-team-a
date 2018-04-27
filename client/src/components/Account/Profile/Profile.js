@@ -32,6 +32,7 @@ class Profile extends React.Component {
       password: "",
       confirm: ""
     };
+    this.props.messageContext.clearMessages();
   }
 
   componentWillUnmount() {

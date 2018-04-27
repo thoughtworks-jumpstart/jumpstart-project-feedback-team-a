@@ -13,51 +13,53 @@ class FeedbackForm extends React.Component {
       feedbackGood: "",
       feedbackAction: "",
       feedbackImprove: "",
+      savedEmail: "",
+      savedFeedbackGood: "",
+      savedFeedbackAction: "",
+      savedFeedbackImprove: "",
       isDraft: false,
       isPending: true
     };
     this.totalCharCount = this.totalCharCount.bind(this);
+    this.props.messageContext.clearMessages();
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const queryString = qs.parse(this.props.location.search);
 
-    if (
-      window.confirm(
-        `Please confirm if you would like to send this feedback to the following recipient: ${
-          this.state.email ? this.state.email : queryString.email
-        }?`
-      )
-    ) {
-      //if id in query string exists, we run the feedbackProcess.updateFeedback
-      //
-      if (this.props.location.search === "") {
-        this.setState({ isDraft: false });
-        feedbackProcess.saveFeedback({
-          email: this.state.email,
-          giver: this.props.sessionContext.user.email,
-          feedbackGood: this.state.feedbackGood,
-          feedbackImprove: this.state.feedbackImprove,
-          feedbackAction: this.state.feedbackAction,
-          messageContext: this.props.messageContext,
-          routerHistory: this.props.history,
-          isPending: false
-        });
-      } else {
-        this.setState({ isDraft: false });
-        feedbackProcess.updateFeedback({
-          id: qs.parse(this.props.location.search).id,
-          email: queryString.email,
-          giver: this.props.sessionContext.user.email,
-          feedbackGood: this.state.feedbackGood,
-          feedbackImprove: this.state.feedbackImprove,
-          feedbackAction: this.state.feedbackAction,
-          messageContext: this.props.messageContext,
-          routerHistory: this.props.history,
-          isPending: false
-        });
-      }
+    if (this.props.location.search === "") {
+      this.setState({ isDraft: false });
+      feedbackProcess.saveFeedback({
+        email: this.state.email,
+        giver: this.props.sessionContext.user.email,
+        feedbackGood: this.state.feedbackGood,
+        feedbackImprove: this.state.feedbackImprove,
+        feedbackAction: this.state.feedbackAction,
+        messageContext: this.props.messageContext,
+        routerHistory: this.props.history,
+        isPending: false
+      });
+
+      this.setState({ savedFeedbackGood: this.state.feedbackGood });
+      this.setState({ feedbackGood: "" });
+      this.setState({ savedFeedbackImprove: this.state.feedbackImprove });
+      this.setState({ feedbackImprove: "" });
+      this.setState({ savedFeedbackAction: this.state.feedbackAction });
+      this.setState({ feedbackAction: "" });
+    } else {
+      this.setState({ isDraft: false });
+      feedbackProcess.updateFeedback({
+        id: qs.parse(this.props.location.search).id,
+        email: queryString.email,
+        giver: this.props.sessionContext.user.email,
+        feedbackGood: this.state.feedbackGood,
+        feedbackImprove: this.state.feedbackImprove,
+        feedbackAction: this.state.feedbackAction,
+        messageContext: this.props.messageContext,
+        routerHistory: this.props.history,
+        isPending: false
+      });
     }
   }
 
@@ -80,20 +82,20 @@ class FeedbackForm extends React.Component {
 
   render() {
     return (
-      <div className="feedback-container">
-        <div className="container">
-          <Messages messages={this.props.messageContext.messages} />
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <div className="form-header">
-              <h1 style={{ display: "inline" }}>Send Feedback</h1>
-              <button
-                style={{ display: "inline" }}
-                className="btn btn-success pull-right"
-                disabled={!this.state.isDraft}
-              >
-                Send
-              </button>
-            </div>
+      <React.Fragment>
+        <div className="feedback-container">
+          <div className="container">
+            <Messages messages={this.props.messageContext.messages} />
+            <h1 style={{ display: "inline" }}>Send Feedback</h1>
+            <button
+              style={{ display: "inline" }}
+              className="btn btn-success pull-right"
+              disabled={!this.state.isDraft}
+              data-toggle="modal"
+              data-target="#myModal"
+            >
+              Send
+            </button>
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>Add Email address</label>
               <input
@@ -109,10 +111,12 @@ class FeedbackForm extends React.Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
+            <hr />
 
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>What I did well?</label>
               <textarea
+                value={this.state.feedbackGood}
                 name="feedbackGood"
                 className="form-control"
                 rows="5"
@@ -123,6 +127,7 @@ class FeedbackForm extends React.Component {
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>What could be better?</label>
               <textarea
+                value={this.state.feedbackImprove}
                 name="feedbackImprove"
                 className="form-control"
                 rows="5"
@@ -133,6 +138,7 @@ class FeedbackForm extends React.Component {
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>Suggestions for improvement?</label>
               <textarea
+                value={this.state.feedbackAction}
                 name="feedbackAction"
                 className="form-control"
                 rows="5"
@@ -140,15 +146,61 @@ class FeedbackForm extends React.Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
-            <br />
-          </form>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="myModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 className="modal-title" id="myModalLabel">
+                  Info
+                </h4>
+              </div>
+              <div className="modal-body">
+                Are you sure you want to send a feedback to {this.state.email}?
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-dismiss="modal"
+                  onClick={this.handleSubmit.bind(this)}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  data-dismiss="modal"
+                  onClick={() => this.props.messageContext.clearMessages()}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
 
           <Prompt
             when={this.state.isDraft}
             message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"
           />
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
