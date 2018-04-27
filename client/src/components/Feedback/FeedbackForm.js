@@ -140,6 +140,7 @@ class FeedbackForm extends React.Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
+            <br />
           </form>
 
           <Prompt

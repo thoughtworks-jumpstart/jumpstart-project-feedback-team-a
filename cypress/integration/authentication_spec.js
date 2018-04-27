@@ -2,7 +2,7 @@ const URL = Cypress.env("baseUrl");
 const TEST_USER_EMAIL = `${Date.now()}@a.com`;
 const PASSWORD = "1";
 
-describe("Authentication", () => {
+describe.skip("Authentication", () => {
   context("Sign Up", () => {
     it("test that password and confirm fields must match", () => {
       cy.visit(URL);

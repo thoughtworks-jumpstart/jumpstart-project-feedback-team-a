@@ -1,7 +1,7 @@
 .login-container {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #0dc2b9, #0dbaf0);
-  padding: 10px;
+  padding: 80px;
 }
 
 #login-panel {

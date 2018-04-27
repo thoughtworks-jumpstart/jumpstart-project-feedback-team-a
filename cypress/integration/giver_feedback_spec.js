@@ -1,7 +1,7 @@
 const URL = Cypress.env("baseUrl");
 const RECIPIENT_EMAIL = "bond@bond.com";
 
-describe("Give Feedback Form", () => {
+describe.skip("Give Feedback Form", () => {
   const USER1 = `${Math.random()}@a.com`;
   const PASSWORD = "1";
 

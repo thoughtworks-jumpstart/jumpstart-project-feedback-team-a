@@ -8,6 +8,7 @@ import {
 } from "../context_helper";
 import { withCookies } from "react-cookie";
 import "../Feedback/Feedback.css";
+import { Prompt } from "react-router-dom";
 
 class RequestFeedback extends React.Component {
   constructor(props) {
@@ -122,7 +123,7 @@ class RequestFeedback extends React.Component {
                   onChange={this.handleChange.bind(this)}
                 />
               </div>
-              <hr />
+              <br />
             </form>
           </div>
 
