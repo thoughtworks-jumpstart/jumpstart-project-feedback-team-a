@@ -86,16 +86,18 @@ class FeedbackForm extends React.Component {
         <div className="feedback-container">
           <div className="container">
             <Messages messages={this.props.messageContext.messages} />
-            <h1 style={{ display: "inline" }}>Send Feedback</h1>
-            <button
-              style={{ display: "inline" }}
-              className="btn btn-success pull-right"
-              disabled={!this.state.isDraft}
-              data-toggle="modal"
-              data-target="#myModal"
-            >
-              Send
-            </button>
+            <div className="form-header">
+              <h1 style={{ display: "inline" }}>Send Feedback</h1>
+              <button
+                style={{ display: "inline" }}
+                className="btn btn-success pull-right"
+                disabled={!this.state.isDraft}
+                data-toggle="modal"
+                data-target="#myModal"
+              >
+                Send
+              </button>
+            </div>
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>Add Email address</label>
               <input
@@ -111,7 +113,6 @@ class FeedbackForm extends React.Component {
                 onChange={this.handleChange.bind(this)}
               />
             </div>
-            <hr />
 
             <div style={{ marginTop: "20px" }} className="form-group">
               <label>What I did well?</label>
