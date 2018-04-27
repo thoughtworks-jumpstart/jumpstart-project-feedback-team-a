@@ -14,6 +14,7 @@ import {
   messageContextPropType,
   sessionContextPropType
 } from "../../context_helper";
+import "./Profile.css";
 
 class Profile extends React.Component {
   static propTypes = {
@@ -75,132 +76,131 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="panel">
-          <div className="panel-body">
-            <Messages messages={this.props.messageContext.messages} />
-            <form
-              onSubmit={this.handleProfileUpdate.bind(this)}
-              className="form-horizontal"
-            >
-              <legend>Profile Information</legend>
-              <div className="form-group">
-                <label htmlFor="email" className="col-sm-3">
-                  Email
-                </label>
-                <div className="col-sm-7">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="form-control"
-                    value={this.state.email}
-                    onChange={this.handleChange.bind(this)}
-                  />
+        <div className="profile-container">
+          <div className="profile-panel">
+            <div className="profile-panel-body">
+              <Messages messages={this.props.messageContext.messages} />
+              <form
+                onSubmit={this.handleProfileUpdate.bind(this)}
+                className="form-horizontal"
+              >
+                <legend>Profile Information</legend>
+                <div className="form-group">
+                  <label htmlFor="email" className="col-sm-3">
+                    Email
+                  </label>
+                  <div className="col-sm-7">
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="form-control"
+                      value={this.state.email}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="name" className="col-sm-3">
-                  Name
-                </label>
-                <div className="col-sm-7">
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="form-control"
-                    value={this.state.name}
-                    onChange={this.handleChange.bind(this)}
-                  />
+                <div className="form-group">
+                  <label htmlFor="name" className="col-sm-3">
+                    Name
+                  </label>
+                  <div className="col-sm-7">
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="form-control"
+                      value={this.state.name}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-3">Gravatar</label>
-                <div className="col-sm-4">
-                  <img
-                    src={this.state.gravatar}
-                    width="100"
-                    height="100"
-                    className="profile"
-                    alt="avatar"
-                  />
+                <div className="form-group">
+                  <label className="col-sm-3">Gravatar</label>
+                  <div className="col-sm-4">
+                    <img
+                      src={this.state.gravatar}
+                      width="100"
+                      height="100"
+                      className="profile"
+                      alt="avatar"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <button type="submit" className="btn btn-success">
+                <div className="form-group">
+                  <button type="submit" className="btn btn-success pull-right">
                     Update
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form
-              onSubmit={this.handleChangePassword.bind(this)}
-              className="form-horizontal"
-            >
-              <legend>Change Password</legend>
-              <div className="form-group">
-                <label htmlFor="password" className="col-sm-3">
-                  New Password
-                </label>
-                <div className="col-sm-7">
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="form-control"
-                    value={this.state.password}
-                    onChange={this.handleChange.bind(this)}
-                  />
+          <br />
+          <div className="profile-panel">
+            <div className="profile-panel-body">
+              <form
+                onSubmit={this.handleChangePassword.bind(this)}
+                className="form-horizontal"
+              >
+                <legend>Change Password</legend>
+                <div className="form-group">
+                  <label htmlFor="password" className="col-sm-3">
+                    New Password
+                  </label>
+                  <div className="col-sm-7">
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="form-control"
+                      value={this.state.password}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="confirm" className="col-sm-3">
-                  Confirm Password
-                </label>
-                <div className="col-sm-7">
-                  <input
-                    type="password"
-                    name="confirm"
-                    id="confirm"
-                    className="form-control"
-                    value={this.state.confirm}
-                    onChange={this.handleChange.bind(this)}
-                  />
+                <div className="form-group">
+                  <label htmlFor="confirm" className="col-sm-3">
+                    Confirm Password
+                  </label>
+                  <div className="col-sm-7">
+                    <input
+                      type="password"
+                      name="confirm"
+                      id="confirm"
+                      className="form-control"
+                      value={this.state.confirm}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-4 col-sm-offset-3">
-                  <button type="submit" className="btn btn-success">
+                <div className="form-group">
+                  <button type="submit" className="btn btn-success pull-right">
                     Change
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form
-              onSubmit={this.handleDeleteAccount.bind(this)}
-              className="form-horizontal"
-            >
-              <legend>Delete Account</legend>
-              <div className="form-group">
-                <p className="col-sm-offset-3 col-sm-9">
-                  You can delete your account, but keep in mind this action is
-                  irreversible.
-                </p>
-                <div className="col-sm-offset-3 col-sm-9">
-                  <button type="submit" className="btn btn-danger">
+          <br />
+          <div className="profile-panel">
+            <div className="profile-panel-body">
+              <form
+                onSubmit={this.handleDeleteAccount.bind(this)}
+                className="form-horizontal"
+              >
+                <legend>Delete Account</legend>
+                <div className="form-group">
+                  <h4>
+                    You can delete your account, but keep in mind this action is
+                    irreversible.
+                  </h4>
+
+                  <button type="submit" className="btn btn-danger pull-right">
                     Delete
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

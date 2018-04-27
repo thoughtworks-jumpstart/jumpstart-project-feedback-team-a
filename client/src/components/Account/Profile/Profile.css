@@ -1,0 +1,11 @@
+.profile-container {
+  max-width: 800px;
+  margin: 100px auto;
+}
+
+.profile-panel-body {
+  padding: 40px;
+  padding-right: 50px;
+  background-color: #f8f5f0;
+  border-radius: 5px;
+}

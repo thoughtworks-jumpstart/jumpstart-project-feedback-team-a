@@ -47,6 +47,7 @@ class FeedbackForm extends React.Component {
       this.setState({ feedbackImprove: "" });
       this.setState({ savedFeedbackAction: this.state.feedbackAction });
       this.setState({ feedbackAction: "" });
+      this.setState({ email: "" });
     } else {
       this.setState({ isDraft: false });
       feedbackProcess.updateFeedback({
@@ -149,8 +150,8 @@ class FeedbackForm extends React.Component {
               />
             </div>
           </div>
+          <br />
         </div>
-
         <div
           className="modal fade"
           id="myModal"
@@ -196,7 +197,6 @@ class FeedbackForm extends React.Component {
               </div>
             </div>
           </div>
-
           <Prompt
             when={this.state.isDraft}
             message="Your feedback hasn't been submitted. Are you sure you want to leave this page?"

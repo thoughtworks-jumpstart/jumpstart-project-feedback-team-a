@@ -125,7 +125,6 @@ class RequestFeedback extends React.Component {
                   onChange={this.handleChange.bind(this)}
                 />
               </div>
-              <hr />
             </div>
           </div>
         </div>
