@@ -85,8 +85,9 @@ class FeedbackForm extends React.Component {
       <React.Fragment>
         <div className="feedback-container">
           <div className="container">
-            <Messages messages={this.props.messageContext.messages} />
             <div className="form-header">
+              <Messages messages={this.props.messageContext.messages} />
+
               <h1 style={{ display: "inline" }}>Send Feedback</h1>
               <button
                 style={{ display: "inline" }}

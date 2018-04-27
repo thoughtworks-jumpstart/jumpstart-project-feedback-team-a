@@ -23,6 +23,7 @@ class RequestFeedback extends React.Component {
       show: true,
       isDraft: false
     };
+    this.props.messageContext.clearMessages();
   }
 
   handleClose() {
@@ -98,8 +99,9 @@ class RequestFeedback extends React.Component {
       <React.Fragment>
         <div className="request-feedback-container">
           <div className="container">
-            <Messages messages={this.props.messageContext.messages} />
             <div className="form-header">
+              <Messages messages={this.props.messageContext.messages} />
+
               <h1 style={{ display: "inline" }}>Request for Feedback</h1>
               <button
                 style={{ display: "inline" }}
