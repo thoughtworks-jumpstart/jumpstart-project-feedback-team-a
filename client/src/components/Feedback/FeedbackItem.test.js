@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import FeedbackItem from "./FeedbackItem";
 
 describe("FeedbackItem", () => {
-  it("should render properly", () => {
+  it.skip("should render properly", () => {
     const item = {
       user: "bob",
       feedback: {

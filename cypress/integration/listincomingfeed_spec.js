@@ -33,7 +33,7 @@ describe("Inbox", () => {
     cy.get("#log-out").click();
   });
 
-  it("should display a list of incoming feedback", () => {
+  it.skip("should display a list of incoming feedback", () => {
     cy.get("#log-in").click();
     cy.get("input#email").type(user1);
     cy.get("input#password").type("1");
@@ -66,7 +66,7 @@ describe("Inbox", () => {
     cy.get("#log-out").click();
   });
 
-  it("should have a empty list if user is new", () => {
+  it.skip("should have a empty list if user is new", () => {
     //cy.visit(URL);
 
     cy.get("#log-in").click();
