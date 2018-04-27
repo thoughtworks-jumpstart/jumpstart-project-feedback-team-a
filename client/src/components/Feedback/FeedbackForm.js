@@ -9,7 +9,7 @@ class FeedbackForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: qs.parse(this.props.location.search).email,
       feedbackGood: "",
       feedbackAction: "",
       feedbackImprove: "",
